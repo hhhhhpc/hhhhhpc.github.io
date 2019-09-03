@@ -1,0 +1,3 @@
+用这个在本机运行的话只需要python环境和一个编译器，需要添加第三方库django，sqlite3
+然后在命令行里进入下载该文件的目录执行 python manage.py runserver 
+即可在本机访问页面
