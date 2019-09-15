@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>解决美帝良心想装上Ubuntu没网的问题 | 硬件联盟博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.因为要写代码的时候需要Linux的环境，所以屁颠屁颠的掏出来了自己的优盘下了个Ubuntu18.04的镜像，然后做了个双系统（这一步具体怎么做网上教程很多，我也就不多说了） 2.然后开机的时候居然发现没有WiFi，没有WiFi，没有WiFi！！！ 然后百度查了好多都说是驱动问题，结果我手机数据线插上电脑浪费了3个G装了无数遍驱动也没解决这个问题，最后看到了一个可能是 无线网卡没有权限的原因，然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决美帝良心想装上Ubuntu没网的问题">
+<meta property="og:url" content="http://yoursite.com/2019/09/15/解决美帝良心想装上Ubuntu没网的问题/index.html">
+<meta property="og:site_name" content="硬件联盟博客">
+<meta property="og:description" content="1.因为要写代码的时候需要Linux的环境，所以屁颠屁颠的掏出来了自己的优盘下了个Ubuntu18.04的镜像，然后做了个双系统（这一步具体怎么做网上教程很多，我也就不多说了） 2.然后开机的时候居然发现没有WiFi，没有WiFi，没有WiFi！！！ 然后百度查了好多都说是驱动问题，结果我手机数据线插上电脑浪费了3个G装了无数遍驱动也没解决这个问题，最后看到了一个可能是 无线网卡没有权限的原因，然">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-15T14:24:56.604Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解决美帝良心想装上Ubuntu没网的问题">
+<meta name="twitter:description" content="1.因为要写代码的时候需要Linux的环境，所以屁颠屁颠的掏出来了自己的优盘下了个Ubuntu18.04的镜像，然后做了个双系统（这一步具体怎么做网上教程很多，我也就不多说了） 2.然后开机的时候居然发现没有WiFi，没有WiFi，没有WiFi！！！ 然后百度查了好多都说是驱动问题，结果我手机数据线插上电脑浪费了3个G装了无数遍驱动也没解决这个问题，最后看到了一个可能是 无线网卡没有权限的原因，然">
+  
+    <link rel="alternate" href="/atom.xml" title="硬件联盟博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">硬件联盟博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-解决美帝良心想装上Ubuntu没网的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/15/解决美帝良心想装上Ubuntu没网的问题/" class="article-date">
+  <time datetime="2019-09-15T14:24:14.000Z" itemprop="datePublished">2019-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      解决美帝良心想装上Ubuntu没网的问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.因为要写代码的时候需要Linux的环境，所以屁颠屁颠的掏出来了自己的优盘下了个Ubuntu18.04的镜像，然后做了个双系统（这一步具体怎么做网上教程很多，我也就不多说了）</p>
+<p>2.然后开机的时候居然发现没有WiFi，没有WiFi，没有WiFi！！！</p>
+<p>然后百度查了好多都说是驱动问题，结果我手机数据线插上电脑浪费了3个G装了无数遍驱动也没解决这个问题，最后看到了一个可能是</p>
+<p>无线网卡没有权限的原因，然后就敲了两行命令，改了个配置文件，就可以愉快的连接上Wifi了，所以这里记录下来，供各位使用。</p>
+<p>3.</p>
+<p>首先你先确认你的驱动确实装了（具体怎么看，可以网上搜索），</p>
+<p>第二步，打开终端，敲入 rfkill list all 会出现如下信息</p>
+<p>0:ideapad_wlan: Wireless LAN<br>Soft blocked: no<br>Hard blocked:yes<br>1:ideapad_bluetooth: Bluetooth<br>Soft blocked: no<br>Hard blocked: yes<br>2:phy0: Wireless LAN<br>Soft blocked: no<br>Hard blocked:no<br>3:hci0: Bluetooth<br>Soft blocked: yes<br>Hard blocked: no</p>
+<p>我们可以看到 ideapad_wlan的hard blocked默认为yes，所以导致wifi无法开启。</p>
+<p>办法一（暂时）：</p>
+<p>（1）sudo modprobe -r ideapad_laptop</p>
+<p>输入完这个命令大概应该就可以连接WiFi了，但是呢还有一个问题就是，没有彻底解决问题，每次开机都要重新执行一次命令，所以我们需要改一下配置文件，以达到我们的目的。</p>
+<p>方法二（推荐）：<br>通过列入黑名单的方式来实现自动移出ideapad_laptop设备。<br>1）创建/etc/modprobe.d/ideapad.conf文件：<br>sudo touch /etc/modprobe.d/ideapad.conf<br>2）编辑ideapad.conf文件：<br>sudo gedit ideapad.conf<br>3) 在ideapad.conf文件中添加：<br>blacklist ideapad_laptop<br>4) 关闭并保存ideapad.conf文件，移除ideapad_laptop设备：<br>sudo modprobe -r ideapad_laptop<br>5) 注销重启Ubuntu系统，可以看到无线设备能够被打开，并能搜索到WiFi信号。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/15/解决美帝良心想装上Ubuntu没网的问题/" data-id="ck0l2mx0o00051wojnroo3uge" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/15/安装python/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">win10下安装python</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/15/解决美帝良心想装上Ubuntu没网的问题/">解决美帝良心想装上Ubuntu没网的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/15/安装python/">win10下安装python</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/10/如何正确下载一个软件/">如何正确下载一个软件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/09/ACM/">ACM</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
