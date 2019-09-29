@@ -190,6 +190,104 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/关于开发板/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硬件联盟博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/30/关于开发板/" class="post-title-link" itemprop="url">关于开发板</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-09-30 00:14:14 / Modified: 00:15:22" itemprop="dateCreated datePublished" datetime="2019-09-30T00:14:14+08:00">2019-09-30</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="为什么要学开发板"><a href="#为什么要学开发板" class="headerlink" title="为什么要学开发板"></a>为什么要学开发板</h1><p>众所周知，近些年，物联网是很火的一个名词，而它的兴盛源于对信息获取的便捷性。</p>
+<p>而开发板是物联网中最重要的一环，可以说开发板配合传感器负责了物联网中的俩项，获取信息和传输信息。</p>
+<p>而且物联网的入门没有想象中的那么难，而且物联网可以看做和互联网是一样的，只不过是连接了传感器并将信息发到一个地方并进行处理。</p>
+<p>当然，我只告诉大家怎么学物联网中开发板即底层的部分，因为其他部分基本是软件工程或计科专业才会去做的数据处理和可视化等处理。</p>
+<p>好了，不废话了，步入正题。</p>
+<h2 id="我推荐的开发板类型"><a href="#我推荐的开发板类型" class="headerlink" title="我推荐的开发板类型"></a>我推荐的开发板类型</h2><p>如果是刚入门学习开发板的话，我比较推荐学习Arduino体系，因为Arduino体系是类C的代码编写，而且相较于其他体系是资源最多的体系，而Arduino体系里比较好用的开发板有Arduino UNO，Arduino Mega，这俩个是比较经典的开发板而且实用性比51强得多。如果想购买的话可以去淘宝或者京东购买。</p>
+<h2 id="Arduino入门教程"><a href="#Arduino入门教程" class="headerlink" title="Arduino入门教程"></a>Arduino入门教程</h2><p>刚才也说过了，Arduino体系是资源最多的体系，这么多人珠玉在前，我就不献丑了，这里给大家推荐一个比较好的地方</p>
+<p><a href="http://mc.dfrobot.com.cn/thread-280817-1-1.html" target="_blank" rel="noopener">http://mc.dfrobot.com.cn/thread-280817-1-1.html</a></p>
+<p>而且这里面有购买配套套件的地方，就是有点小贵，建议大家量力而行，俩仨个人一起买一套也行。</p>
+<p>这里面教程也是比较详细的，你知道LED灯 长脚是正极短脚负极，而在开发板上需要自己在代码里定义正极接口，负极就是GND接口。</p>
+<p>基本就能正确的完成里面的所有示例。</p>
+<h2 id="ESP32板子（进阶部分）"><a href="#ESP32板子（进阶部分）" class="headerlink" title="ESP32板子（进阶部分）"></a>ESP32板子（进阶部分）</h2><p>如果你把上面的所有示例都完成了的话，且继续有兴趣钻研开发板，</p>
+<p>那这部分就是为你精心准备的，如果上面的示例做完了，且感觉自己对开发板没啥兴趣，也可以看看这部分图一乐，不想看的话也不会有很大的影响。</p>
+<p>我开始也说了，开发板负责了获取信息和传输信息，如果细心的话你们也发现了，Arduino的教程里面只涉及到了获取信息，或者控制点小东西，完全没和网络进行交互。</p>
+<p>其实也不能说没有和网络进行交流，只是教程里没有体现罢了，我想你可能记得有的教程里用到了串口监视器，而串口监视器其实也是一种开发板和电脑进行通信，你也可以用电脑获取到信息然后再和外界就行信息的交流只是有点麻烦而已，有兴趣的话可以自己了解一下，或者可以私聊问我，这里就不再赘述了。</p>
+<p>好了，步入这个专题的正题，ESP32板子。</p>
+<p>当然ESP32有很多体系方法去编写代码，这里只提供Arduino体系的教程。</p>
+<p>当然，ESP32作为开发板界的新贵，拥护他的人也不少。我在这里给大家贴出我认为很好的教程链接（真的不是我懒，真的是珠玉在前，我写很可能会误导大家）</p>
+<p>Arduino IDE 配置ESP32的环境</p>
+<p><a href="https://blog.csdn.net/Naisu_kun/article/details/84958561" target="_blank" rel="noopener">https://blog.csdn.net/Naisu_kun/article/details/84958561</a></p>
+<p>而这个教程里面，看到编写上传程序即可，批量烧录固件到模块中不用看。</p>
+<p>而ESP32 连接网络（应该是手机开热点，校园网应该不行）</p>
+<p><a href="https://blog.csdn.net/solar_Lan/article/details/80049747" target="_blank" rel="noopener">https://blog.csdn.net/solar_Lan/article/details/80049747</a></p>
+<p>ESP32基础的应该就这些了进阶的项目建议看这里</p>
+<p><a href="https://randomnerdtutorials.com/?s=ESP32+Arduino" target="_blank" rel="noopener">https://randomnerdtutorials.com/?s=ESP32+Arduino</a> </p>
+<p>虽然是英文文档但确实不错，用翻译凑合看吧</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/选择正确的浏览器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -219,7 +317,7 @@
                 
               
 
-              <time title="Created: 2019-09-25 00:43:32 / Modified: 00:46:16" itemprop="dateCreated datePublished" datetime="2019-09-25T00:43:32+08:00">2019-09-25</time>
+              <time title="Created: 2019-09-25 00:43:32 / Modified: 00:47:46" itemprop="dateCreated datePublished" datetime="2019-09-25T00:43:32+08:00">2019-09-25</time>
             </span>
           
             
@@ -651,7 +749,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
