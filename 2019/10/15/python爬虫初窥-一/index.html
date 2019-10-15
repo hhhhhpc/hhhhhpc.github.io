@@ -55,18 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="python���������һ��ǰ������������һ����վ��������豸��ɵĴ���������ͨ�����������վ�㣬վ���HTML,CSS,JS���뷵�ظ�����������뾭����������������ḻ��ʵ�ҳ�������������ǰ�������̳�������python���������һ�������������������ż��̳̣�С">
+  <meta name="description" content="python爬虫初窥（一）前言互联网是由一个个站点和网络设备组成的大网，我们通过浏览器访问站点，站点把HTML,CSS,JS代码返回给浏览器，代码经由浏览器解析，将丰富多彩的页面呈现在我们眼前。而本教程是利用python进行爬虫的一个入入入入入入入入门级教程，小白向。1.什么是爬虫如果我们把互联网比作一个蜘蛛网，数据便存放于蜘蛛网的各个节点，而爬虫就是一只小蜘蛛，">
+<meta name="keywords" content="代码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python爬虫初窥(一)">
 <meta property="og:url" content="http://yoursite.com/2019/10/15/python爬虫初窥-一/index.html">
 <meta property="og:site_name" content="硬件联盟博客">
-<meta property="og:description" content="python���������һ��ǰ������������һ����վ��������豸��ɵĴ���������ͨ�����������վ�㣬վ���HTML,CSS,JS���뷵�ظ�����������뾭����������������ḻ��ʵ�ҳ�������������ǰ�������̳�������python���������һ�������������������ż��̳̣�С">
+<meta property="og:description" content="python爬虫初窥（一）前言互联网是由一个个站点和网络设备组成的大网，我们通过浏览器访问站点，站点把HTML,CSS,JS代码返回给浏览器，代码经由浏览器解析，将丰富多彩的页面呈现在我们眼前。而本教程是利用python进行爬虫的一个入入入入入入入入门级教程，小白向。1.什么是爬虫如果我们把互联网比作一个蜘蛛网，数据便存放于蜘蛛网的各个节点，而爬虫就是一只小蜘蛛，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/python_spider_1.png">
-<meta property="og:updated_time" content="2019-10-15T15:24:18.000Z">
+<meta property="og:updated_time" content="2019-10-15T15:27:38.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python爬虫初窥(一)">
-<meta name="twitter:description" content="python���������һ��ǰ������������һ����վ��������豸��ɵĴ���������ͨ�����������վ�㣬վ���HTML,CSS,JS���뷵�ظ�����������뾭����������������ḻ��ʵ�ҳ�������������ǰ�������̳�������python���������һ�������������������ż��̳̣�С">
+<meta name="twitter:description" content="python爬虫初窥（一）前言互联网是由一个个站点和网络设备组成的大网，我们通过浏览器访问站点，站点把HTML,CSS,JS代码返回给浏览器，代码经由浏览器解析，将丰富多彩的页面呈现在我们眼前。而本教程是利用python进行爬虫的一个入入入入入入入入门级教程，小白向。1.什么是爬虫如果我们把互联网比作一个蜘蛛网，数据便存放于蜘蛛网的各个节点，而爬虫就是一只小蜘蛛，">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/python_spider_1.png">
   <link rel="canonical" href="http://yoursite.com/2019/10/15/python爬虫初窥-一/">
 
@@ -236,7 +237,7 @@
                 
               
 
-              <time title="Created: 2019-10-15 23:21:35 / Modified: 23:24:18" itemprop="dateCreated datePublished" datetime="2019-10-15T23:21:35+08:00">2019-10-15</time>
+              <time title="Created: 2019-10-15 23:26:26 / Modified: 23:27:38" itemprop="dateCreated datePublished" datetime="2019-10-15T23:26:26+08:00">2019-10-15</time>
             </span>
           
             
@@ -263,25 +264,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="python���������һ��"><a href="#python���������һ��" class="headerlink" title="python���������һ��"></a>python���������һ��</h1><h3 id="j��"><a href="#j��" class="headerlink" title="ǰ��"></a>ǰ��</h3><p>����������һ����վ��������豸��ɵĴ���������ͨ�����������վ�㣬վ���HTML,CSS,JS���뷵�ظ�����������뾭����������������ḻ��ʵ�ҳ�������������ǰ�������̳�������python���������һ�������������������ż��̳̣�С����</p><a id="more"></a>
-<h3 id="1-ʲo������"><a href="#1-ʲo������" class="headerlink" title="1.ʲô������"></a>1.ʲô������</h3><p>������ǰѻ���������һ��֩���������ݱ�����֩�����ĸ����ڵ㣬���������һֻС֩�룬</p>
-<p>������ץȡ�Լ���������ݣ�</p>
-<p>�Ӽ���������˵��������ǳ���ͨ��ģ�����������Ϊ������վ�������󣬻�ȡ��վ����Դ��</p>
-<p>��Ȼ��ȡ��Դ����Ҫ�����ݽ�����ȡ�͹����������ܼ���ʹ�á�</p>
-<h3 id="2-����L�������"><a href="#2-����L�������" class="headerlink" title="2.����Ļ�������"></a>2.����Ļ�������</h3><p>���������󡪡���&gt;��ȡ��Ӧ���ݡ�������&gt;�������ݡ�������&gt;��������</p>
-<p>����������������֪ʶһ���У�</p>
-<p>HTML����Ϊ��Ҫ�������ݾ�Ҫ֪���������л�ȡ����Ҫ�����ݣ����������Ҫ���HTML�����˽⣬�������֪������ôȥ������Ҫ��ȡ�����ݡ�</p>
-<p>Python����Ϊ��ƪ�̳�����python����д�����棬���Զ�python���˽��Ǳ���ģ��������ǰ��python���˽⣬����ȥ<a href="https://learnku.com/docs/tutorial/3.7.0�����վ���˽�һ��python�Ļ����﷨��" target="_blank" rel="noopener">https://learnku.com/docs/tutorial/3.7.0�����վ���˽�һ��python�Ļ����﷨��</a></p>
-<p>TCP/IP��HTTPЭ�飬��Щ�������˽�������߼���������һͷ��ˮȥѧϰ���棬</p>
-<p>���о���ϸ�ֵĻ��������ݵ�ʱ����Ҫ��re���������ʽ����������������beautifulsoup��jsonģ��ȡ��������ݵĻ�����ǣ�������ݿ�����ļ���д�����ݡ�</p>
-<h3 id="3-httpЭ��-��������Ӧ"><a href="#3-httpЭ��-��������Ӧ" class="headerlink" title="3.httpЭ�� ��������Ӧ"></a>3.httpЭ�� ��������Ӧ</h3><p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/python_spider_1.png" alt="image"></p>
-<p>Request �û����Լ�������ͨ�������(client)���͸�������(server)��������ܴ��Լ��ĸ�����Ϣ</p>
-<p>Response:�������������󣬷����û�������������Ϣ��Ȼ�󷵻�����(�������ݿ��ܰ���ͼƬ��htmm��css��js�Ĵ���)</p>
-<p>��Request��ΪGET/POST����GETһ��Ϊ�ύ�����ȡһ��ҳ�棬��POST���ύ���ݸ�������Ȼ���ȡ�µ�ҳ��</p>
-<h3 id="4-���л���"><a href="#4-���л���" class="headerlink" title="4.���л���"></a>4.���л���</h3><p>��ʹ�õ���WIN10��python��3.7��IDE��PyCharm��Pycharm�������棬�������ѧУ��ע��ѧУ����Ļ�Ҳ�ǿ��԰�������רҵ��ģ�����ѧУ�����ǿ��Եģ���</p>
-<h3 id="5-��������I�װ"><a href="#5-��������I�װ" class="headerlink" title="5.��������İ�װ"></a>5.��������İ�װ</h3><p>��������İ�װ�Ļ����Ҹ��˽��������̫��Ϥ��ͬ�汾python�������⻷��python��pip�Ĺ�ϵ�Ļ�������ʹ��pycharm���ӵ������⣬Ҳ�ܷ��㡣</p>
-<p><a href="https://blog.csdn.net/qiannianguji01/article/details/50397046����pycharm���ӵ�������Ľ̡̳�" target="_blank" rel="noopener">https://blog.csdn.net/qiannianguji01/article/details/50397046����pycharm���ӵ�������Ľ̡̳�</a></p>
-<p>��Ϊpip�����Ƿ��㣬�������̫�˽�python�������������պ���ܻ�е��Ի�</p>
+        <h1 id="python爬虫初窥（一）"><a href="#python爬虫初窥（一）" class="headerlink" title="python爬虫初窥（一）"></a>python爬虫初窥（一）</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>互联网是由一个个站点和网络设备组成的大网，我们通过浏览器访问站点，站点把HTML,CSS,JS代码返回给浏览器，代码经由浏览器解析，将丰富多彩的页面呈现在我们眼前。而本教程是利用python进行爬虫的一个入入入入入入入入门级教程，小白向。</p><h3 id="1-什么是爬虫"><a href="#1-什么是爬虫" class="headerlink" title="1.什么是爬虫"></a>1.什么是爬虫</h3><p>如果我们把互联网比作一个蜘蛛网，数据便存放于蜘蛛网的各个节点，而爬虫就是一只小蜘蛛，</p><a id="more"></a>
+
+<p>沿着网抓取自己的猎物（数据）</p>
+<p>从技术层面来说，爬虫就是程序通过模拟浏览器的行为：向网站发起请求，获取网站的资源，</p>
+<p>当然获取资源后还需要对数据进行提取和过滤这样才能继续使用。</p>
+<h3 id="2-爬虫的基本流程"><a href="#2-爬虫的基本流程" class="headerlink" title="2.爬虫的基本流程"></a>2.爬虫的基本流程</h3><p>程序发送请求———&gt;获取响应内容————&gt;解析内容————&gt;保存数据</p>
+<p>而这个流程里所需的知识一般有：</p>
+<p>HTML，因为你要解析内容就要知道从内容中获取你想要的数据，所以这就需要你对HTML有所了解，这样你才知道你怎么去找你想要提取的内容。</p>
+<p>Python，因为这篇教程是用python语言写的爬虫，所以对python的了解是必须的，如果你以前对python不了解，建议去<a href="https://learnku.com/docs/tutorial/3.7.0这个网站先了解一下python的基本语法。" target="_blank" rel="noopener">https://learnku.com/docs/tutorial/3.7.0这个网站先了解一下python的基本语法。</a></p>
+<p>TCP/IP，HTTP协议，这些能让你了解爬虫的逻辑而不至于一头雾水去学习爬虫，</p>
+<p>还有就是细分的话解析内容的时候需要，re（正则表达式），第三方解析库beautifulsoup，json模块等。保存数据的话可能牵扯到数据库或者文件读写等内容。</p>
+<h3 id="3-http协议-请求与相应"><a href="#3-http协议-请求与相应" class="headerlink" title="3.http协议 请求与相应"></a>3.http协议 请求与相应</h3><p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/python_spider_1.png" alt="image"></p>
+<p>Request 用户将自己的请求通过浏览器(client)发送给服务器(server)，请求可能带自己的个人信息</p>
+<p>Response:服务器接受请求，分析用户发来的请求信息，然后返回数据(返回数据可能包括图片，htmm，css，js的代码)</p>
+<p>而Request分为GET/POST请求，GET一般为提交请求获取一个页面，而POST会提交数据给服务器然后获取新的页面</p>
+<h3 id="4-运行环境"><a href="#4-运行环境" class="headerlink" title="4.运行环境"></a>4.运行环境</h3><p>我使用的是WIN10，python是3.7，IDE是PyCharm，Pycharm有社区版，而且如果学校能注册学校邮箱的话也是可以白嫖四年专业版的（咱们学校好像是可以的）。</p>
+<h3 id="5-第三方库的安装"><a href="#5-第三方库的安装" class="headerlink" title="5.第三方库的安装"></a>5.第三方库的安装</h3><p>第三方库的安装的话，我个人建议如果不太熟悉不同版本python或者虚拟环境python和pip的关系的话，可以使用pycharm添加第三方库，也很方便。</p>
+<p><a href="https://blog.csdn.net/qiannianguji01/article/details/50397046这是pycharm添加第三方库的教程。" target="_blank" rel="noopener">https://blog.csdn.net/qiannianguji01/article/details/50397046这是pycharm添加第三方库的教程。</a></p>
+<p>因为pip方便是方便，但如果不太了解python第三方库添加日后可能会感到迷惑。</p>
+<p>这次的教程就这样，下一篇开始代码的讲解</p>
 
     </div>
 
@@ -292,6 +294,15 @@
       
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/代码/" rel="tag"># 代码</a>
+            
+          </div>
+        
 
         
 
@@ -355,7 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python���������һ��"><span class="nav-number">1.</span> <span class="nav-text">python���������һ��</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#j��"><span class="nav-number">1.0.1.</span> <span class="nav-text">ǰ��</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ʲo������"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.ʲô������</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-����L�������"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.����Ļ�������</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-httpЭ��-��������Ӧ"><span class="nav-number">1.0.4.</span> <span class="nav-text">3.httpЭ�� ��������Ӧ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-���л���"><span class="nav-number">1.0.5.</span> <span class="nav-text">4.���л���</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-��������I�װ"><span class="nav-number">1.0.6.</span> <span class="nav-text">5.��������İ�װ</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python爬虫初窥（一）"><span class="nav-number">1.</span> <span class="nav-text">python爬虫初窥（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.0.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是爬虫"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.什么是爬虫</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-爬虫的基本流程"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.爬虫的基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-http协议-请求与相应"><span class="nav-number">1.0.4.</span> <span class="nav-text">3.http协议 请求与相应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-运行环境"><span class="nav-number">1.0.5.</span> <span class="nav-text">4.运行环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-第三方库的安装"><span class="nav-number">1.0.6.</span> <span class="nav-text">5.第三方库的安装</span></a></li></ol></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
