@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>python爬虫初窥（二）requests库</title>
+    <url>/2019/10/16/python%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5%EF%BC%88%E4%BA%8C%EF%BC%89requests%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="python爬虫初窥（二）requests库"><a href="#python爬虫初窥（二）requests库" class="headerlink" title="python爬虫初窥（二）requests库"></a>python爬虫初窥（二）requests库</h1><h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>上一节说过了，爬虫是模拟浏览器向服务器发送请求，然后获取服务器的响应。然后再对数据进行处理，所以我们要利用requests库发送各种HTTP请求来获取网站上的数据。</p><h3 id="2-运行环境"><a href="#2-运行环境" class="headerlink" title="2.运行环境"></a>2.运行环境</h3><p>系统版本</p><p>我使用的是win10，不太喜欢（其实还是没钱）Mac。。。。所以这个教程就以win为例了。</p><a id="more"></a>
+
+
+<p>python版本</p>
+<p>我的是3.6版本，关于如何下载python本博客里也有教程（滑稽）</p>
+<h3 id="3-IDE"><a href="#3-IDE" class="headerlink" title="3.IDE"></a>3.IDE</h3><p>我使用的是pycharm，是JB公司的产品，简直好用的一批好吧。吹爆</p>
+<h3 id="4-安装requests库"><a href="#4-安装requests库" class="headerlink" title="4.安装requests库"></a>4.安装requests库</h3><p>如何利用pycharm安装第三方库可以参考上篇教程贴的连接的例子。</p>
+<p>而如果你想深入了解requests库的话可以参考这个文档<a href="http://cn.python-requests.org/zh_CN/latest/，这个文档还是很顶的。" target="_blank" rel="noopener">http://cn.python-requests.org/zh_CN/latest/，这个文档还是很顶的。</a></p>
+<h3 id="5-开工"><a href="#5-开工" class="headerlink" title="5.开工"></a>5.开工</h3><p>废话这么多，想必大家也看烦了，现在开始编写代码吧。</p>
+<p>由于本篇教程小白向，所以怎么使用pycharm写python代码也顺便教给你们吧</p>
+<p><a href="https://jingyan.baidu.com/article/09ea3ede7826d5c0afde3942.html可以参考这篇教程" target="_blank" rel="noopener">https://jingyan.baidu.com/article/09ea3ede7826d5c0afde3942.html可以参考这篇教程</a></p>
+<p>当然，我们这里要输入的代码不是hello world</p>
+<p>而是下面的代码</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests <span class="comment">#导入requests库</span></span><br><span class="line">r = requests.get(<span class="string">'https://haut-hardware-of-league.github.io/'</span>) <span class="comment">#像目标url地址发送get请求，返回一个response对象</span></span><br><span class="line">print(r.text) <span class="comment">#r.text是http response的网页HTML</span></span><br></pre></td></tr></table></figure>
+
+<p>你是不是想问就这就这就这就这就这？</p>
+<p>没错，就这就这就这就这就这</p>
+<p>执行完之后底部便会出现输出结果，这就完成了python爬虫的第一步，获取网页的HTML内容。</p>
+<p>当然你可以给get加其他参数或者使用post请求，当然，由于这里是小白向，就不多言了，而且我在上面贴的有中文的官方文档的连接，有兴趣深究的可以去看一下，下面我就再简单介绍一个requests库好了。</p>
+<h4 id="get请求"><a href="#get请求" class="headerlink" title="get请求"></a>get请求</h4><p>无参数的</p>
+<p><code>r = requests.get(&quot;https://unsplash.com&quot;)</code></p>
+<p>这也是我们刚刚用到的，其实就是向网站发送一个get请求，返回值存到了r里，r的type是response</p>
+<p>当然get请求也可以传参数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">payload = &#123;&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: &apos;value2&apos;&#125;</span><br><span class="line">r = requests.get(&quot;http://httpbin.org/get&quot;, params=payload)</span><br></pre></td></tr></table></figure>
+
+<p>上面代码向服务器发送的请求就包含了俩个参数，key1和key2，以及俩个参数的值，</p>
+<p>实际上构成了这个网址<a href="http://httpbin.org/get?key1=value1&amp;key2=value2" target="_blank" rel="noopener">http://httpbin.org/get?key1=value1&amp;key2=value2</a></p>
+<h4 id="post请求"><a href="#post请求" class="headerlink" title="post请求"></a>post请求</h4><p>无参数的post请求和get请求一样只不过把get改为post即可</p>
+<p>有参数的post请求其实和get也一样，也是把get改为post就行了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">payload = &#123;&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: &apos;value2&apos;&#125;</span><br><span class="line">r = requests.post(&quot;http://httpbin.org/post&quot;, data=payload)</span><br></pre></td></tr></table></figure>
+
+<p>post请求是用来提交数据的，即填写一堆输入框比如账号密码啥的，然后提交。</p>
+<p>其他请求平常用的也不多我就不赘述了。</p>
+]]></content>
+      <tags>
+        <tag>代码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python爬虫初窥(一)</title>
+    <url>/2019/10/15/python%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5-%E4%B8%80/</url>
+    <content><![CDATA[<h1 id="python爬虫初窥（一）"><a href="#python爬虫初窥（一）" class="headerlink" title="python爬虫初窥（一）"></a>python爬虫初窥（一）</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>互联网是由一个个站点和网络设备组成的大网，我们通过浏览器访问站点，站点把HTML,CSS,JS代码返回给浏览器，代码经由浏览器解析，将丰富多彩的页面呈现在我们眼前。而本教程是利用python进行爬虫的一个入入入入入入入入门级教程，小白向。</p><h3 id="1-什么是爬虫"><a href="#1-什么是爬虫" class="headerlink" title="1.什么是爬虫"></a>1.什么是爬虫</h3><p>如果我们把互联网比作一个蜘蛛网，数据便存放于蜘蛛网的各个节点，而爬虫就是一只小蜘蛛，</p><a id="more"></a>
+
+<p>沿着网抓取自己的猎物（数据）</p>
+<p>从技术层面来说，爬虫就是程序通过模拟浏览器的行为：向网站发起请求，获取网站的资源，</p>
+<p>当然获取资源后还需要对数据进行提取和过滤这样才能继续使用。</p>
+<h3 id="2-爬虫的基本流程"><a href="#2-爬虫的基本流程" class="headerlink" title="2.爬虫的基本流程"></a>2.爬虫的基本流程</h3><p>程序发送请求———&gt;获取响应内容————&gt;解析内容————&gt;保存数据</p>
+<p>而这个流程里所需的知识一般有：</p>
+<p>HTML，因为你要解析内容就要知道从内容中获取你想要的数据，所以这就需要你对HTML有所了解，这样你才知道你怎么去找你想要提取的内容。</p>
+<p>Python，因为这篇教程是用python语言写的爬虫，所以对python的了解是必须的，如果你以前对python不了解，建议去<a href="https://learnku.com/docs/tutorial/3.7.0这个网站先了解一下python的基本语法。" target="_blank" rel="noopener">https://learnku.com/docs/tutorial/3.7.0这个网站先了解一下python的基本语法。</a></p>
+<p>TCP/IP，HTTP协议，这些能让你了解爬虫的逻辑而不至于一头雾水去学习爬虫，</p>
+<p>还有就是细分的话解析内容的时候需要，re（正则表达式），第三方解析库beautifulsoup，json模块等。保存数据的话可能牵扯到数据库或者文件读写等内容。</p>
+<h3 id="3-http协议-请求与相应"><a href="#3-http协议-请求与相应" class="headerlink" title="3.http协议 请求与相应"></a>3.http协议 请求与相应</h3><p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/python_spider_1.png" alt="image"></p>
+<p>Request 用户将自己的请求通过浏览器(client)发送给服务器(server)，请求可能带自己的个人信息</p>
+<p>Response:服务器接受请求，分析用户发来的请求信息，然后返回数据(返回数据可能包括图片，htmm，css，js的代码)</p>
+<p>而Request分为GET/POST请求，GET一般为提交请求获取一个页面，而POST会提交数据给服务器然后获取新的页面</p>
+<h3 id="4-运行环境"><a href="#4-运行环境" class="headerlink" title="4.运行环境"></a>4.运行环境</h3><p>我使用的是WIN10，python是3.7，IDE是PyCharm，Pycharm有社区版，而且如果学校能注册学校邮箱的话也是可以白嫖四年专业版的（咱们学校好像是可以的）。</p>
+<h3 id="5-第三方库的安装"><a href="#5-第三方库的安装" class="headerlink" title="5.第三方库的安装"></a>5.第三方库的安装</h3><p>第三方库的安装的话，我个人建议如果不太熟悉不同版本python或者虚拟环境python和pip的关系的话，可以使用pycharm添加第三方库，也很方便。</p>
+<p><a href="https://blog.csdn.net/qiannianguji01/article/details/50397046这是pycharm添加第三方库的教程。" target="_blank" rel="noopener">https://blog.csdn.net/qiannianguji01/article/details/50397046这是pycharm添加第三方库的教程。</a></p>
+<p>因为pip方便是方便，但如果不太了解python第三方库添加日后可能会感到迷惑。</p>
+<p>这次的教程就这样，下一篇开始代码的讲解</p>
+]]></content>
+      <tags>
+        <tag>代码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>win10下安装python</title>
+    <url>/2019/10/08/%E5%AE%89%E8%A3%85python/</url>
+    <content><![CDATA[<h3 id="1-自己的碎碎念"><a href="#1-自己的碎碎念" class="headerlink" title="1.自己的碎碎念"></a>1.自己的碎碎念</h3><h5 id="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"><a href="#python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法" class="headerlink" title="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"></a>python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法</h5><h3 id="2-环境需求"><a href="#2-环境需求" class="headerlink" title="2.环境需求"></a>2.环境需求</h3><p>win10</p>
+<p>python版本：python3.7</p>
+<a id="more"></a>
+<h3 id="3-下载步骤"><a href="#3-下载步骤" class="headerlink" title="3.下载步骤"></a>3.下载步骤</h3><p>当然这里还有一个推荐方法就是直接利用微软自带的应用商店安装一键安装，也很方便。不过我个人还是比较喜欢这种手动下载的方法<br>1.首先要到python官网下载python，需要下载对应的版本（我觉得都9102年了应该很少有32位的电脑了吧）不过以防万一，大家还是去搜一下怎么去查自己系统多少位吧，我这里就不再赘述了</p>
+<p><a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">https://www.python.org/downloads/windows/</a> 这里是python的官方下载网址，估计不少初学者看见这个页面头都大了（就像我一样，不知道下载哪个）</p>
+<p>首先你先选择你要安装的版本，</p>
+<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/3b4273f83fa7f256.png" alt="image"></p>
+<p>我们这里安装3.7.4版本，所以点击一下即可</p>
+<p>进入页面后直接拉到最后有列表如下</p>
+<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/833fdb8c7b135e78.png" alt="image"></p>
+<p>(Windows x86-64 executable installer)我们点一下这个链接，就可以下载了</p>
+<h3 id="4-安装步骤"><a href="#4-安装步骤" class="headerlink" title="4.安装步骤"></a>4.安装步骤</h3><p>下载完成后双击执行下载的exe程序，进入安装界面</p>
+<p><img src="https://github.com/HAUT-hardware-of-league/blog_photo/blob/master/8a1f28b5e2537a7c.png" alt="image"></p>
+<p>请选择 Custo那一串（汉语意思为自定义安装，为啥不让他自动安装心里应该清楚）并且记得把该页面最下面俩个方框的对勾打上</p>
+<p>然后直接点next进入这个页面</p>
+<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/32538b853673ce41.png" alt="image"></p>
+<p>这里你就可以自定义python的安装路径了，然后直接install即可</p>
+<h3 id="5-验证安装"><a href="#5-验证安装" class="headerlink" title="5.验证安装"></a>5.验证安装</h3><p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/3bfd2830789fe039.png" alt="image"> 安装完成后出现这个界面</p>
+<p>然后再进入cmd 输入python -V</p>
+<p>示例如下<br>如果显示python的版本则安装成功</p>
+<p>则安装成功</p>
+<p>开始愉快的使用python吧</p>
+]]></content>
+      <tags>
+        <tag>代码</tag>
+        <tag>环境配置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于开发板</title>
+    <url>/2019/09/30/%E5%85%B3%E4%BA%8E%E5%BC%80%E5%8F%91%E6%9D%BF/</url>
+    <content><![CDATA[<h1 id="为什么要学开发板"><a href="#为什么要学开发板" class="headerlink" title="为什么要学开发板"></a>为什么要学开发板</h1><p>众所周知，近些年，物联网是很火的一个名词，而它的兴盛源于对信息获取的便捷性。</p>
+<p>而开发板是物联网中最重要的一环，可以说开发板配合传感器负责了物联网中的俩项，获取信息和传输信息。</p>
+<p>而且物联网的入门没有想象中的那么难，而且物联网可以看做和互联网是一样的，只不过是连接了传感器并将信息发到一个地方并进行处理。</p>
+<p>当然，我只告诉大家怎么学物联网中开发板即底层的部分，因为其他部分基本是软件工程或计科专业才会去做的数据处理和可视化等处理。</p>
+<p>好了，不废话了，步入正题。</p>
+<a id="more"></a>
+<h2 id="我推荐的开发板类型"><a href="#我推荐的开发板类型" class="headerlink" title="我推荐的开发板类型"></a>我推荐的开发板类型</h2><p>如果是刚入门学习开发板的话，我比较推荐学习Arduino体系，因为Arduino体系是类C的代码编写，而且相较于其他体系是资源最多的体系，而Arduino体系里比较好用的开发板有Arduino UNO，Arduino Mega，这俩个是比较经典的开发板而且实用性比51强得多。如果想购买的话可以去淘宝或者京东购买。</p>
+<h2 id="Arduino入门教程"><a href="#Arduino入门教程" class="headerlink" title="Arduino入门教程"></a>Arduino入门教程</h2><p>刚才也说过了，Arduino体系是资源最多的体系，这么多人珠玉在前，我就不献丑了，这里给大家推荐一个比较好的地方</p>
+<p><a href="http://mc.dfrobot.com.cn/thread-280817-1-1.html" target="_blank" rel="noopener">http://mc.dfrobot.com.cn/thread-280817-1-1.html</a></p>
+<p>而且这里面有购买配套套件的地方，就是有点小贵，建议大家量力而行，俩仨个人一起买一套也行。</p>
+<p>这里面教程也是比较详细的，你知道LED灯 长脚是正极短脚负极，而在开发板上需要自己在代码里定义正极接口，负极就是GND接口。</p>
+<p>基本就能正确的完成里面的所有示例。</p>
+<h2 id="ESP32板子（进阶部分）"><a href="#ESP32板子（进阶部分）" class="headerlink" title="ESP32板子（进阶部分）"></a>ESP32板子（进阶部分）</h2><p>如果你把上面的所有示例都完成了的话，且继续有兴趣钻研开发板，</p>
+<p>那这部分就是为你精心准备的，如果上面的示例做完了，且感觉自己对开发板没啥兴趣，也可以看看这部分图一乐，不想看的话也不会有很大的影响。</p>
+<p>我开始也说了，开发板负责了获取信息和传输信息，如果细心的话你们也发现了，Arduino的教程里面只涉及到了获取信息，或者控制点小东西，完全没和网络进行交互。</p>
+<p>其实也不能说没有和网络进行交流，只是教程里没有体现罢了，我想你可能记得有的教程里用到了串口监视器，而串口监视器其实也是一种开发板和电脑进行通信，你也可以用电脑获取到信息然后再和外界就行信息的交流只是有点麻烦而已，有兴趣的话可以自己了解一下，或者可以私聊问我，这里就不再赘述了。</p>
+<p>好了，步入这个专题的正题，ESP32板子。</p>
+<p>当然ESP32有很多体系方法去编写代码，这里只提供Arduino体系的教程。</p>
+<p>当然，ESP32作为开发板界的新贵，拥护他的人也不少。我在这里给大家贴出我认为很好的教程链接（真的不是我懒，真的是珠玉在前，我写很可能会误导大家）</p>
+<p>Arduino IDE 配置ESP32的环境</p>
+<p><a href="https://blog.csdn.net/Naisu_kun/article/details/84958561" target="_blank" rel="noopener">https://blog.csdn.net/Naisu_kun/article/details/84958561</a></p>
+<p>而这个教程里面，看到编写上传程序即可，批量烧录固件到模块中不用看。</p>
+<p>而ESP32 连接网络（应该是手机开热点，校园网应该不行）</p>
+<p><a href="https://blog.csdn.net/solar_Lan/article/details/80049747" target="_blank" rel="noopener">https://blog.csdn.net/solar_Lan/article/details/80049747</a></p>
+<p>ESP32基础的应该就这些了进阶的项目建议看这里</p>
+<p><a href="https://randomnerdtutorials.com/?s=ESP32+Arduino" target="_blank" rel="noopener">https://randomnerdtutorials.com/?s=ESP32+Arduino</a> </p>
+<p>虽然是英文文档但确实不错，用翻译凑合看吧</p>
+]]></content>
+      <tags>
+        <tag>代码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>选择正确的浏览器</title>
+    <url>/2019/09/25/%E9%80%89%E6%8B%A9%E6%AD%A3%E7%A1%AE%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8/</url>
+    <content><![CDATA[<p>对于浏览器的选择，这里肯定首推chrome</p>
+<p>当然无脑尬吹不可取，</p>
+<p>先说说它的优点：chrome速度快和简洁是最大的优点，而且书签比起其他的浏览器方便很多，基于google账号可以实现多端同步（但是吧可能需要一点其他手段才能申请google账号）而且不会弹窗广告</p>
+<p>还有就是如果学习前端的话，F12（开发者模式）也挺方便的</p>
+<a id="more"></a>
+<p>但缺点同样不少：最大的问题就是可能占用内存较大，然后就是不支持网银，还有和Flash几乎水火不容，我都不知道为什么，有时候，我明明设置好了flash一直允许，下次打开网页又要我重新设置</p>
+<p>当然chrome的一些快键键就不再多说了打开设置按钮都可以看到，什么shift+左键看新窗口，ctrl+左键开界面，估计大伙也都知道。</p>
+<p>关于如何给一个网页权限</p>
+<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/chrome_img_1.png" alt="image"></p>
+<p>是在隐私设置里的的网站设置里，在这里面就可以设置给一个网站什么权限了，一般推荐大家使用先询问，不要设置禁止，当年我用chrome抢课就吃了没弹窗的亏，我还在痛骂学校的网站，后来才知道原来是我自己憨批了。。。</p>
+<p>然后还有就是设置下载内容最好改一下地址，我记得默认好像是C。。</p>
+<p>这里搜索引擎的话，我主推bing</p>
+<p>如果想玩一下别人的界面的话可以先选择你想修改的东西，右击点检查，然后界面就会变成这样，</p>
+<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/chrome_img_2.png" alt="image"></p>
+<p>然后对着双击对着里面的内容修改就行了，当然这种东西只会在你的电脑上有效，因为这个网站的本质前端文件还是没有改变的，只是在你这显示出来的被你改变了而已。</p>
+<p>还有就是一些搜索引擎的应用，想了解的话可以去知乎上或着百度搜一下，挺多教程的，这里我就不赘述了。</p>
+<p>当然既然谈到chrome了就离不开插件了，当然很多优秀的插件需要在google应用商店下载，也有的在国内站点有资源可以下载使用。<br>我这里给大家推荐几个我比较喜欢用的插件吧<br>OneTab，可以一键把你的所有标签页变成一个列表，节省内存，你用的时候可以从中选择打开一个或打开多个，我挺喜欢的。<br>AdGuard广告拦截器挺方便的，可以去除很多广告（滑稽）简直爽的一批<br>还有就是万能的Tampermonkey也就是俗称油候，用他运行脚本简直爽的不要不要的，而且网络上有很多写好的脚本，简直万能。<br>划词翻译的话我觉得可以要也可以不要，chrome自己也带翻译，不过好像只能全文。<br>好了，就到这吧，不啰嗦了。</p>
+]]></content>
+      <tags>
+        <tag>日常</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决美帝良心想装上Ubuntu没网的问题</title>
+    <url>/2019/09/15/%E8%A7%A3%E5%86%B3%E7%BE%8E%E5%B8%9D%E8%89%AF%E5%BF%83%E6%83%B3%E8%A3%85%E4%B8%8AUbuntu%E6%B2%A1%E7%BD%91%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>1.因为要写代码的时候需要Linux的环境，所以屁颠屁颠的掏出来了自己的优盘下了个Ubuntu18.04的镜像，然后做了个双系统（这一步具体怎么做网上教程很多，我也就不多说了）</p>
+<p>2.然后开机的时候居然发现没有WiFi，没有WiFi，没有WiFi！！！</p>
+<p>然后百度查了好多都说是驱动问题，结果我手机数据线插上电脑浪费了3个G装了无数遍驱动也没解决这个问题，最后看到了一个可能是</p>
+<p>无线网卡没有权限的原因，然后就敲了两行命令，改了个配置文件，就可以愉快的连接上Wifi了，所以这里记录下来，供各位使用。</p>
+<a id="more"></a>
+<p>3.</p>
+<p>首先你先确认你的驱动确实装了（具体怎么看，可以网上搜索），</p>
+<p>第二步，打开终端，敲入 rfkill list all 会出现如下信息</p>
+<p>0:ideapad_wlan: Wireless LAN<br>Soft blocked: no<br>Hard blocked:yes<br>1:ideapad_bluetooth: Bluetooth<br>Soft blocked: no<br>Hard blocked: yes<br>2:phy0: Wireless LAN<br>Soft blocked: no<br>Hard blocked:no<br>3:hci0: Bluetooth<br>Soft blocked: yes<br>Hard blocked: no</p>
+<p>我们可以看到 ideapad_wlan的hard blocked默认为yes，所以导致wifi无法开启。</p>
+<p>办法一（暂时）：</p>
+<p>（1）sudo modprobe -r ideapad_laptop</p>
+<p>输入完这个命令大概应该就可以连接WiFi了，但是呢还有一个问题就是，没有彻底解决问题，每次开机都要重新执行一次命令，所以我们需要改一下配置文件，以达到我们的目的。</p>
+<p>方法二（推荐）：<br>通过列入黑名单的方式来实现自动移出ideapad_laptop设备。<br>1）创建/etc/modprobe.d/ideapad.conf文件：<br>sudo touch /etc/modprobe.d/ideapad.conf<br>2）编辑ideapad.conf文件：<br>sudo gedit ideapad.conf<br>3) 在ideapad.conf文件中添加：<br>blacklist ideapad_laptop<br>4) 关闭并保存ideapad.conf文件，移除ideapad_laptop设备：<br>sudo modprobe -r ideapad_laptop<br>5) 注销重启Ubuntu系统，可以看到无线设备能够被打开，并能搜索到WiFi信号。</p>
+]]></content>
+      <tags>
+        <tag>环境配置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何正确下载一个软件</title>
+    <url>/2019/09/10/%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%B8%8B%E8%BD%BD%E4%B8%80%E4%B8%AA%E8%BD%AF%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="如何正确下载一个软件"><a href="#如何正确下载一个软件" class="headerlink" title="如何正确下载一个软件"></a>如何正确下载一个软件</h1><p>众所周知，一般的比较好用的软件都是国外的（实话实说，国内软件做的确实拉跨）   ，所以很多时候下载成为了难住大家的第一关，鉴于确实很对人对英语有比较深的恐惧感，所以这篇博客，以受众较广的Adobe全家桶为例教大家如何下载软件。</p>
+<h2 id="第一步：选择正确的搜索引擎"><a href="#第一步：选择正确的搜索引擎" class="headerlink" title="第一步：选择正确的搜索引擎"></a>第一步：选择正确的搜索引擎</h2><p>目前我想大家用的搜索引擎还是百度居多，但这里我要实名diss百度，使用百度很多时候前面好多篇都是广告，还有很多（balabalablabla。。。此处省略一万字）总而言之，现在的百度，往往是广告排在了广告的前面，所以我推荐大家使用bing的搜索引擎，虽然也会有广告，但排版方式比百度强了很多倍（别问我为啥不用goole，因为默认你们不会翻墙）</p>
+<h2 id="第二步：-选择正确的搜索方式"><a href="#第二步：-选择正确的搜索方式" class="headerlink" title="第二步： 选择正确的搜索方式"></a>第二步： 选择正确的搜索方式</h2><p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/ad97f5caf7dc399a.png" alt="image"></p>
+<p>选择这种搜索方式，你知道哪个是官网吗？？？而且如果官网是英文，你会不会点进去就退出然后选择那种第三方软件园然后下载？</p>
+<p>反正我当年是这么选的。</p>
+<a id="more"></a>
+
+<p>但如果你们选择搜索的时候多打上官网俩个字，也许结果就会不同</p>
+<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/b0fa1c10391b5521.png" alt="image"></p>
+<p>就像这样一样前俩个一般都是官网。</p>
+<h2 id="第三步-选择要下载的版本"><a href="#第三步-选择要下载的版本" class="headerlink" title="第三步:选择要下载的版本"></a>第三步:选择要下载的版本</h2><p>ps:鉴于adobe官网是中文所以换成了下载pycharm</p>
+<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/5a5996e679480e9b.png" alt="image"></p>
+<p>进入官网之后，往往都会有一个大大大大大大的download键</p>
+<p>点一下即可进入下载页面</p>
+<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/de1908dea4283b09.png" alt="image"></p>
+<p>一般点过download的页面就会进入选择下载哪个的页面，一般会让你选择下载具体哪种版本，选择你的操作系统，一般都选择windows，具体哪个版本应该也都有说明，可以翻译一波看看啥意思决定下载哪个，然后下载后安装就行了。</p>
+<p>关于安装，无非是自定义安装到哪个盘里，需要加载哪些插件。</p>
+<p>这里就不在赘述了。</p>
+<p>所以，希望看完这篇教程的你，不要再问怎么下载XXX软件了，官网，download ，ok!!!!!!真·有手就行</p>
+]]></content>
+      <tags>
+        <tag>日常</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ACM</title>
+    <url>/2019/09/09/ACM/</url>
+    <content><![CDATA[<h2 id="因为本社团ACM实力属实拉跨，所以只能找嘉豪学姐帮忙，所以链接指向的是嘉豪学姐的博客"><a href="#因为本社团ACM实力属实拉跨，所以只能找嘉豪学姐帮忙，所以链接指向的是嘉豪学姐的博客" class="headerlink" title="因为本社团ACM实力属实拉跨，所以只能找嘉豪学姐帮忙，所以链接指向的是嘉豪学姐的博客"></a>因为本社团ACM实力属实拉跨，所以只能找嘉豪学姐帮忙，所以链接指向的是嘉豪学姐的博客</h2><p><a href="https://blog.csdn.net/weixin_43870697" target="_blank" rel="noopener">https://blog.csdn.net/weixin_43870697</a></p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+</search>
