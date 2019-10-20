@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>test</title>
+    <url>/2019/10/20/test/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>python爬虫初窥（二）requests库</title>
     <url>/2019/10/16/python%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5%EF%BC%88%E4%BA%8C%EF%BC%89requests%E5%BA%93/</url>
     <content><![CDATA[<h1 id="python爬虫初窥（二）requests库"><a href="#python爬虫初窥（二）requests库" class="headerlink" title="python爬虫初窥（二）requests库"></a>python爬虫初窥（二）requests库</h1><h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>上一节说过了，爬虫是模拟浏览器向服务器发送请求，然后获取服务器的响应。然后再对数据进行处理，所以我们要利用requests库发送各种HTTP请求来获取网站上的数据。</p><h3 id="2-运行环境"><a href="#2-运行环境" class="headerlink" title="2.运行环境"></a>2.运行环境</h3><p>系统版本</p><p>我使用的是win10，不太喜欢（其实还是没钱）Mac。。。。所以这个教程就以win为例了。</p><a id="more"></a>
