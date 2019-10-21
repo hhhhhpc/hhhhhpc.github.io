@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="python爬虫初窥（三）BeautifulSoup库1.前言上一篇演示了如何使用requests模块向网站发送http请求，获取到网页的HTML数据，而第一篇的时候就说过了，爬虫获取到信息后下面就是对信息的处理，而我比较喜欢使用处理数据的库是用BeautifulSoup这个库。2.运行环境同上篇一样 且自行安装BeautifulSoup库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python爬虫初窥(三)">
+<meta property="og:url" content="http://yoursite.com/2019/10/21/python爬虫初窥-三/index.html">
+<meta property="og:site_name" content="硬件联盟博客">
+<meta property="og:description" content="python爬虫初窥（三）BeautifulSoup库1.前言上一篇演示了如何使用requests模块向网站发送http请求，获取到网页的HTML数据，而第一篇的时候就说过了，爬虫获取到信息后下面就是对信息的处理，而我比较喜欢使用处理数据的库是用BeautifulSoup这个库。2.运行环境同上篇一样 且自行安装BeautifulSoup库">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/20191021173730.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/20191021173918.png">
+<meta property="og:updated_time" content="2019-10-21T14:19:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python爬虫初窥(三)">
+<meta name="twitter:description" content="python爬虫初窥（三）BeautifulSoup库1.前言上一篇演示了如何使用requests模块向网站发送http请求，获取到网页的HTML数据，而第一篇的时候就说过了，爬虫获取到信息后下面就是对信息的处理，而我比较喜欢使用处理数据的库是用BeautifulSoup这个库。2.运行环境同上篇一样 且自行安装BeautifulSoup库">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_2.png">
+  <link rel="canonical" href="http://yoursite.com/2019/10/21/python爬虫初窥-三/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>python爬虫初窥(三) | 硬件联盟博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">硬件联盟博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">9</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/21/python爬虫初窥-三/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="硬件技术联盟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硬件联盟博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">python爬虫初窥(三)
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-21 22:18:26 / Modified: 22:19:29" itemprop="dateCreated datePublished" datetime="2019-10-21T22:18:26+08:00">2019-10-21</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/10/21/python爬虫初窥-三/" class="post-meta-item leancloud_visitors" data-flag-title="python爬虫初窥(三)" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/10/21/python爬虫初窥-三/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/21/python爬虫初窥-三/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="python爬虫初窥（三）BeautifulSoup库"><a href="#python爬虫初窥（三）BeautifulSoup库" class="headerlink" title="python爬虫初窥（三）BeautifulSoup库"></a>python爬虫初窥（三）BeautifulSoup库</h1><h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>上一篇演示了如何使用requests模块向网站发送http请求，获取到网页的HTML数据，而第一篇的时候就说过了，爬虫获取到信息后下面就是对信息的处理，而我比较喜欢使用处理数据的库是用BeautifulSoup这个库。</p><h3 id="2-运行环境"><a href="#2-运行环境" class="headerlink" title="2.运行环境"></a>2.运行环境</h3><p>同上篇一样 且自行安装BeautifulSoup库</p><a id="more"></a>
+
+<p><a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/这里是这个库的中文网站。" target="_blank" rel="noopener">https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/这里是这个库的中文网站。</a></p>
+<h3 id="3-开工"><a href="#3-开工" class="headerlink" title="3.开工"></a>3.开工</h3><h5 id="3-1-原理"><a href="#3-1-原理" class="headerlink" title="3.1 原理"></a>3.1 原理</h5><p>Beautiful Soup将HTML文档看成一个复杂的树形结构，每个节点都是Python对象，而所有对象可以归纳为四个类型，Tag , NavigableString , BeautifulSoup , Comment</p>
+<h5 id="3-2-Tag"><a href="#3-2-Tag" class="headerlink" title="3.2 Tag"></a>3.2 Tag</h5><p>我们知道HTML代码可以说所有内容都是存放在标签里的，而这个库的标签也是这个意思。</p>
+<p>我们找个例子来了解一下吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">from bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line">html_doc = &quot;&quot;&quot;</span><br><span class="line">&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;</span><br><span class="line">&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were</span><br><span class="line">&lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;,</span><br><span class="line">&lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and</span><br><span class="line">&lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;</span><br><span class="line">and they lived at the bottom of a well.&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">soup = BeautifulSoup(html_doc, &apos;lxml&apos;)  #声明BeautifulSoup对象</span><br><span class="line">find = soup.find(&apos;p&apos;)  #使用find方法查到第一个p标签</span><br><span class="line">print(&quot;find&apos;s return type is &quot;, type(find))  #输出返回值类型</span><br><span class="line">print(&quot;find&apos;s content is&quot;, find)  #输出find获取的值</span><br><span class="line">print(&quot;find&apos;s Tag Name is &quot;, find.name)  #输出标签的名字</span><br><span class="line">print(&quot;find&apos;s Attribute(class) is &quot;, find[&apos;class&apos;])  #输出标签的class属性值</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_2.png" alt="image"></p>
+<p>可以看到，你查到的是第一个P标签。</p>
+<p>而找到的标签里有 .name和.attribute类型，.attribute是返回那个class的类型</p>
+<h5 id="3-3-NavigableString"><a href="#3-3-NavigableString" class="headerlink" title="3.3 NavigableString"></a>3.3 NavigableString</h5><p>这个就是标签中的文本内容但是不含标签，你可以试一下例子</p>
+<p>再上面的例子中 最后一行加入print(‘NavigableString is：’, find.string)  就可以得到下面的输出</p>
+<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_3.png" alt="image"></p>
+<h5 id="3-4-BeautifulSoup"><a href="#3-4-BeautifulSoup" class="headerlink" title="3.4 BeautifulSoup"></a>3.4 BeautifulSoup</h5><p>这个对象表示一个文档的全部内容，支持遍历文档树和搜索</p>
+<h5 id="3-5-Comment"><a href="#3-5-Comment" class="headerlink" title="3.5 Comment"></a>3.5 Comment</h5><p>这个对象是HTML中的注释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">markup = &quot;&lt;b&gt;&lt;!--Hey, buddy. Want to buy a used parser?--&gt;&lt;/b&gt;&quot;</span><br><span class="line">soup = BeautifulSoup(markup)</span><br><span class="line">comment = soup.b.string</span><br><span class="line">type(comment)</span><br><span class="line"># &lt;class &apos;bs4.element.Comment&apos;&gt;  //应该输出内容</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-6-BeautifulSoup的遍历方法"><a href="#3-6-BeautifulSoup的遍历方法" class="headerlink" title="3.6 BeautifulSoup的遍历方法"></a>3.6 BeautifulSoup的遍历方法</h5><p>一般常用的有子节点，父节点，及标签名的方式遍历</p>
+<p>关于子节点和父节点的定义可参考这篇 <a href="https://www.w3school.com.cn/htmldom/dom_nodes.asp" target="_blank" rel="noopener">https://www.w3school.com.cn/htmldom/dom_nodes.asp</a></p>
+<h6 id="3-6-1-节点和标签名"><a href="#3-6-1-节点和标签名" class="headerlink" title="3.6.1 节点和标签名"></a>3.6.1 节点和标签名</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">soup.head #查找head标签</span><br><span class="line">soup.p #查找第一个p标签</span><br><span class="line"></span><br><span class="line">#对标签的直接子节点进行循环</span><br><span class="line">for child in title_tag.children:</span><br><span class="line">    print(child)</span><br><span class="line"></span><br><span class="line">soup.parent #父节点</span><br><span class="line"></span><br><span class="line"># 所有父节点</span><br><span class="line">for parent in link.parents:</span><br><span class="line">    if parent is None:</span><br><span class="line">        print(parent)</span><br><span class="line">    else:</span><br><span class="line">        print(parent.name)</span><br><span class="line"></span><br><span class="line"># 兄弟节点</span><br><span class="line">sibling_soup.b.next_sibling #后面的兄弟节点</span><br><span class="line">sibling_soup.c.previous_sibling #前面的兄弟节点</span><br><span class="line"></span><br><span class="line">#所有兄弟节点</span><br><span class="line">for sibling in soup.a.next_siblings:</span><br><span class="line">    print(repr(sibling))</span><br><span class="line"></span><br><span class="line">for sibling in soup.find(id=&quot;link3&quot;).previous_siblings:</span><br><span class="line">    print(repr(sibling))</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-6-2-搜索文档树"><a href="#3-6-2-搜索文档树" class="headerlink" title="3.6.2 搜索文档树"></a>3.6.2 搜索文档树</h6><p>常用的方式是find()和find_all()，不常用的我就不多提了，想看的可以去官方文档查一下</p>
+<p>可以通过tag的name，即名字为name的tag</p>
+<p>attr参数，就是tag的属性，即class</p>
+<p>string参数，搜索文档中字符串的内容</p>
+<p>recursive 参数： 调用tag的 find_all() 方法时，Beautiful Soup会检索当前tag的所有子孙节点。如果只想搜索tag的直接子节点，可以使用参数 recursive=False 。可以看一下示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">soup.find_all(&quot;title&quot;)</span><br><span class="line"># [&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;]</span><br><span class="line">#</span><br><span class="line">soup.find_all(&quot;p&quot;, &quot;title&quot;)</span><br><span class="line"># [&lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;]</span><br><span class="line"># </span><br><span class="line">soup.find_all(&quot;a&quot;)</span><br><span class="line"># [&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;,</span><br><span class="line">#  &lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;,</span><br><span class="line">#  &lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]</span><br><span class="line">#</span><br><span class="line">soup.find_all(id=&quot;link2&quot;)</span><br><span class="line"># [&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;]</span><br><span class="line">#</span><br><span class="line">import re</span><br><span class="line">soup.find(string=re.compile(&quot;sisters&quot;))</span><br><span class="line"># u&apos;Once upon a time there were three little sisters; and their names were\n&apos;</span><br></pre></td></tr></table></figure>
+
+<p>现在最基本的python爬虫需要用的东西都已经介绍完了，下面来进行下实战吧</p>
+<h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><p>这次就爬个天气预报的信息好了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url = &apos;http://www.weather.com.cn/weather/101230101.shtml&apos;</span><br><span class="line"></span><br><span class="line">header = &#123;&apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) &apos;</span><br><span class="line">                      &apos;AppleWebKit/537.36 (KHTML, like Gecko) &apos;</span><br><span class="line">                      &apos;Chrome/69.0.3486.0 Safari/537.36&apos;&#125;  # 模拟一个报头，将爬虫变为浏览器</span><br><span class="line">response = requests.get(url=url, headers=header)</span><br><span class="line">response.encoding = &apos;utf-8&apos;    # 指定返回信息的编码格式</span><br><span class="line"></span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
+
+<p>然后输出内容应该是一大堆内容，这里就不贴图了。</p>
+<p>然后现在我们找到我们需要爬下来的内容，首先打开开发者模式可以看到右边一坨花花绿绿的代码，不要慌张，我教你怎么正确寻找你要的东西。</p>
+<p>以这个页面为例我们想要的肯定是这一部分内容</p>
+<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_5.png" alt="image"></p>
+<p>你可以对着他们点击右键然后有个叫检查或者审查元素的按钮，这样你就可以看见右边的的代码会跳到一个地方，然后根据那个地方你可以找他的父节点或者其他的，可以看见他的HTML标签和class然后就可以用BS库进行提取了。</p>
+<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/20191021173730.png" alt></p>
+<p>就比如这个，这个单个的标签是 li class为 sky啥啥啥的的，而且可以看到他的父标签是ul class是</p>
+<p>t clearfix</p>
+<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/20191021173918.png" alt></p>
+<p>然后我们验证一下，父标签果然就是这一列。</p>
+<p>然后我们就开始用BS库进行解析吧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line">url = &apos;http://www.weather.com.cn/weather/101230101.shtml&apos;</span><br><span class="line"></span><br><span class="line">header = &#123;&apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) &apos;</span><br><span class="line">                      &apos;AppleWebKit/537.36 (KHTML, like Gecko) &apos;</span><br><span class="line">                      &apos;Chrome/69.0.3486.0 Safari/537.36&apos;&#125;</span><br><span class="line"></span><br><span class="line">response = requests.get(url=url, headers=header)</span><br><span class="line">response.encoding = &apos;utf-8&apos;</span><br><span class="line">soup = BeautifulSoup(response.text, &apos;lxml&apos;)</span><br><span class="line">weather = soup.find(&apos;ul&apos;, class_=&apos;t clearfix&apos;)  # 定位 HTML标签为UL 类型为t clearfix的内容</span><br><span class="line">print(weather.text)</span><br></pre></td></tr></table></figure>
+
+<p>这个代码里面 weather就是我们想要提取出来的内容了。</p>
+<p>当然你也可以通过正则表达式来获取更详细的信息。</p>
+<p>然后你就可以对这些数据进行处理，比如文件的存贮，发送到其他地方，这都随你便了。</p>
+<p>当然还有就是我们这里并没有应对反爬虫的机制，也没有涉及到发送post请求的爬虫，我就不赘述了，有兴趣的</p>
+<p>关于python爬虫的教程就到这把，如果大家有兴趣的话可以去试点更多有意思的，比如爬图片然后存贮到其他地方，我这里就不再赘述了。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/16/python爬虫初窥（二）requests库/" rel="next" title="python爬虫初窥（二）requests库">
+                  <i class="fa fa-chevron-left"></i> python爬虫初窥（二）requests库
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python爬虫初窥（三）BeautifulSoup库"><span class="nav-number">1.</span> <span class="nav-text">python爬虫初窥（三）BeautifulSoup库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-前言"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-运行环境"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.运行环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-开工"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.开工</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-原理"><span class="nav-number">1.0.3.0.1.</span> <span class="nav-text">3.1 原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-Tag"><span class="nav-number">1.0.3.0.2.</span> <span class="nav-text">3.2 Tag</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-NavigableString"><span class="nav-number">1.0.3.0.3.</span> <span class="nav-text">3.3 NavigableString</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-BeautifulSoup"><span class="nav-number">1.0.3.0.4.</span> <span class="nav-text">3.4 BeautifulSoup</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-Comment"><span class="nav-number">1.0.3.0.5.</span> <span class="nav-text">3.5 Comment</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-6-BeautifulSoup的遍历方法"><span class="nav-number">1.0.3.0.6.</span> <span class="nav-text">3.6 BeautifulSoup的遍历方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-6-1-节点和标签名"><span class="nav-number">1.0.3.0.6.1.</span> <span class="nav-text">3.6.1 节点和标签名</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-6-2-搜索文档树"><span class="nav-number">1.0.3.0.6.2.</span> <span class="nav-text">3.6.2 搜索文档树</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战"><span class="nav-number">1.0.4.</span> <span class="nav-text">实战</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">硬件技术联盟</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">硬件技术联盟</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=XMcD9pNjK3V40D6jUj0nlV1u-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'XMcD9pNjK3V40D6jUj0nlV1u-gzGzoHsz',
+            'X-LC-Key': 'bC0poa1v6JejAlDxJcSHemqP',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '7o4zkUkX5ibWMdl91RNu2ddv-gzGzoHsz',
+    appKey: 'DCvwhBf94NfhNUBrTBopgPCP',
+    placeholder: '来啊，快活啊',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
