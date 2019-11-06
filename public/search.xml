@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>记录一次博客迁移</title>
+    <title></title>
     <url>/2019/11/06/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<hr><p>title: 记录一次博客迁移<br>date: 2019-11-06 23:19:05</p><h2 id="tags-日常"><a href="#tags-日常" class="headerlink" title="tags: 日常"></a>tags: 日常</h2><h1 id="记录一下这次的博客迁移"><a href="#记录一下这次的博客迁移" class="headerlink" title="记录一下这次的博客迁移"></a>记录一下这次的博客迁移</h1><p>因为以前的懒和图方便，把图床和博客的服务器都放在了github上，白嫖别人的资源。</p><p>但事实证明了白嫖不是永久的</p><p><img src="http://47.98.136.155:8088/images/cry.jpg" alt="image"></p><p>在前几天就得到了惨痛的教训，因为图片放在github上，所以全部图片加载不出来，这也导致很多博客本来简单易懂，这一来，变得难的离谱，本来我还想等着等着他恢复凑合着用吧。</p><a id="more"></a>
+
+
+
+
+
+<p>但当我一天想更新一篇文章的时候！！！！！！</p>
+<p>我发现文章也没法更新了，而且github仓库里可以更新，但我的博客却不会更新，简直抓狂，无奈，只能选择把所有服务都部署在我自己的服务器上，这样才能不受人掣肘。</p>
+<p>当然，因为博客也刚起步，整个迁移的工作量也不大，就是把所有图片的引用路径和以前在github部署的配置文件都改一下，但还是要引以为戒，尽量在自己可以掌控的范围内做事情。</p>
+<p>冲冲冲！！！</p>
+]]></content>
   </entry>
   <entry>
     <title>win10下安装python</title>
