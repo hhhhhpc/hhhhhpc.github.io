@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>记录一次博客迁移</title>
+    <url>/2019/11/06/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>win10下安装python</title>
     <url>/2019/11/06/%E5%AE%89%E8%A3%85python/</url>
     <content><![CDATA[<h3 id="1-自己的碎碎念"><a href="#1-自己的碎碎念" class="headerlink" title="1.自己的碎碎念"></a>1.自己的碎碎念</h3><h5 id="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"><a href="#python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法" class="headerlink" title="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"></a>python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法</h5><h3 id="2-环境需求"><a href="#2-环境需求" class="headerlink" title="2.环境需求"></a>2.环境需求</h3><p>win10</p>
