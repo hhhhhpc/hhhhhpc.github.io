@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>da</title>
-    <url>/2019/11/06/da/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>rata</title>
-    <url>/2019/11/05/rata/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>python爬虫初窥(三)</title>
     <url>/2019/10/21/python%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5-%E4%B8%89/</url>
     <content><![CDATA[<h1 id="python爬虫初窥（三）BeautifulSoup库"><a href="#python爬虫初窥（三）BeautifulSoup库" class="headerlink" title="python爬虫初窥（三）BeautifulSoup库"></a>python爬虫初窥（三）BeautifulSoup库</h1><h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>13上一篇演示了如何使用requests模块向网站发送http请求，获取到网页的HTML数据，而第一篇的时候就说过了，爬虫获取到信息后下面就是对信息的处理，而我比较喜欢使用处理数据的库是用BeautifulSoup这个库。</p><h3 id="2-运行环境"><a href="#2-运行环境" class="headerlink" title="2.运行环境"></a>2.运行环境</h3><p>同上篇一样 且自行安装BeautifulSoup库</p><a id="more"></a>
