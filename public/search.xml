@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>win10下安装python</title>
+    <url>/2019/11/06/%E5%AE%89%E8%A3%85python/</url>
+    <content><![CDATA[<h3 id="1-自己的碎碎念"><a href="#1-自己的碎碎念" class="headerlink" title="1.自己的碎碎念"></a>1.自己的碎碎念</h3><h5 id="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"><a href="#python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法" class="headerlink" title="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"></a>python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法</h5><h3 id="2-环境需求"><a href="#2-环境需求" class="headerlink" title="2.环境需求"></a>2.环境需求</h3><p>win10</p>
+<p>python版本：python3.7</p>
+<a id="more"></a>
+<h3 id="3-下载步骤"><a href="#3-下载步骤" class="headerlink" title="3.下载步骤"></a>3.下载步骤</h3><p>当然这里还有一个推荐方法就是直接利用微软自带的应用商店安装一键安装，也很方便。不过我个人还是比较喜欢这种手动下载的方法<br>1.首先要到python官网下载python，需要下载对应的版本（我觉得都9102年了应该很少有32位的电脑了吧）不过以防万一，大家还是去搜一下怎么去查自己系统多少位吧，我这里就不再赘述了</p>
+<p><a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">https://www.python.org/downloads/windows/</a> 这里是python的官方下载网址，估计不少初学者看见这个页面头都大了（就像我一样，不知道下载哪个）</p>
+<p>首先你先选择你要安装的版本，</p>
+<p><img src="http://47.98.136.155:8088/images/3b4273f83fa7f256.png" alt="image"></p>
+<p>我们这里安装3.7.4版本，所以点击一下即可</p>
+<p>进入页面后直接拉到最后有列表如下</p>
+<p><img src="http://47.98.136.155:8088/images/833fdb8c7b135e78.png" alt="image"></p>
+<p>(Windows x86-64 executable installer)我们点一下这个链接，就可以下载了</p>
+<h3 id="4-安装步骤"><a href="#4-安装步骤" class="headerlink" title="4.安装步骤"></a>4.安装步骤</h3><p>下载完成后双击执行下载的exe程序，进入安装界面</p>
+<p><img src="http://47.98.136.155:8088/images/8a1f28b5e2537a7c.png" alt="image"></p>
+<p>请选择 Custo那一串（汉语意思为自定义安装，为啥不让他自动安装心里应该清楚）并且记得把该页面最下面俩个方框的对勾打上</p>
+<p>然后直接点next进入这个页面</p>
+<p><img src="http://47.98.136.155:8088/images/32538b853673ce41.png" alt="image"></p>
+<p>这里你就可以自定义python的安装路径了，然后直接install即可</p>
+<h3 id="5-验证安装"><a href="#5-验证安装" class="headerlink" title="5.验证安装"></a>5.验证安装</h3><p><img src="http://47.98.136.155:8088/images/3bfd2830789fe039.png" alt="image"> 安装完成后出现这个界面</p>
+<p>然后再进入cmd 输入python -V</p>
+<p>示例如下<br>如果显示python的版本则安装成功</p>
+<p>则安装成功</p>
+<p>开始愉快的使用python吧</p>
+]]></content>
+      <tags>
+        <tag>代码</tag>
+        <tag>环境配置</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python爬虫初窥(三)</title>
     <url>/2019/10/21/python%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5-%E4%B8%89/</url>
     <content><![CDATA[<h1 id="python爬虫初窥（三）BeautifulSoup库"><a href="#python爬虫初窥（三）BeautifulSoup库" class="headerlink" title="python爬虫初窥（三）BeautifulSoup库"></a>python爬虫初窥（三）BeautifulSoup库</h1><h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>13上一篇演示了如何使用requests模块向网站发送http请求，获取到网页的HTML数据，而第一篇的时候就说过了，爬虫获取到信息后下面就是对信息的处理，而我比较喜欢使用处理数据的库是用BeautifulSoup这个库。</p><h3 id="2-运行环境"><a href="#2-运行环境" class="headerlink" title="2.运行环境"></a>2.运行环境</h3><p>同上篇一样 且自行安装BeautifulSoup库</p><a id="more"></a>
@@ -11,12 +42,12 @@
 <p>我们找个例子来了解一下吧。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line">html_doc = &quot;&quot;&quot;</span><br><span class="line">&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;</span><br><span class="line">&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were</span><br><span class="line">&lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;,</span><br><span class="line">&lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and</span><br><span class="line">&lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;</span><br><span class="line">and they lived at the bottom of a well.&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">soup = BeautifulSoup(html_doc, &apos;lxml&apos;)  #声明BeautifulSoup对象</span><br><span class="line">find = soup.find(&apos;p&apos;)  #使用find方法查到第一个p标签</span><br><span class="line">print(&quot;find&apos;s return type is &quot;, type(find))  #输出返回值类型</span><br><span class="line">print(&quot;find&apos;s content is&quot;, find)  #输出find获取的值</span><br><span class="line">print(&quot;find&apos;s Tag Name is &quot;, find.name)  #输出标签的名字</span><br><span class="line">print(&quot;find&apos;s Attribute(class) is &quot;, find[&apos;class&apos;])  #输出标签的class属性值</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_2.png" alt="image"></p>
+<p><img src="http://47.98.136.155:8088/images/python_spider_2.png" alt="image"></p>
 <p>可以看到，你查到的是第一个P标签。</p>
 <p>而找到的标签里有 .name和.attribute类型，.attribute是返回那个class的类型</p>
 <h5 id="3-3-NavigableString"><a href="#3-3-NavigableString" class="headerlink" title="3.3 NavigableString"></a>3.3 NavigableString</h5><p>这个就是标签中的文本内容但是不含标签，你可以试一下例子</p>
 <p>再上面的例子中 最后一行加入print(‘NavigableString is：’, find.string)  就可以得到下面的输出</p>
-<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_3.png" alt="image"></p>
+<p><img src="http://47.98.136.155:8088/images/python_spider_3.png" alt="image"></p>
 <h5 id="3-4-BeautifulSoup"><a href="#3-4-BeautifulSoup" class="headerlink" title="3.4 BeautifulSoup"></a>3.4 BeautifulSoup</h5><p>这个对象表示一个文档的全部内容，支持遍历文档树和搜索</p>
 <h5 id="3-5-Comment"><a href="#3-5-Comment" class="headerlink" title="3.5 Comment"></a>3.5 Comment</h5><p>这个对象是HTML中的注释</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">markup = &quot;&lt;b&gt;&lt;!--Hey, buddy. Want to buy a used parser?--&gt;&lt;/b&gt;&quot;</span><br><span class="line">soup = BeautifulSoup(markup)</span><br><span class="line">comment = soup.b.string</span><br><span class="line">type(comment)</span><br><span class="line"># &lt;class &apos;bs4.element.Comment&apos;&gt;  //应该输出内容</span><br></pre></td></tr></table></figure>
@@ -39,9 +70,9 @@
 <p>然后输出内容应该是一大堆内容，这里就不贴图了。</p>
 <p>然后现在我们找到我们需要爬下来的内容，首先打开开发者模式可以看到右边一坨花花绿绿的代码，不要慌张，我教你怎么正确寻找你要的东西。</p>
 <p>以这个页面为例我们想要的肯定是这一部分内容</p>
-<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_5.png" alt="image"></p>
+<p><img src="http://47.98.136.155:8088/images/python_spider_5.png" alt="image"></p>
 <p>你可以对着他们点击右键然后有个叫检查或者审查元素的按钮，这样你就可以看见右边的的代码会跳到一个地方，然后根据那个地方你可以找他的父节点或者其他的，可以看见他的HTML标签和class然后就可以用BS库进行提取了。</p>
-<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/20191021173730.png" alt></p>
+<p><img src="http://47.98.136.155:8088/images/20191021173730.png" alt></p>
 <p>就比如这个，这个单个的标签是 li class为 sky啥啥啥的的，而且可以看到他的父标签是ul class是</p>
 <p>t clearfix</p>
 <p><img src="http://47.98.136.155:8088/images/20191021173918.png" alt></p>
@@ -114,7 +145,7 @@
 <p>Python，因为这篇教程是用python语言写的爬虫，所以对python的了解是必须的，如果你以前对python不了解，建议去<a href="https://learnku.com/docs/tutorial/3.7.0这个网站先了解一下python的基本语法。" target="_blank" rel="noopener">https://learnku.com/docs/tutorial/3.7.0这个网站先了解一下python的基本语法。</a></p>
 <p>TCP/IP，HTTP协议，这些能让你了解爬虫的逻辑而不至于一头雾水去学习爬虫，</p>
 <p>还有就是细分的话解析内容的时候需要，re（正则表达式），第三方解析库beautifulsoup，json模块等。保存数据的话可能牵扯到数据库或者文件读写等内容。</p>
-<h3 id="3-http协议-请求与相应"><a href="#3-http协议-请求与相应" class="headerlink" title="3.http协议 请求与相应"></a>3.http协议 请求与相应</h3><p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/python_spider_1.png" alt="image"></p>
+<h3 id="3-http协议-请求与相应"><a href="#3-http协议-请求与相应" class="headerlink" title="3.http协议 请求与相应"></a>3.http协议 请求与相应</h3><p><img src="http://47.98.136.155:8088/images/python_spider_1.png" alt="image"></p>
 <p>Request 用户将自己的请求通过浏览器(client)发送给服务器(server)，请求可能带自己的个人信息</p>
 <p>Response:服务器接受请求，分析用户发来的请求信息，然后返回数据(返回数据可能包括图片，htmm，css，js的代码)</p>
 <p>而Request分为GET/POST请求，GET一般为提交请求获取一个页面，而POST会提交数据给服务器然后获取新的页面</p>
@@ -126,37 +157,6 @@
 ]]></content>
       <tags>
         <tag>代码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>win10下安装python</title>
-    <url>/2019/10/08/%E5%AE%89%E8%A3%85python/</url>
-    <content><![CDATA[<h3 id="1-自己的碎碎念"><a href="#1-自己的碎碎念" class="headerlink" title="1.自己的碎碎念"></a>1.自己的碎碎念</h3><h5 id="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"><a href="#python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法" class="headerlink" title="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"></a>python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法</h5><h3 id="2-环境需求"><a href="#2-环境需求" class="headerlink" title="2.环境需求"></a>2.环境需求</h3><p>win10</p>
-<p>python版本：python3.7</p>
-<a id="more"></a>
-<h3 id="3-下载步骤"><a href="#3-下载步骤" class="headerlink" title="3.下载步骤"></a>3.下载步骤</h3><p>当然这里还有一个推荐方法就是直接利用微软自带的应用商店安装一键安装，也很方便。不过我个人还是比较喜欢这种手动下载的方法<br>1.首先要到python官网下载python，需要下载对应的版本（我觉得都9102年了应该很少有32位的电脑了吧）不过以防万一，大家还是去搜一下怎么去查自己系统多少位吧，我这里就不再赘述了</p>
-<p><a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">https://www.python.org/downloads/windows/</a> 这里是python的官方下载网址，估计不少初学者看见这个页面头都大了（就像我一样，不知道下载哪个）</p>
-<p>首先你先选择你要安装的版本，</p>
-<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/3b4273f83fa7f256.png" alt="image"></p>
-<p>我们这里安装3.7.4版本，所以点击一下即可</p>
-<p>进入页面后直接拉到最后有列表如下</p>
-<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/833fdb8c7b135e78.png" alt="image"></p>
-<p>(Windows x86-64 executable installer)我们点一下这个链接，就可以下载了</p>
-<h3 id="4-安装步骤"><a href="#4-安装步骤" class="headerlink" title="4.安装步骤"></a>4.安装步骤</h3><p>下载完成后双击执行下载的exe程序，进入安装界面</p>
-<p><img src="https://github.com/HAUT-hardware-of-league/blog_photo/blob/master/8a1f28b5e2537a7c.png" alt="image"></p>
-<p>请选择 Custo那一串（汉语意思为自定义安装，为啥不让他自动安装心里应该清楚）并且记得把该页面最下面俩个方框的对勾打上</p>
-<p>然后直接点next进入这个页面</p>
-<p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/32538b853673ce41.png" alt="image"></p>
-<p>这里你就可以自定义python的安装路径了，然后直接install即可</p>
-<h3 id="5-验证安装"><a href="#5-验证安装" class="headerlink" title="5.验证安装"></a>5.验证安装</h3><p><img src="https://raw.githubusercontent.com/HAUT-hardware-of-league/blog_photo/master/3bfd2830789fe039.png" alt="image"> 安装完成后出现这个界面</p>
-<p>然后再进入cmd 输入python -V</p>
-<p>示例如下<br>如果显示python的版本则安装成功</p>
-<p>则安装成功</p>
-<p>开始愉快的使用python吧</p>
-]]></content>
-      <tags>
-        <tag>代码</tag>
-        <tag>环境配置</tag>
       </tags>
   </entry>
   <entry>

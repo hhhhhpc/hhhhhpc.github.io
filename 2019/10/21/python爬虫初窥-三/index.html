@@ -63,16 +63,16 @@
 <meta property="og:site_name" content="硬件联盟博客">
 <meta property="og:description" content="python爬虫初窥（三）BeautifulSoup库1.前言13上一篇演示了如何使用requests模块向网站发送http请求，获取到网页的HTML数据，而第一篇的时候就说过了，爬虫获取到信息后下面就是对信息的处理，而我比较喜欢使用处理数据的库是用BeautifulSoup这个库。2.运行环境同上篇一样 且自行安装BeautifulSoup库">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_2.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_3.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_5.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/20191021173730.png">
+<meta property="og:image" content="http://47.98.136.155:8088/images/python_spider_2.png">
+<meta property="og:image" content="http://47.98.136.155:8088/images/python_spider_3.png">
+<meta property="og:image" content="http://47.98.136.155:8088/images/python_spider_5.png">
+<meta property="og:image" content="http://47.98.136.155:8088/images/20191021173730.png">
 <meta property="og:image" content="http://47.98.136.155:8088/images/20191021173918.png">
-<meta property="og:updated_time" content="2019-11-05T13:53:40.830Z">
+<meta property="og:updated_time" content="2019-11-06T15:15:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python爬虫初窥(三)">
 <meta name="twitter:description" content="python爬虫初窥（三）BeautifulSoup库1.前言13上一篇演示了如何使用requests模块向网站发送http请求，获取到网页的HTML数据，而第一篇的时候就说过了，爬虫获取到信息后下面就是对信息的处理，而我比较喜欢使用处理数据的库是用BeautifulSoup这个库。2.运行环境同上篇一样 且自行安装BeautifulSoup库">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_2.png">
+<meta name="twitter:image" content="http://47.98.136.155:8088/images/python_spider_2.png">
   <link rel="canonical" href="http://yoursite.com/2019/10/21/python爬虫初窥-三/">
 
 
@@ -310,7 +310,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-05 21:53:40" itemprop="dateModified" datetime="2019-11-05T21:53:40+08:00">2019-11-05</time>
+                <time title="Modified: 2019-11-06 23:15:51" itemprop="dateModified" datetime="2019-11-06T23:15:51+08:00">2019-11-06</time>
               </span>
             
           
@@ -356,12 +356,12 @@
 <p>我们找个例子来了解一下吧。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">from bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line">html_doc = &quot;&quot;&quot;</span><br><span class="line">&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;</span><br><span class="line">&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were</span><br><span class="line">&lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;,</span><br><span class="line">&lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and</span><br><span class="line">&lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;</span><br><span class="line">and they lived at the bottom of a well.&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">soup = BeautifulSoup(html_doc, &apos;lxml&apos;)  #声明BeautifulSoup对象</span><br><span class="line">find = soup.find(&apos;p&apos;)  #使用find方法查到第一个p标签</span><br><span class="line">print(&quot;find&apos;s return type is &quot;, type(find))  #输出返回值类型</span><br><span class="line">print(&quot;find&apos;s content is&quot;, find)  #输出find获取的值</span><br><span class="line">print(&quot;find&apos;s Tag Name is &quot;, find.name)  #输出标签的名字</span><br><span class="line">print(&quot;find&apos;s Attribute(class) is &quot;, find[&apos;class&apos;])  #输出标签的class属性值</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_2.png" alt="image"></p>
+<p><img src="http://47.98.136.155:8088/images/python_spider_2.png" alt="image"></p>
 <p>可以看到，你查到的是第一个P标签。</p>
 <p>而找到的标签里有 .name和.attribute类型，.attribute是返回那个class的类型</p>
 <h5 id="3-3-NavigableString"><a href="#3-3-NavigableString" class="headerlink" title="3.3 NavigableString"></a>3.3 NavigableString</h5><p>这个就是标签中的文本内容但是不含标签，你可以试一下例子</p>
 <p>再上面的例子中 最后一行加入print(‘NavigableString is：’, find.string)  就可以得到下面的输出</p>
-<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_3.png" alt="image"></p>
+<p><img src="http://47.98.136.155:8088/images/python_spider_3.png" alt="image"></p>
 <h5 id="3-4-BeautifulSoup"><a href="#3-4-BeautifulSoup" class="headerlink" title="3.4 BeautifulSoup"></a>3.4 BeautifulSoup</h5><p>这个对象表示一个文档的全部内容，支持遍历文档树和搜索</p>
 <h5 id="3-5-Comment"><a href="#3-5-Comment" class="headerlink" title="3.5 Comment"></a>3.5 Comment</h5><p>这个对象是HTML中的注释</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">markup = &quot;&lt;b&gt;&lt;!--Hey, buddy. Want to buy a used parser?--&gt;&lt;/b&gt;&quot;</span><br><span class="line">soup = BeautifulSoup(markup)</span><br><span class="line">comment = soup.b.string</span><br><span class="line">type(comment)</span><br><span class="line"># &lt;class &apos;bs4.element.Comment&apos;&gt;  //应该输出内容</span><br></pre></td></tr></table></figure>
@@ -384,9 +384,9 @@
 <p>然后输出内容应该是一大堆内容，这里就不贴图了。</p>
 <p>然后现在我们找到我们需要爬下来的内容，首先打开开发者模式可以看到右边一坨花花绿绿的代码，不要慌张，我教你怎么正确寻找你要的东西。</p>
 <p>以这个页面为例我们想要的肯定是这一部分内容</p>
-<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/python_spider_5.png" alt="image"></p>
+<p><img src="http://47.98.136.155:8088/images/python_spider_5.png" alt="image"></p>
 <p>你可以对着他们点击右键然后有个叫检查或者审查元素的按钮，这样你就可以看见右边的的代码会跳到一个地方，然后根据那个地方你可以找他的父节点或者其他的，可以看见他的HTML标签和class然后就可以用BS库进行提取了。</p>
-<p><img src="https://raw.githubusercontent.com/hhhhhpc/blog_photo/master/20191021173730.png" alt></p>
+<p><img src="http://47.98.136.155:8088/images/20191021173730.png" alt></p>
 <p>就比如这个，这个单个的标签是 li class为 sky啥啥啥的的，而且可以看到他的父标签是ul class是</p>
 <p>t clearfix</p>
 <p><img src="http://47.98.136.155:8088/images/20191021173918.png" alt></p>
@@ -433,6 +433,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/11/06/安装python/" rel="prev" title="win10下安装python">
+                  win10下安装python <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
