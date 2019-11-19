@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>test</title>
-    <url>/2019/11/19/test/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>git初窥</title>
     <url>/2019/11/19/git%E5%88%9D%E7%AA%A5/</url>
     <content><![CDATA[<h1 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h1><p>因为学校留作业要交Github上，但又很厌烦在页面上点来点去的方法，所以写下命令行git提交文件的方法供大家使用，我个人认为如果会用的话是能提升工作效率的。</p><h1 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h1><p>我假设你是在Windows系统上</p><p>在Windows上使用Git，可以从Git官网直接<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载安装程序</a>，然后按默认选项安装即可。</p><p>安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！</p><a id="more"></a>
