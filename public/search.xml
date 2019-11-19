@@ -1,19 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title>git初窥</title>
+    <url>/2019/11/19/git%E5%88%9D%E7%AA%A5/</url>
+    <content><![CDATA[<h1 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h1><p>因为学校留作业要交Github上，但又很厌烦在页面上点来点去的方法，所以写下命令行git提交文件的方法供大家使用，我个人认为如果会用的话是能提升工作效率的。</p><h1 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h1><p>我假设你是在Windows系统上</p><p>在Windows上使用Git，可以从Git官网直接<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载安装程序</a>，然后按默认选项安装即可。</p><p>安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！</p><a id="more"></a>
+
+
+
+<p><img src="http://47.98.136.155:8088/images/git_bash2.png" alt="image"></p>
+<p>安装完成了，请在命令行输入俩行命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p>其中把“Your name”更改为你的github名字</p>
+<p>email更改为你的github注册的邮箱即可。</p>
+<p>然后以我的github中的仓库为例吧</p>
+<p>在你想要存放文件的地方打开git bash或者cmd命令行</p>
+<p>然后输入</p>
+<p>git clone +“你的仓库的地址”</p>
+<p>我的就是 </p>
+<p>git clone <a href="https://github.com/hhhhhpc/LabExercises_02" target="_blank" rel="noopener">https://github.com/hhhhhpc/LabExercises_02</a></p>
+<p>然后等待下载你会发现有一个文件夹了，</p>
+<p>然后使用cd命令进入这个文件夹</p>
+<p><img src="http://47.98.136.155:8088/images/git_bash2.png" alt="image"></p>
+<p>然后再文件夹里创建一个新的文件</p>
+<p><img src="http://47.98.136.155:8088/images/git_bash3.png" alt="image"></p>
+<p>当然，你可以在这个新的文件夹里放很多其他的东西。</p>
+<p>然后在命令行里输入 git add . </p>
+<p>这条命令是为了告诉git你添加了什么文件，用.这个通配符是让他把更改的文件都算上。</p>
+<p>如果不报错的话请输入git commit -m “xxxx”</p>
+<p>这是为了告诉git你这次提交更改了什么</p>
+<p>就拿我这次来示例，我是创建了个test文件，就可以写</p>
+<p>git commit -m “test”</p>
+<p>如果这俩步里面报错了的话请不要慌张，一般你把报错信息复制去搜索一下都能解决问题。</p>
+<p>然后这两步做完在命令行里输入</p>
+<p>git push即可，这样你在本地文件夹里更改的操作就能更新在你的github上。</p>
+<p>我个人是比较推荐这种方式的，毕竟点来点去的方法工作效率是有点低的。</p>
+]]></content>
+      <tags>
+        <tag>代码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记录一次博客迁移</title>
     <url>/2019/11/06/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</url>
-    <content><![CDATA[<hr><p>title: 记录一次博客迁移<br>date: 2019-11-06 23:19:05</p><h2 id="tags-日常"><a href="#tags-日常" class="headerlink" title="tags: 日常"></a>tags: 日常</h2><h1 id="记录一下这次的博客迁移"><a href="#记录一下这次的博客迁移" class="headerlink" title="记录一下这次的博客迁移"></a>记录一下这次的博客迁移</h1><p>因为以前的懒和图方便，把图床和博客的服务器都放在了github上，白嫖别人的资源。</p><p>但事实证明了白嫖不是永久的</p><p><img src="http://47.98.136.155:8088/images/cry.jpg" alt="image"></p><p>在前几天就得到了惨痛的教训，因为图片放在github上，所以全部图片加载不出来，这也导致很多博客本来简单易懂，这一来，变得难的离谱，本来我还想等着等着他恢复凑合着用吧。</p><a id="more"></a>
+    <content><![CDATA[<h1 id="记录一下这次的博客迁移"><a href="#记录一下这次的博客迁移" class="headerlink" title="记录一下这次的博客迁移"></a>记录一下这次的博客迁移</h1><p>因为以前的懒和图方便，把图床和博客的服务器都放在了github上，白嫖别人的资源。</p><p>但事实证明了白嫖不是永久的</p><p><img src="http://47.98.136.155:8088/images/cry.jpg" alt="image"></p><p>在前几天就得到了惨痛的教训，因为图片放在github上，所以全部图片加载不出来，这也导致很多博客本来简单易懂，这一来，变得难的离谱，本来我还想等着等着他恢复凑合着用吧。</p><p>但当我一天想更新一篇文章的时候！！！！！！</p><a id="more"></a>
 
 
 
 
-
-<p>但当我一天想更新一篇文章的时候！！！！！！</p>
 <p>我发现文章也没法更新了，而且github仓库里可以更新，但我的博客却不会更新，简直抓狂，无奈，只能选择把所有服务都部署在我自己的服务器上，这样才能不受人掣肘。</p>
 <p>当然，因为博客也刚起步，整个迁移的工作量也不大，就是把所有图片的引用路径和以前在github部署的配置文件都改一下，但还是要引以为戒，尽量在自己可以掌控的范围内做事情。</p>
 <p>冲冲冲！！！</p>
 ]]></content>
+      <tags>
+        <tag>日常</tag>
+      </tags>
   </entry>
   <entry>
     <title>win10下安装python</title>
