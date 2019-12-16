@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Untitled13</title>
+    <url>/2019/12/16/Untitled13/</url>
+    <content><![CDATA[<p>eara</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>win10下安装python</title>
+    <url>/2019/12/15/%E5%AE%89%E8%A3%85python/</url>
+    <content><![CDATA[<h3 id="1-自己的碎碎念"><a href="#1-自己的碎碎念" class="headerlink" title="1.自己的碎碎念"></a>1.自己的碎碎念</h3><h5 id="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"><a href="#python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法" class="headerlink" title="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"></a>python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法</h5><h3 id="2-环境需求"><a href="#2-环境需求" class="headerlink" title="2.环境需求"></a>2.环境需求</h3><p>win10</p>
+<p>python版本：python3.7</p>
+<a id="more"></a>
+<h3 id="3-下载步骤"><a href="#3-下载步骤" class="headerlink" title="3.下载步骤"></a>3.下载步骤</h3><p>当然这里还有一个推荐方法就是直接利用微软自带的应用商店安装一键安装，也很方便。不过我个人还是比较喜欢这种手动下载的方法<br>1.首先要到python官网下载python，需要下载对应的版本（我觉得都9102年了应该很少有32位的电脑了吧）不过以防万一，大家还是去搜一下怎么去查自己系统多少位吧，我这里就不再赘述了</p>
+<p><a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">https://www.python.org/downloads/windows/</a> 这里是python的官方下载网址，估计不少初学者看见这个页面头都大了（就像我一样，不知道下载哪个）</p>
+<p>首先你先选择你要安装的版本，</p>
+<p><img src="http://47.98.136.155:8088/images/3b4273f83fa7f256.png" alt="image"></p>
+<p>我们这里安装3.7.4版本，所以点击一下即可</p>
+<p>进入页面后直接拉到最后有列表如下</p>
+<p><img src="http://47.98.136.155:8088/images/833fdb8c7b135e78.png" alt="image"></p>
+<p>(Windows x86-64 executable installer)我们点一下这个链接，就可以下载了</p>
+<h3 id="4-安装步骤"><a href="#4-安装步骤" class="headerlink" title="4.安装步骤"></a>4.安装步骤</h3><p>下载完成后双击执行下载的exe程序，进入安装界面</p>
+<p><img src="http://47.98.136.155:8088/images/8a1f28b5e2537a7c.png" alt="image"></p>
+<p>请选择 Custo那一串（汉语意思为自定义安装，为啥不让他自动安装心里应该清楚）并且记得把该页面最下面俩个方框的对勾打上</p>
+<p>然后直接点next进入这个页面</p>
+<p><img src="http://47.98.136.155:8088/images/32538b853673ce41.png" alt="image"></p>
+<p>这里你就可以自定义python的安装路径了，然后直接install即可</p>
+<h3 id="5-验证安装"><a href="#5-验证安装" class="headerlink" title="5.验证安装"></a>5.验证安装</h3><p><img src="http://47.98.136.155:8088/images/3bfd2830789fe039.png" alt="image"> 安装完成后出现这个界面</p>
+<p>然后再进入cmd 输入python -V</p>
+<p>示例如下<br>如果显示python的版本则安装成功</p>
+<p>则安装成功</p>
+<p>开始愉快的使用python吧</p>
+]]></content>
+      <tags>
+        <tag>代码</tag>
+        <tag>环境配置</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>test</title>
     <url>/2019/12/15/test/</url>
     <content><![CDATA[<p>dararadafaga8913141<br><img src="/images/pasted-0.png" alt="upload successful"></p>
@@ -60,37 +97,6 @@
 ]]></content>
       <tags>
         <tag>日常</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>win10下安装python</title>
-    <url>/2019/11/06/%E5%AE%89%E8%A3%85python/</url>
-    <content><![CDATA[<h3 id="1-自己的碎碎念"><a href="#1-自己的碎碎念" class="headerlink" title="1.自己的碎碎念"></a>1.自己的碎碎念</h3><h5 id="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"><a href="#python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法" class="headerlink" title="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"></a>python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法</h5><h3 id="2-环境需求"><a href="#2-环境需求" class="headerlink" title="2.环境需求"></a>2.环境需求</h3><p>win10</p>
-<p>python版本：python3.7</p>
-<a id="more"></a>
-<h3 id="3-下载步骤"><a href="#3-下载步骤" class="headerlink" title="3.下载步骤"></a>3.下载步骤</h3><p>当然这里还有一个推荐方法就是直接利用微软自带的应用商店安装一键安装，也很方便。不过我个人还是比较喜欢这种手动下载的方法<br>1.首先要到python官网下载python，需要下载对应的版本（我觉得都9102年了应该很少有32位的电脑了吧）不过以防万一，大家还是去搜一下怎么去查自己系统多少位吧，我这里就不再赘述了</p>
-<p><a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">https://www.python.org/downloads/windows/</a> 这里是python的官方下载网址，估计不少初学者看见这个页面头都大了（就像我一样，不知道下载哪个）</p>
-<p>首先你先选择你要安装的版本，</p>
-<p><img src="http://47.98.136.155:8088/images/3b4273f83fa7f256.png" alt="image"></p>
-<p>我们这里安装3.7.4版本，所以点击一下即可</p>
-<p>进入页面后直接拉到最后有列表如下</p>
-<p><img src="http://47.98.136.155:8088/images/833fdb8c7b135e78.png" alt="image"></p>
-<p>(Windows x86-64 executable installer)我们点一下这个链接，就可以下载了</p>
-<h3 id="4-安装步骤"><a href="#4-安装步骤" class="headerlink" title="4.安装步骤"></a>4.安装步骤</h3><p>下载完成后双击执行下载的exe程序，进入安装界面</p>
-<p><img src="http://47.98.136.155:8088/images/8a1f28b5e2537a7c.png" alt="image"></p>
-<p>请选择 Custo那一串（汉语意思为自定义安装，为啥不让他自动安装心里应该清楚）并且记得把该页面最下面俩个方框的对勾打上</p>
-<p>然后直接点next进入这个页面</p>
-<p><img src="http://47.98.136.155:8088/images/32538b853673ce41.png" alt="image"></p>
-<p>这里你就可以自定义python的安装路径了，然后直接install即可</p>
-<h3 id="5-验证安装"><a href="#5-验证安装" class="headerlink" title="5.验证安装"></a>5.验证安装</h3><p><img src="http://47.98.136.155:8088/images/3bfd2830789fe039.png" alt="image"> 安装完成后出现这个界面</p>
-<p>然后再进入cmd 输入python -V</p>
-<p>示例如下<br>如果显示python的版本则安装成功</p>
-<p>则安装成功</p>
-<p>开始愉快的使用python吧</p>
-]]></content>
-      <tags>
-        <tag>代码</tag>
-        <tag>环境配置</tag>
       </tags>
   </entry>
   <entry>
