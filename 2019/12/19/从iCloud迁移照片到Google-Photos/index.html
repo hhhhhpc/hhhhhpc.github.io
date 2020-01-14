@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="缘由&amp;amp;要求Google大法好，Photos无限容量备份照片！当然，需要一台位于境外的VPS，从iCloud上拉资源，再上传到Google Drive。从iCloud上下载由于Apple没有开放iCloud的API，于是关于iCloud下载的第三方程序少之又少。于是我找到了这个icloudpd。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从iCloud迁移照片到Google Photos">
+<meta property="og:url" content="http://yoursite.com/2019/12/19/从iCloud迁移照片到Google-Photos/index.html">
+<meta property="og:site_name" content="硬件联盟博客">
+<meta property="og:description" content="缘由&amp;amp;要求Google大法好，Photos无限容量备份照片！当然，需要一台位于境外的VPS，从iCloud上拉资源，再上传到Google Drive。从iCloud上下载由于Apple没有开放iCloud的API，于是关于iCloud下载的第三方程序少之又少。于是我找到了这个icloudpd。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-19T07:32:49.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从iCloud迁移照片到Google Photos">
+<meta name="twitter:description" content="缘由&amp;amp;要求Google大法好，Photos无限容量备份照片！当然，需要一台位于境外的VPS，从iCloud上拉资源，再上传到Google Drive。从iCloud上下载由于Apple没有开放iCloud的API，于是关于iCloud下载的第三方程序少之又少。于是我找到了这个icloudpd。">
+  <link rel="canonical" href="http://yoursite.com/2019/12/19/从iCloud迁移照片到Google-Photos/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>从iCloud迁移照片到Google Photos | 硬件联盟博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">硬件联盟博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">5</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">18</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/19/从iCloud迁移照片到Google-Photos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="硬件技术联盟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硬件联盟博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">从iCloud迁移照片到Google Photos
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-12-19 15:30:13 / Modified: 15:32:49" itemprop="dateCreated datePublished" datetime="2019-12-19T15:30:13+08:00">2019-12-19</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/12/19/从iCloud迁移照片到Google-Photos/" class="post-meta-item leancloud_visitors" data-flag-title="从iCloud迁移照片到Google Photos" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/12/19/从iCloud迁移照片到Google-Photos/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/12/19/从iCloud迁移照片到Google-Photos/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="缘由-amp-要求"><a href="#缘由-amp-要求" class="headerlink" title="缘由&amp;要求"></a>缘由&amp;要求</h1><p>Google大法好，Photos无限容量备份照片！</p><p>当然，需要一台位于境外的VPS，从iCloud上拉资源，再上传到Google Drive。</p><h1 id="从iCloud上下载"><a href="#从iCloud上下载" class="headerlink" title="从iCloud上下载"></a>从iCloud上下载</h1><p>由于Apple没有开放iCloud的API，于是关于iCloud下载的第三方程序少之又少。于是我找到了这个<a href="https://www.ctolib.com/ndbroadbent-icloud_photos_downloader.html" target="_blank" rel="noopener">icloudpd</a>。</p><a id="more"></a>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#以Ubuntu/Debian系统为例</span><br><span class="line">#下载并安装pip，若为安装unzip，则需使用apt-get install unzip。</span><br><span class="line"> root@Raincorn:/icloud# wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate</span><br><span class="line">--2019-01-30 20:58:55--  https://bootstrap.pypa.io/get-pip.py</span><br><span class="line">Resolving bootstrap.pypa.io (bootstrap.pypa.io)... 151.101.0.175, 151.101.64.175, 151.101.128.175, ...</span><br><span class="line">Connecting to bootstrap.pypa.io (bootstrap.pypa.io)|151.101.0.175|:443... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 1700321 (1.6M) [text/x-python]</span><br><span class="line">Saving to: ‘get-pip.py’</span><br><span class="line"></span><br><span class="line">get-pip.py            100%[===========================&gt;]   1.62M  --.-KB/s   in 0.02s  </span><br><span class="line"></span><br><span class="line">2019-01-30 20:58:55 (79.4 MB/s) - ‘get-pip.py’ saved [1700321/1700321]</span><br><span class="line"></span><br><span class="line">root@Raincorn:/icloud# python get-pip.py</span><br><span class="line">DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won&apos;t be maintained after that date. A future version of pip will drop support for Python 2.7.</span><br><span class="line">Collecting pip</span><br><span class="line">  Downloading</span><br><span class="line">Successfully installed pip-19.0.1 setuptools-40.7.1 wheel-0.32.3</span><br><span class="line">#由于已经由pip收录，可以使用pip install icloudpd来安装icloudpd。</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>icloud photos</code>(注意，photos为你要保存照片的目录，可自定义为其他。)<br>接着会要求输入iCloud账号密码，验证完成后就会开始下载，我用了51分20秒把2324张照片下载了下来。但是为什么速度不理想，原因很大程度上是因为苹果的iCloud服务器由云上贵州接管，服务器在国内，晚上又是高峰时段。</p>
+<h1 id="上传到Google-Drive"><a href="#上传到Google-Drive" class="headerlink" title="上传到Google Drive"></a>上传到Google Drive</h1><p>Google作为行业巨头，全力推行开源事业，有关Drive的有关程序网上比比皆是，我这里介绍我正在使用的一个名为<a href="https://rclone.org" target="_blank" rel="noopener">rclone</a>的管理程序。</p>
+<h2 id="rclone的安装"><a href="#rclone的安装" class="headerlink" title="rclone的安装"></a>rclone的安装</h2><h3 id="下载rclone"><a href="#下载rclone" class="headerlink" title="下载rclone"></a>下载rclone</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#按照官方Docs操作就好。</span><br><span class="line">#首先下载并解压rclone</span><br><span class="line">root@Raincorn:~# wget https://downloads.rclone.org/rclone-current-linux-amd64.zip</span><br><span class="line"></span><br><span class="line">root@Raincorn:~# unzip rclone-current-linux-amd64.zip</span><br><span class="line"></span><br><span class="line">root@Raincorn:~# cd rclone-*linux-amd64</span><br></pre></td></tr></table></figure>
+
+<h3 id="复制赋权"><a href="#复制赋权" class="headerlink" title="复制赋权"></a>复制赋权</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cp rclone /usr/bin/</span><br><span class="line"></span><br><span class="line">chown root:root /usr/bin/rclone</span><br><span class="line"></span><br><span class="line">chmod 755 /usr/bin/rclone</span><br><span class="line">#至于为什么要有这一步，可以参考之前那篇关于[环境变量]（https://raincorn.top/2018/08/29/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/）的文章，间的来说，就是为了在用rclone时能够找到对应的程序。</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装帮助页面"><a href="#安装帮助页面" class="headerlink" title="安装帮助页面"></a>安装帮助页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/local/share/man/man1</span><br><span class="line"></span><br><span class="line">cp rclone.1 /usr/local/share/man/man1/</span><br><span class="line"></span><br><span class="line">mandb</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>键入rclone config即可进入配置页面。</p>
+<p>这里是配置实例，基本上有些英语基础就没问题。也可以参考<a href="https://rclone.org/drive/" target="_blank" rel="noopener">https://rclone.org/drive/</a>    给出的实例，或者<a href="https://www.chenweiliang.com/cwl-694.html" target="_blank" rel="noopener">https://www.chenweiliang.com/cwl-694.html</a>    的例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">root@Raincorn:/rclone# rclone config</span><br><span class="line">2019/01/30 21:25:58 NOTICE: Config file &quot;/root/.config/rclone/rclone.conf&quot; not found - using defaults</span><br><span class="line">No remotes found - make a new one</span><br><span class="line">n) New remote</span><br><span class="line">s) Set configuration password</span><br><span class="line">q) Quit config</span><br><span class="line">n/s/q&gt; n（创建新的Drive类型）</span><br><span class="line">name&gt; Google（自定义配置的名称）</span><br><span class="line">Type of storage to configure.</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">Choose a number from below, or type in your own value</span><br><span class="line"> 1 / A stackable unification remote, which can appear to merge the contents of several remotes</span><br><span class="line">   \ &quot;union&quot;</span><br><span class="line"> 2 / Alias for a existing remote</span><br><span class="line">   \ &quot;alias&quot;</span><br><span class="line"> 3 / Amazon Drive</span><br><span class="line">   \ &quot;amazon cloud drive&quot;</span><br><span class="line"> 4 / Amazon S3 Compliant Storage Providers (AWS, Ceph, Dreamhost, IBM COS, Minio)</span><br><span class="line">   \ &quot;s3&quot;</span><br><span class="line"> 5 / Backblaze B2</span><br><span class="line">   \ &quot;b2&quot;</span><br><span class="line"> 6 / Box</span><br><span class="line">   \ &quot;box&quot;</span><br><span class="line"> 7 / Cache a remote</span><br><span class="line">   \ &quot;cache&quot;</span><br><span class="line"> 8 / Dropbox</span><br><span class="line">   \ &quot;dropbox&quot;</span><br><span class="line"> 9 / Encrypt/Decrypt a remote</span><br><span class="line">   \ &quot;crypt&quot;</span><br><span class="line">10 / FTP Connection</span><br><span class="line">   \ &quot;ftp&quot;</span><br><span class="line">11 / Google Cloud Storage (this is not Google Drive)</span><br><span class="line">   \ &quot;google cloud storage&quot;</span><br><span class="line">12 / Google Drive</span><br><span class="line">   \ &quot;drive&quot;</span><br><span class="line">13 / Hubic</span><br><span class="line">   \ &quot;hubic&quot;</span><br><span class="line">14 / JottaCloud</span><br><span class="line">   \ &quot;jottacloud&quot;</span><br><span class="line"></span><br><span class="line">Storage&gt; 12（选择类型，会随着版本变动而有所变化。）</span><br><span class="line">** See help for drive backend at: https://rclone.org/drive/ **</span><br><span class="line"></span><br><span class="line">Google Application Client Id</span><br><span class="line">Leave blank normally.</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">client_id&gt; </span><br><span class="line">Google Application Client Secret</span><br><span class="line">Leave blank normally.</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">client_secret&gt; </span><br><span class="line">Scope that rclone should use when requesting access from drive.</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">Choose a number from below, or type in your own value</span><br><span class="line"> 1 / Full access all files, excluding Application Data Folder.</span><br><span class="line">   \ &quot;drive&quot;</span><br><span class="line"> 2 / Read-only access to file metadata and file contents.</span><br><span class="line">   \ &quot;drive.readonly&quot;</span><br><span class="line">   / Access to files created by rclone only.</span><br><span class="line"> 3 | These are visible in the drive website.</span><br><span class="line">   | File authorization is revoked when the user deauthorizes the app.</span><br><span class="line">   \ &quot;drive.file&quot;</span><br><span class="line">   / Allows read and write access to the Application Data folder.</span><br><span class="line"> 4 | This is not visible in the drive website.</span><br><span class="line">   \ &quot;drive.appfolder&quot;</span><br><span class="line">   / Allows read-only access to file metadata but</span><br><span class="line"> 5 | does not allow any access to read or download file content.</span><br><span class="line">   \ &quot;drive.metadata.readonly&quot;</span><br><span class="line">scope&gt; 1（即允许rclone获得你全部的Drive访问权限。）</span><br><span class="line">ID of the root folder</span><br><span class="line">Leave blank normally.</span><br><span class="line">Fill in to access &quot;Computers&quot; folders. (see docs).</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">root_folder_id&gt; </span><br><span class="line">Service Account Credentials JSON file path </span><br><span class="line">Leave blank normally.</span><br><span class="line">Needed only if you want use SA instead of interactive login.</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">service_account_file&gt; </span><br><span class="line">Edit advanced config? (y/n)</span><br><span class="line">y) Yes</span><br><span class="line">n) No</span><br><span class="line">y/n&gt; n（不进行高级配置。）</span><br><span class="line">Remote config</span><br><span class="line">Use auto config?</span><br><span class="line"> * Say Y if not sure</span><br><span class="line"> * Say N if you are working on a remote or headless machine or Y didn&apos;t work</span><br><span class="line">y) Yes</span><br><span class="line">n) No</span><br><span class="line">y/n&gt; n</span><br><span class="line">If your browser doesn&apos;t open automatically go to the following link: https://accounts.google.com/(你需要登陆的链接。)</span><br><span class="line">Enter verification code&gt; 4/4gBaYe2_（你在网页中获得erification code）</span><br><span class="line">Configure this as a team drive?</span><br><span class="line">y) Yes</span><br><span class="line">n) No</span><br><span class="line">y/n&gt; n</span><br><span class="line">--------------------</span><br><span class="line">[Google]</span><br><span class="line">type = drive</span><br><span class="line">scope = drive</span><br><span class="line">token = &#123;&quot;access_token&quot;:&quot;ya29.GluhBkLo5l7zLGZFmeHEbBSWFxJD8HaiAqpDLmD7BPPFUGcpXrgnnd8pWoahZJvgyv9Qk5yc7TxRLRmxKt31N8mmjP4bbvr2sSb_E8ZbpRNetFtglc2SrjMRFW6z&quot;,&quot;token_type&quot;:&quot;Bearer&quot;,&quot;refresh_token&quot;:&quot;1/jmLzUeXGBUqMVHV_k4x8F6UhPXkbMW-U-zJpnGnnv6I&quot;,&quot;expiry&quot;:&quot;2019-01-30T22:28:52.644486809+08:00&quot;&#125;</span><br><span class="line">--------------------</span><br><span class="line">y) Yes this is OK</span><br><span class="line">e) Edit this remote</span><br><span class="line">d) Delete this remote</span><br><span class="line">y/e/d&gt; y</span><br><span class="line">Current remotes:</span><br><span class="line"></span><br><span class="line">Name                 Type</span><br><span class="line">====                 ====</span><br><span class="line">Google               drive</span><br><span class="line"></span><br><span class="line">e) Edit existing remote</span><br><span class="line">n) New remote</span><br><span class="line">d) Delete remote</span><br><span class="line">r) Rename remote</span><br><span class="line">c) Copy remote</span><br><span class="line">s) Set configuration password</span><br><span class="line">q) Quit config</span><br><span class="line">e/n/d/r/c/s/q&gt; q</span><br></pre></td></tr></table></figure>
+
+<h2 id="开始上传Google-Drive"><a href="#开始上传Google-Drive" class="headerlink" title="开始上传Google Drive"></a>开始上传Google Drive</h2><p>（本地文件夹以origin,Drive文件夹以backup为例）<br>在web端新建一个名为backup的文件夹，新建完成后使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@Raincorn:/rclone# rclone lsd Google:</span><br><span class="line">          -1 2019-01-30 21:32:54        -1 backup</span><br><span class="line">#这里的“Google”即为你所创建的配置名称，backup即为你刚刚新建的那个用来备份的文件夹。     </span><br><span class="line">root@Raincorn:/rclone# rclone copy /root/origin Google:backup</span><br><span class="line">#/root/origin为源文件夹，Google：backup为配置名称+远程文件夹。</span><br></pre></td></tr></table></figure>
+
+<p>挂到Screen中，第二天即可迁移完成。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/12/19/Windows安装文件初探/" rel="next" title="Windows安装文件初探">
+                  <i class="fa fa-chevron-left"></i> Windows安装文件初探
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/12/19/Linux-on-Windows/" rel="prev" title="Linux on Windows">
+                  Linux on Windows <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缘由-amp-要求"><span class="nav-number">1.</span> <span class="nav-text">缘由&amp;要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从iCloud上下载"><span class="nav-number">2.</span> <span class="nav-text">从iCloud上下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传到Google-Drive"><span class="nav-number">3.</span> <span class="nav-text">上传到Google Drive</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rclone的安装"><span class="nav-number">3.1.</span> <span class="nav-text">rclone的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载rclone"><span class="nav-number">3.1.1.</span> <span class="nav-text">下载rclone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制赋权"><span class="nav-number">3.1.2.</span> <span class="nav-text">复制赋权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装帮助页面"><span class="nav-number">3.1.3.</span> <span class="nav-text">安装帮助页面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始上传Google-Drive"><span class="nav-number">3.3.</span> <span class="nav-text">开始上传Google Drive</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">硬件技术联盟</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">硬件技术联盟</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=XMcD9pNjK3V40D6jUj0nlV1u-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'XMcD9pNjK3V40D6jUj0nlV1u-gzGzoHsz',
+            'X-LC-Key': 'bC0poa1v6JejAlDxJcSHemqP',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '7o4zkUkX5ibWMdl91RNu2ddv-gzGzoHsz',
+    appKey: 'DCvwhBf94NfhNUBrTBopgPCP',
+    placeholder: '来啊，快活啊',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

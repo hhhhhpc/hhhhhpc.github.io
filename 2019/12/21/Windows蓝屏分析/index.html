@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="蓝屏死机（英语：Blue Screen of Death，缩写为：BSoD）指的是微软Windows 操作系统在无法从一个系统错误中恢复过来时所显示的屏幕图像。 先抛出来解决方案： 卸载最近一次的Windows更新，并尝试加载最近一次正常启动时的注册表 卸载最近安装的驱动程序或者尝试升级/降级该驱动 移除最近添加的硬件设备 将QQ更换为Windows Store的UWP版本并移除所有第三方杀毒软">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows蓝屏分析">
+<meta property="og:url" content="http://yoursite.com/2019/12/21/Windows蓝屏分析/index.html">
+<meta property="og:site_name" content="硬件联盟博客">
+<meta property="og:description" content="蓝屏死机（英语：Blue Screen of Death，缩写为：BSoD）指的是微软Windows 操作系统在无法从一个系统错误中恢复过来时所显示的屏幕图像。 先抛出来解决方案： 卸载最近一次的Windows更新，并尝试加载最近一次正常启动时的注册表 卸载最近安装的驱动程序或者尝试升级/降级该驱动 移除最近添加的硬件设备 将QQ更换为Windows Store的UWP版本并移除所有第三方杀毒软">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/lh62Q7pJroKAG1I.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/5KjNAcOpTgzlxBQ.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/JW6TRiEo1XndDQx.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/DLEeG5znMm7FcUW.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/ipKDLcve2XJwb9N.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/K26xPoJul9yQ1zG.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/12/21/Qx9msP.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/mK8h31QSATxktjc.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/NXoWJ6dAZvRSHBc.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/L1flQTV2ISywXR6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/12/21/QvvMOU.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/12/21/QxSjnf.jpg">
+<meta property="og:updated_time" content="2019-12-21T15:20:46.565Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows蓝屏分析">
+<meta name="twitter:description" content="蓝屏死机（英语：Blue Screen of Death，缩写为：BSoD）指的是微软Windows 操作系统在无法从一个系统错误中恢复过来时所显示的屏幕图像。 先抛出来解决方案： 卸载最近一次的Windows更新，并尝试加载最近一次正常启动时的注册表 卸载最近安装的驱动程序或者尝试升级/降级该驱动 移除最近添加的硬件设备 将QQ更换为Windows Store的UWP版本并移除所有第三方杀毒软">
+<meta name="twitter:image" content="https://i.loli.net/2019/12/21/lh62Q7pJroKAG1I.png">
+  <link rel="canonical" href="http://yoursite.com/2019/12/21/Windows蓝屏分析/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Windows蓝屏分析 | 硬件联盟博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">硬件联盟博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">5</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">18</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/21/Windows蓝屏分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="硬件技术联盟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硬件联盟博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Windows蓝屏分析
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-12-21 23:18:57 / Modified: 23:20:46" itemprop="dateCreated datePublished" datetime="2019-12-21T23:18:57+08:00">2019-12-21</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/12/21/Windows蓝屏分析/" class="post-meta-item leancloud_visitors" data-flag-title="Windows蓝屏分析" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/12/21/Windows蓝屏分析/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/12/21/Windows蓝屏分析/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.loli.net/2019/12/21/lh62Q7pJroKAG1I.png" alt="Windows10蓝屏"></p><blockquote>
+<p>蓝屏死机（英语：Blue Screen of Death，缩写为：BSoD）指的是微软Windows 操作系统在无法从一个系统错误中恢复过来时所显示的屏幕图像。</p>
+</blockquote><p>先抛出来解决方案：</p><ul>
+<li>卸载最近一次的Windows更新，并尝试加载最近一次正常启动时的注册表</li>
+<li>卸载最近安装的驱动程序或者尝试升级/降级该驱动</li>
+<li>移除最近添加的硬件设备</li>
+<li>将QQ更换为Windows Store的UWP版本并移除所有第三方杀毒软件</li>
+<li>运行sfc /scannow以检查系统镜像</li>
+<li>重装系统</li>
+<li>重买电脑</li>
+</ul><a id="more"></a>
+
+
+
+<p><em>若无法正常启动，请尝试进入安全模式或者PE进行操作。</em></p>
+<p><strong><em>所以定期备份是个很好的习惯！本文中需要额外下载的示例或者资料，均可与<a href="https://mega.nz/#F!gwcAWC5a!w1X2WHX07_uIs6IPDFLYbw" target="_blank" rel="noopener">此处</a>下载。</em></strong></p>
+<hr>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>首先需要说明的是，Windows蓝屏是一种系统保护机制（可以把Windows蓝屏比喻成感冒/发烧），是Windows为保护硬件及数据的策略，当发生诸如内存非法访问，堆栈溢出等错误而Windows无法处理时，Windows将主动崩溃。虽然蓝屏的原因有很多，但其一定发生在内核层(Ring 0)。</p>
+<blockquote>
+<p>  crash type:<br>      0x01: High IRQL fault (Kernel-mode)<br>      0x02: Buffer overflow<br>      0x03: Code overwrite<br>      0x04: Stack trash<br>      0x05: High IRQL fault (User-mode)<br>      0x06: Stack overflow<br>      0x07: Hardcoded breakpoint<br>      0x08: Double Free  </p>
+</blockquote>
+<p>以上是<a href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/notmyfault" target="_blank" rel="noopener">NotMyFault</a>列举的常见Windows崩溃原因。</p>
+<h1 id="崩溃分析"><a href="#崩溃分析" class="headerlink" title="崩溃分析"></a>崩溃分析</h1><p>当Windows崩溃时，显示器会切换至低分辨率下的VGA显示模式，显示蓝色背景并给出停止代码与建议，当Dump文件转存完毕后，系统将自动进行重启。 </p>
+<h2 id="蓝屏代码"><a href="#蓝屏代码" class="headerlink" title="蓝屏代码"></a>蓝屏代码</h2><p>我们可以根据Windows蓝屏时候的错误代码进行初步判断，但无法将错误定位到具体驱动或者进程。蓝屏恢复方法可以参考<a href="https://support.microsoft.com/zh-cn/help/14238/windows-10-troubleshoot-blue-screen-errors" target="_blank" rel="noopener">微软官方指引</a>，具体错误代码可以查阅<a href="https://www.lifewire.com/blue-screen-error-codes-4065576" target="_blank" rel="noopener">此网站</a>或者查阅前文资料中的Code Lists。至于我为什么不贴中文译版，因为翻译实在太烂了。</p>
+<h2 id="Dump分析"><a href="#Dump分析" class="headerlink" title="Dump分析"></a>Dump分析</h2><p>很不幸的是，很多时候蓝屏代码并不能帮助你准确定位问题，以便解决具体的进程或者驱动。这个时候我们需要分析Windows的内存崩溃转储文件来得出具体结论，这里的内核Dump文件即为发生崩溃时内存的部分/完整内容拷贝，具体步骤如下文所述。</p>
+<h3 id="创建转储文件"><a href="#创建转储文件" class="headerlink" title="创建转储文件"></a>创建转储文件</h3><p>在Control Panel\System and Security\System的Advanced system settings选项，Advanced选项卡，Startup and Recovery选项下便可设置。<br><img src="https://i.loli.net/2019/12/21/5KjNAcOpTgzlxBQ.png" alt="Startup and Recovery"><br>拉开Write debugging information选项即可查看转储内存类型：None/Small/Kernel/Complete/Automatic/Active。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>None</td>
+<td>不创建转储日志</td>
+</tr>
+<tr>
+<td>Small</td>
+<td>仅保留基本信息，引起崩溃的线程内核栈与关联内存栈</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>保留当前运行时的进程列表，堆栈以及驱动程序列表</td>
+</tr>
+<tr>
+<td>Complete</td>
+<td>记录Windows崩溃时能够访问的所有内存</td>
+</tr>
+<tr>
+<td>Automatic</td>
+<td>类似Kernel,但在Paging file大小存在差异</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>类似Complete，但初步筛选故障Pages</td>
+</tr>
+</tbody></table>
+<h3 id="下载工具"><a href="#下载工具" class="headerlink" title="下载工具"></a>下载工具</h3><h4 id="WinDbg"><a href="#WinDbg" class="headerlink" title="WinDbg"></a>WinDbg</h4><p>目前微软发布WinDbg主要借助Windows SDK，安装可以参考<a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools" target="_blank" rel="noopener">文档</a>,或者使用我提供的<a href="https://drive.google.com/open?id=172F-H7PuzsEIHrN8ToktxjtCfQXiMasR" target="_blank" rel="noopener">离线包</a>。<img src="https://i.loli.net/2019/12/21/JW6TRiEo1XndDQx.png" alt="WinDbg测试页面"></p>
+<h4 id="WinDbg-Preview"><a href="#WinDbg-Preview" class="headerlink" title="WinDbg Preview"></a>WinDbg Preview</h4><p>预览版为UWP应用，可直接于Microsoft Store直接下载。<img src="https://i.loli.net/2019/12/21/DLEeG5znMm7FcUW.png" alt="Store详情页"><br><img src="https://i.loli.net/2019/12/21/ipKDLcve2XJwb9N.png" alt="WinDbg Preview测试页面"><br>Tips:如果你需要参考其它指南的话，建议安装前者，网络上大多资料均介绍此版本，不过二者差距较小，当然我很喜欢后者。</p>
+<h3 id="Symbols配置"><a href="#Symbols配置" class="headerlink" title="Symbols配置"></a>Symbols配置</h3><blockquote>
+<p>When applications, libraries, drivers, or operating systems are linked, the linker that creates the .exe and .dll files also creates a number of additional files known as symbol files.</p>
+</blockquote>
+<p>在崩溃分析中，我们可以使用Symbols来定位Windows原生应用或者内容发生崩溃时的具体进程，驱动，函数。配置Symbols有若干方法，以下推荐两种，请根据实际条件选择：</p>
+<ul>
+<li>配置环境变量在本地缓存并指向Symbols公共服务器，新建系统系统变量，名称设置为_NT_SYMBOL_PATH，变量值为SRV*c:\symbol*<a href="http://msdl.microsoft.com/download/symbols" target="_blank" rel="noopener">http://msdl.microsoft.com/download/symbols</a> ，其中SRV*与*http://… 之间的路径为Symbols文件在本地的缓存路径，例如我的缓存路径为c:\symbol。<br>该句的意思即告诉WinDbg，Symbols文件位于c:\symbol，当在该路径下无法寻找到目标Symbols时，主动从<a href="http://msdl.microsoft.com/download/symbols" target="_blank" rel="noopener">http://msdl.microsoft.com/download/symbols</a> 下载缓存。<br><img src="https://i.loli.net/2019/12/21/K26xPoJul9yQ1zG.png" alt="Symbols路径配置"><br>重启系统后生效，在这里分享一个技能点，在cmd中输入<code>set PATH=C:</code>后关闭cmd即可使环境变量在Windows不重启的情况下生效。</li>
+<li>借助dbgcmd（注意不是cmd），输入<code>.symfix+ c:\symbol</code>即可将当前Workspace的Symbols指向c:\symbol，之后再使用<code>.sympath</code>即可输出当前Symbols的配置路径，最后<code>reload</code>便可开始根据当前系统版本同步Symbols，如果一切正常，你会在C:\symbol目录下看到下载的文件。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0: kd&gt; .symfix c:\symbol  </span><br><span class="line">0: kd&gt; .sympath  </span><br><span class="line">Symbol search path is: srv*  </span><br><span class="line">Expanded Symbol search path is: cache*c:\symbol;SRV*https://msdl.microsoft.com/download/symbols</span><br></pre></td></tr></table></figure>
+
+<p>配置好的测试页面会出现类似下图的提示，<code>Symbol search path is: SRV\*c:\symbol\* http://msdl.microsoft.com/download/symbols。</code><img src="https://s2.ax1x.com/2019/12/21/Qx9msP.jpg" alt="PATH路径"><br>Tips:</p>
+<ul>
+<li>！<strong><em>目前msdl服务器似乎被墙了，请将代理置为全局。</em></strong></li>
+<li>下载Symbols的过程中左下角会提示当前下载的任务名称，右侧会出现进度条，如果没有，请检查网络。</li>
+<li>！！！<strong><em>网络问题很重要</em></strong></li>
+<li>如果安装过程中遇到困难，请尝试将WinDbg的安装目录添加到环境变量中，以便寻找到SYMSRV.DLL和SYMSTORE.EXE。然而，我无法寻找到UWP版本的安装目录，请安装上文提到的第一个版本的WinDbg。<h3 id="Dump分析-1"><a href="#Dump分析-1" class="headerlink" title="Dump分析"></a>Dump分析</h3>把文件丢进WinDbg等待Symbols下载完成后便可开始分析，如果你运气够好，初步的分析下，你可能会看到“Probably caused by ***”的文本，基本上即为出现问题的具体驱动/进程了。</li>
+</ul>
+<p>如果没有分析结果，或者全部指向ntoskrnl类似的内核程序时，我们需要考虑进一步分析。在dbgcmd中输入<code>!analyze -v</code>便可开始进一步分析，我们可能会看到类似如下的Stack_text调用情况。<br><img src="https://i.loli.net/2019/12/21/mK8h31QSATxktjc.png" alt="Stack调用"><br>计算机中的Stack向低地址方向生长，于是从下至上分析，可以看到是nvlddmkm先后调用了dxgkrnl的DpiDispatchPower，DpiFdoDispatchPower，DpiFdoHandleDevicePower函数，在调用DpiFdoHandleDevicePower后即引发了watchdog.exe，随后NT内核的KeBugCheckEx启动，引发蓝屏。我们可以推测出出错的程序可能是dxgkrnl或者nvlddmkm，即DirectX程序，nVidia驱动程序。因此建议对DX进行修复，对N卡驱动进行升/降级。<br><img src="https://i.loli.net/2019/12/21/NXoWJ6dAZvRSHBc.png" alt="MODULE_NAME"><br>从文件末尾的MODULE_NAME可以看到端倪，基本判断问题为DirectX程序与nVidia驱动的不兼容。</p>
+<p>我们随后又进行了验证，dbgcmd中输入<code>!process</code>即可开始验证。<br><img src="https://i.loli.net/2019/12/21/L1flQTV2ISywXR6.png" alt="验证"><br>在这里我们较为关注<code>Image: System</code>这句与<code>ReadMemory error: Cannot get nt!KeMaximumIncrement value.
+fffff78000000000: Unable to get shared data</code>基本判断为栈溢出。</p>
+<h3 id="驱动判断"><a href="#驱动判断" class="headerlink" title="驱动判断"></a>驱动判断</h3><p>你可以使用Google来搜索该驱动属于何种设备，并尝试更新/回退。当Google搜索不到一些冷门硬件时，我们需要使用lm(list module)，使用命令<code>lm kv m nvlddmkm</code>(k——kernel，内核；v——verbose，详细；m——match，匹配）来列出该模块的具体信息。<img src="https://s2.ax1x.com/2019/12/21/QvvMOU.jpg" alt="nvlddmkm具体信息">上图中，我们可以看到列出了该模块的时间戳，路径，名称，校验码等。同时，通过查阅主机的注册表我们也可以得出具体路径以及设备。</p>
+<h1 id="作死之路"><a href="#作死之路" class="headerlink" title="作死之路"></a>作死之路</h1><p>如果你想要更多的Dump来分析，请左转Microsoft Community，我在我的附件里（前文可下载）附上了9份Dump文件，本次分析的文件结果也已导出为html格式，于附件中。<br>。<br>。<br>。<br>。<br>。<br>。<br>如果你想变得更强大，欢迎阅读书籍《深入解析Windows操作系统》，绝对是一本好书，就是有“点”厚？！<br><img src="https://s2.ax1x.com/2019/12/21/QxSjnf.jpg" alt="《深入解析Windows操作系统》第六版下册"></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/12/19/如何输出Hello-World！/" rel="next" title="如何输出Hello World！">
+                  <i class="fa fa-chevron-left"></i> 如何输出Hello World！
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/01/01/CPU寄存器总结/" rel="prev" title="CPU寄存器总结">
+                  CPU寄存器总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#崩溃分析"><span class="nav-number">2.</span> <span class="nav-text">崩溃分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#蓝屏代码"><span class="nav-number">2.1.</span> <span class="nav-text">蓝屏代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dump分析"><span class="nav-number">2.2.</span> <span class="nav-text">Dump分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建转储文件"><span class="nav-number">2.2.1.</span> <span class="nav-text">创建转储文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载工具"><span class="nav-number">2.2.2.</span> <span class="nav-text">下载工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WinDbg"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">WinDbg</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WinDbg-Preview"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">WinDbg Preview</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbols配置"><span class="nav-number">2.2.3.</span> <span class="nav-text">Symbols配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dump分析-1"><span class="nav-number">2.2.4.</span> <span class="nav-text">Dump分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#驱动判断"><span class="nav-number">2.2.5.</span> <span class="nav-text">驱动判断</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作死之路"><span class="nav-number">3.</span> <span class="nav-text">作死之路</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">硬件技术联盟</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">硬件技术联盟</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=XMcD9pNjK3V40D6jUj0nlV1u-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'XMcD9pNjK3V40D6jUj0nlV1u-gzGzoHsz',
+            'X-LC-Key': 'bC0poa1v6JejAlDxJcSHemqP',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '7o4zkUkX5ibWMdl91RNu2ddv-gzGzoHsz',
+    appKey: 'DCvwhBf94NfhNUBrTBopgPCP',
+    placeholder: '来啊，快活啊',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

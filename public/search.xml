@@ -1,15 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Untitled13</title>
-    <url>/2019/12/16/Untitled13/</url>
-    <content><![CDATA[<p>eara</p>
+    <title></title>
+    <url>/2020/01/14/%E8%A7%A3%E5%86%B3ubuntu%E5%85%B3%E6%9C%BA%E5%8D%A1%E7%95%8C%E9%9D%A290s/</url>
+    <content><![CDATA[<h1 id="解决ubuntu关机卡界面90s"><a href="#解决ubuntu关机卡界面90s" class="headerlink" title="解决ubuntu关机卡界面90s"></a>解决ubuntu关机卡界面90s</h1><p>注意了，这个不是系统的问题，是配置的问题。网上有很多其他的方案，下载watchdog啊，或者一行命令什么的，其实只需要改一下配置文件就可以了。</p><p>sudo vim /etc/systemd/system.conf</p><p>可以使用vim也可以使用ubuntu自带的gedit，用vim的话需要先apt安装一下。</p><a id="more"></a>
+
+
+<p># This file is part of systemd.<br>#<br># systemd is free software; you can redistribute it and/or modify it<br># under the terms of the GNU Lesser General Public License as published by<br># the Free Software Foundation; either version 2.1 of the License, or<br># (at your option) any later version.<br>#<br># Entries in this file show the compile time defaults.<br># You can change settings by editing this file.<br># Defaults can be restored by simply deleting this file.<br>#<br># See systemd-system.conf(5) for details.</p>
+<p>[Manager]<br>#LogLevel=info<br>#LogTarget=journal-or-kmsg<br>#LogColor=yes<br>#LogLocation=no<br>#DumpCore=yes<br>#ShowStatus=yes<br>#CrashChangeVT=no<br>#CrashShell=no<br>#CrashReboot=no<br>#CtrlAltDelBurstAction=reboot-force<br>#CPUAffinity=1 2<br>#JoinControllers=cpu,cpuacct net_cls,net_prio<br>#RuntimeWatchdogSec=0<br>#ShutdownWatchdogSec=10min<br>#CapabilityBoundingSet=<br>#SystemCallArchitectures=<br>#TimerSlackNSec=<br>#DefaultTimerAccuracySec=1min<br>#DefaultStandardOutput=journal<br>#DefaultStandardError=inherit<br><strong>#DefaultTimeoutStartSec=90s</strong><br><strong>#DefaultTimeoutStopSec=90s</strong><br>#DefaultRestartSec=100ms<br>#DefaultStartLimitIntervalSec=10s<br>#DefaultStartLimitBurst=5<br>#DefaultEnvironment=<br>#DefaultCPUAccounting=no<br>#DefaultIOAccounting=no<br>#DefaultIPAccounting=no<br>#DefaultBlockIOAccounting=no<br>#DefaultMemoryAccounting=no<br>#DefaultTasksAccounting=yes<br>#DefaultTasksMax=<br>#DefaultLimitCPU=<br>#DefaultLimitFSIZE=<br>#DefaultLimitDATA=<br>#DefaultLimitSTACK=<br>#DefaultLimitCORE=<br>#DefaultLimitRSS=<br>#DefaultLimitNOFILE=<br>#DefaultLimitAS=<br>#DefaultLimitNPROC=<br>#DefaultLimitMEMLOCK=<br>#DefaultLimitLOCKS=<br>#DefaultLimitSIGPENDING=<br>#DefaultLimitMSGQUEUE=<br>#DefaultLimitNICE=<br>#DefaultLimitRTPRIO=<br>#DefaultLimitRTTIME=<br>#IPAddressAllow=<br>#IPAddressDeny=</p>
+<p>配置文件大概就长这样，找到加粗的俩行，把#注释去掉并且修改时间为1，就可以解决了</p>
 ]]></content>
   </entry>
   <entry>
-    <title>win10下安装python</title>
-    <url>/2019/12/15/%E5%AE%89%E8%A3%85python/</url>
-    <content><![CDATA[<h3 id="1-自己的碎碎念"><a href="#1-自己的碎碎念" class="headerlink" title="1.自己的碎碎念"></a>1.自己的碎碎念</h3><h5 id="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"><a href="#python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法" class="headerlink" title="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"></a>python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法</h5><h3 id="2-环境需求"><a href="#2-环境需求" class="headerlink" title="2.环境需求"></a>2.环境需求</h3><p>win10</p>
+    <title>CPU寄存器总结</title>
+    <url>/2020/01/01/CPU%E5%AF%84%E5%AD%98%E5%99%A8%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>X86架构通用寄存器只有8个，其余为不可直接操作寄存器。在叙述寄存器单元之前，我们先将CPU内部分为三大块：</p><h1 id="控制单元（Control-Unit）"><a href="#控制单元（Control-Unit）" class="headerlink" title="控制单元（Control Unit）"></a>控制单元（Control Unit）</h1><p>程序计数器 PC（Program Counter）、指令寄存器 IR(Instruction Register)、指令译码器 ID(Instruction Decoder)和操作控制器 OC(Operation Controller)。</p><a id="more"></a>
+
+<h1 id="运算逻辑单元（Arithmetic-Logic-Unit）"><a href="#运算逻辑单元（Arithmetic-Logic-Unit）" class="headerlink" title="运算逻辑单元（Arithmetic Logic Unit）"></a>运算逻辑单元（Arithmetic Logic Unit）</h1><p>算术运算与逻辑运算，进行加减乘除基础运算与位移运算。</p>
+<h1 id="储存单元（Storage-Unit）"><a href="#储存单元（Storage-Unit）" class="headerlink" title="储存单元（Storage Unit）"></a>储存单元（Storage Unit）</h1><p>包含寄存器，片内缓存L1~L4，其中L1分为数据缓存与指令缓存，L4主要在Iris上以eDRAM的形式存在。<br><img src="https://i.loli.net/2020/01/01/dlNgGqe8pP4oCB7.png" alt="X64片内寄存器"></p>
+<h2 id="状态寄存器"><a href="#状态寄存器" class="headerlink" title="状态寄存器"></a>状态寄存器</h2><table>
+<thead>
+<tr>
+<th>字长</th>
+<th>通用寄存器</th>
+<th>指针寄存器</th>
+<th>索引寄存器</th>
+<th>区段寄存器</th>
+<th>标志寄存器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>16 Bits</td>
+<td>AX BX CX DX</td>
+<td>BP SP IP</td>
+<td>SI DI</td>
+<td>CS DS SS ES</td>
+<td>FLAGS</td>
+</tr>
+<tr>
+<td>32 Bits</td>
+<td>EAX EBX ECX EDX</td>
+<td>EBP ESP EIP</td>
+<td>ESI EDI</td>
+<td>CS DS SS ES FS GS</td>
+<td>EFLAGS</td>
+</tr>
+<tr>
+<td>64 Bits</td>
+<td>RAX RBX RCX RDX R8~R15</td>
+<td>RBP RSP RIP</td>
+<td>RSI RDI</td>
+<td>CS DS SS ES FS GS</td>
+<td>RFLAGS</td>
+</tr>
+</tbody></table>
+<ul>
+<li>AX BX CX DX 可分为高八位与低八位，例AH（High），BL（Low），寄存器之间的长度必须相同才可进行运算。</li>
+<li>BP —— Base Pointer（基址指针），SP —— Stack Pointer (堆栈指针)，标记Stack基准和移动的指针。</li>
+<li>指针寄存器IP记录下一条指令的偏移地址。</li>
+<li>指针寄存器SI DI指向数组内部。</li>
+<li>区段寄存器CS DS SS ES 产生储存器的绝对地址。</li>
+<li>标记寄存器FLAGS标志零位，奇偶，符号，进位等。</li>
+<li>EAX EBX ECX EDX 低16位与AX BX CX DX相兼容。</li>
+<li>R8~R15为X64新增通用寄存器。<br><img src="https://i.loli.net/2020/01/01/a8oTr61zkEIUFGX.png" alt="通用寄存器"><br><img src="https://i.loli.net/2020/01/01/XJr6tRqWGwQ5KlN.png" alt="指针寄存器"></li>
+</ul>
+<h2 id="指令集专用寄存器"><a href="#指令集专用寄存器" class="headerlink" title="指令集专用寄存器"></a>指令集专用寄存器</h2><p>（我的CPU为i7-6700HQ : X86,X86-64,MMX, SSE, SSE2, SSE3, SSSE3, SSE4.1, SSE4.2,VT-x, AVX, AVX2, FMA3, AES,TSX）</p>
+<ul>
+<li><p>MM —— MMX（Matrix Math eXtensions，矩阵数学扩展）指令集使用，SIMD(单指令多数据(Single Instruction Multiple Data))多媒体指令集，意在提高多媒体处理能力。</p>
+</li>
+<li><p>XMM —— SSE（Streaming SIMD Extensions，单一指令多数据流扩展）指令集使用，MMX继任，主要用于提高数学运算性能。</p>
+</li>
+<li><p>YMM ZMM —— AVX (Advanced Vector Extensions，高级向量扩展指令集)指令集使用，作为AVX继任，将XMM寄存器扩展到YMM乃至512 Bits的ZMM。</p>
+</li>
+<li><p>VT-x指令集主要用于硬件虚拟化操作，AES指令集主要用于提高系统加解密速度，FMA为AVX指令集子集，用来提高特定运算场景运算速度。</p>
+<h2 id="系统专用寄存器："><a href="#系统专用寄存器：" class="headerlink" title="系统专用寄存器："></a>系统专用寄存器：</h2></li>
+<li><p>CR —— Control Register（控制寄存器）</p>
+</li>
+<li><p>DR —— Debug Register（调试寄存器）</p>
+</li>
+<li><p>TR —— Test Register（测试寄存器）</p>
+</li>
+</ul>
+<p><strong><em>改动此类寄存器需要Ring 0级别的权限，所以我称之为操作系统专用寄存器。</em></strong></p>
+<p>二十一世纪二十年代第一天，莫有啥好说的。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Windows蓝屏分析</title>
+    <url>/2019/12/21/Windows%E8%93%9D%E5%B1%8F%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<p><img src="https://i.loli.net/2019/12/21/lh62Q7pJroKAG1I.png" alt="Windows10蓝屏"></p><blockquote>
+<p>蓝屏死机（英语：Blue Screen of Death，缩写为：BSoD）指的是微软Windows 操作系统在无法从一个系统错误中恢复过来时所显示的屏幕图像。</p>
+</blockquote><p>先抛出来解决方案：</p><ul>
+<li>卸载最近一次的Windows更新，并尝试加载最近一次正常启动时的注册表</li>
+<li>卸载最近安装的驱动程序或者尝试升级/降级该驱动</li>
+<li>移除最近添加的硬件设备</li>
+<li>将QQ更换为Windows Store的UWP版本并移除所有第三方杀毒软件</li>
+<li>运行sfc /scannow以检查系统镜像</li>
+<li>重装系统</li>
+<li>重买电脑</li>
+</ul><a id="more"></a>
+
+
+
+<p><em>若无法正常启动，请尝试进入安全模式或者PE进行操作。</em></p>
+<p><strong><em>所以定期备份是个很好的习惯！本文中需要额外下载的示例或者资料，均可与<a href="https://mega.nz/#F!gwcAWC5a!w1X2WHX07_uIs6IPDFLYbw" target="_blank" rel="noopener">此处</a>下载。</em></strong></p>
+<hr>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>首先需要说明的是，Windows蓝屏是一种系统保护机制（可以把Windows蓝屏比喻成感冒/发烧），是Windows为保护硬件及数据的策略，当发生诸如内存非法访问，堆栈溢出等错误而Windows无法处理时，Windows将主动崩溃。虽然蓝屏的原因有很多，但其一定发生在内核层(Ring 0)。</p>
+<blockquote>
+<p>  crash type:<br>      0x01: High IRQL fault (Kernel-mode)<br>      0x02: Buffer overflow<br>      0x03: Code overwrite<br>      0x04: Stack trash<br>      0x05: High IRQL fault (User-mode)<br>      0x06: Stack overflow<br>      0x07: Hardcoded breakpoint<br>      0x08: Double Free  </p>
+</blockquote>
+<p>以上是<a href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/notmyfault" target="_blank" rel="noopener">NotMyFault</a>列举的常见Windows崩溃原因。</p>
+<h1 id="崩溃分析"><a href="#崩溃分析" class="headerlink" title="崩溃分析"></a>崩溃分析</h1><p>当Windows崩溃时，显示器会切换至低分辨率下的VGA显示模式，显示蓝色背景并给出停止代码与建议，当Dump文件转存完毕后，系统将自动进行重启。 </p>
+<h2 id="蓝屏代码"><a href="#蓝屏代码" class="headerlink" title="蓝屏代码"></a>蓝屏代码</h2><p>我们可以根据Windows蓝屏时候的错误代码进行初步判断，但无法将错误定位到具体驱动或者进程。蓝屏恢复方法可以参考<a href="https://support.microsoft.com/zh-cn/help/14238/windows-10-troubleshoot-blue-screen-errors" target="_blank" rel="noopener">微软官方指引</a>，具体错误代码可以查阅<a href="https://www.lifewire.com/blue-screen-error-codes-4065576" target="_blank" rel="noopener">此网站</a>或者查阅前文资料中的Code Lists。至于我为什么不贴中文译版，因为翻译实在太烂了。</p>
+<h2 id="Dump分析"><a href="#Dump分析" class="headerlink" title="Dump分析"></a>Dump分析</h2><p>很不幸的是，很多时候蓝屏代码并不能帮助你准确定位问题，以便解决具体的进程或者驱动。这个时候我们需要分析Windows的内存崩溃转储文件来得出具体结论，这里的内核Dump文件即为发生崩溃时内存的部分/完整内容拷贝，具体步骤如下文所述。</p>
+<h3 id="创建转储文件"><a href="#创建转储文件" class="headerlink" title="创建转储文件"></a>创建转储文件</h3><p>在Control Panel\System and Security\System的Advanced system settings选项，Advanced选项卡，Startup and Recovery选项下便可设置。<br><img src="https://i.loli.net/2019/12/21/5KjNAcOpTgzlxBQ.png" alt="Startup and Recovery"><br>拉开Write debugging information选项即可查看转储内存类型：None/Small/Kernel/Complete/Automatic/Active。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>None</td>
+<td>不创建转储日志</td>
+</tr>
+<tr>
+<td>Small</td>
+<td>仅保留基本信息，引起崩溃的线程内核栈与关联内存栈</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>保留当前运行时的进程列表，堆栈以及驱动程序列表</td>
+</tr>
+<tr>
+<td>Complete</td>
+<td>记录Windows崩溃时能够访问的所有内存</td>
+</tr>
+<tr>
+<td>Automatic</td>
+<td>类似Kernel,但在Paging file大小存在差异</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>类似Complete，但初步筛选故障Pages</td>
+</tr>
+</tbody></table>
+<h3 id="下载工具"><a href="#下载工具" class="headerlink" title="下载工具"></a>下载工具</h3><h4 id="WinDbg"><a href="#WinDbg" class="headerlink" title="WinDbg"></a>WinDbg</h4><p>目前微软发布WinDbg主要借助Windows SDK，安装可以参考<a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools" target="_blank" rel="noopener">文档</a>,或者使用我提供的<a href="https://drive.google.com/open?id=172F-H7PuzsEIHrN8ToktxjtCfQXiMasR" target="_blank" rel="noopener">离线包</a>。<img src="https://i.loli.net/2019/12/21/JW6TRiEo1XndDQx.png" alt="WinDbg测试页面"></p>
+<h4 id="WinDbg-Preview"><a href="#WinDbg-Preview" class="headerlink" title="WinDbg Preview"></a>WinDbg Preview</h4><p>预览版为UWP应用，可直接于Microsoft Store直接下载。<img src="https://i.loli.net/2019/12/21/DLEeG5znMm7FcUW.png" alt="Store详情页"><br><img src="https://i.loli.net/2019/12/21/ipKDLcve2XJwb9N.png" alt="WinDbg Preview测试页面"><br>Tips:如果你需要参考其它指南的话，建议安装前者，网络上大多资料均介绍此版本，不过二者差距较小，当然我很喜欢后者。</p>
+<h3 id="Symbols配置"><a href="#Symbols配置" class="headerlink" title="Symbols配置"></a>Symbols配置</h3><blockquote>
+<p>When applications, libraries, drivers, or operating systems are linked, the linker that creates the .exe and .dll files also creates a number of additional files known as symbol files.</p>
+</blockquote>
+<p>在崩溃分析中，我们可以使用Symbols来定位Windows原生应用或者内容发生崩溃时的具体进程，驱动，函数。配置Symbols有若干方法，以下推荐两种，请根据实际条件选择：</p>
+<ul>
+<li>配置环境变量在本地缓存并指向Symbols公共服务器，新建系统系统变量，名称设置为_NT_SYMBOL_PATH，变量值为SRV*c:\symbol*<a href="http://msdl.microsoft.com/download/symbols" target="_blank" rel="noopener">http://msdl.microsoft.com/download/symbols</a> ，其中SRV*与*http://… 之间的路径为Symbols文件在本地的缓存路径，例如我的缓存路径为c:\symbol。<br>该句的意思即告诉WinDbg，Symbols文件位于c:\symbol，当在该路径下无法寻找到目标Symbols时，主动从<a href="http://msdl.microsoft.com/download/symbols" target="_blank" rel="noopener">http://msdl.microsoft.com/download/symbols</a> 下载缓存。<br><img src="https://i.loli.net/2019/12/21/K26xPoJul9yQ1zG.png" alt="Symbols路径配置"><br>重启系统后生效，在这里分享一个技能点，在cmd中输入<code>set PATH=C:</code>后关闭cmd即可使环境变量在Windows不重启的情况下生效。</li>
+<li>借助dbgcmd（注意不是cmd），输入<code>.symfix+ c:\symbol</code>即可将当前Workspace的Symbols指向c:\symbol，之后再使用<code>.sympath</code>即可输出当前Symbols的配置路径，最后<code>reload</code>便可开始根据当前系统版本同步Symbols，如果一切正常，你会在C:\symbol目录下看到下载的文件。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0: kd&gt; .symfix c:\symbol  </span><br><span class="line">0: kd&gt; .sympath  </span><br><span class="line">Symbol search path is: srv*  </span><br><span class="line">Expanded Symbol search path is: cache*c:\symbol;SRV*https://msdl.microsoft.com/download/symbols</span><br></pre></td></tr></table></figure>
+
+<p>配置好的测试页面会出现类似下图的提示，<code>Symbol search path is: SRV\*c:\symbol\* http://msdl.microsoft.com/download/symbols。</code><img src="https://s2.ax1x.com/2019/12/21/Qx9msP.jpg" alt="PATH路径"><br>Tips:</p>
+<ul>
+<li>！<strong><em>目前msdl服务器似乎被墙了，请将代理置为全局。</em></strong></li>
+<li>下载Symbols的过程中左下角会提示当前下载的任务名称，右侧会出现进度条，如果没有，请检查网络。</li>
+<li>！！！<strong><em>网络问题很重要</em></strong></li>
+<li>如果安装过程中遇到困难，请尝试将WinDbg的安装目录添加到环境变量中，以便寻找到SYMSRV.DLL和SYMSTORE.EXE。然而，我无法寻找到UWP版本的安装目录，请安装上文提到的第一个版本的WinDbg。<h3 id="Dump分析-1"><a href="#Dump分析-1" class="headerlink" title="Dump分析"></a>Dump分析</h3>把文件丢进WinDbg等待Symbols下载完成后便可开始分析，如果你运气够好，初步的分析下，你可能会看到“Probably caused by ***”的文本，基本上即为出现问题的具体驱动/进程了。</li>
+</ul>
+<p>如果没有分析结果，或者全部指向ntoskrnl类似的内核程序时，我们需要考虑进一步分析。在dbgcmd中输入<code>!analyze -v</code>便可开始进一步分析，我们可能会看到类似如下的Stack_text调用情况。<br><img src="https://i.loli.net/2019/12/21/mK8h31QSATxktjc.png" alt="Stack调用"><br>计算机中的Stack向低地址方向生长，于是从下至上分析，可以看到是nvlddmkm先后调用了dxgkrnl的DpiDispatchPower，DpiFdoDispatchPower，DpiFdoHandleDevicePower函数，在调用DpiFdoHandleDevicePower后即引发了watchdog.exe，随后NT内核的KeBugCheckEx启动，引发蓝屏。我们可以推测出出错的程序可能是dxgkrnl或者nvlddmkm，即DirectX程序，nVidia驱动程序。因此建议对DX进行修复，对N卡驱动进行升/降级。<br><img src="https://i.loli.net/2019/12/21/NXoWJ6dAZvRSHBc.png" alt="MODULE_NAME"><br>从文件末尾的MODULE_NAME可以看到端倪，基本判断问题为DirectX程序与nVidia驱动的不兼容。</p>
+<p>我们随后又进行了验证，dbgcmd中输入<code>!process</code>即可开始验证。<br><img src="https://i.loli.net/2019/12/21/L1flQTV2ISywXR6.png" alt="验证"><br>在这里我们较为关注<code>Image: System</code>这句与<code>ReadMemory error: Cannot get nt!KeMaximumIncrement value.
+fffff78000000000: Unable to get shared data</code>基本判断为栈溢出。</p>
+<h3 id="驱动判断"><a href="#驱动判断" class="headerlink" title="驱动判断"></a>驱动判断</h3><p>你可以使用Google来搜索该驱动属于何种设备，并尝试更新/回退。当Google搜索不到一些冷门硬件时，我们需要使用lm(list module)，使用命令<code>lm kv m nvlddmkm</code>(k——kernel，内核；v——verbose，详细；m——match，匹配）来列出该模块的具体信息。<img src="https://s2.ax1x.com/2019/12/21/QvvMOU.jpg" alt="nvlddmkm具体信息">上图中，我们可以看到列出了该模块的时间戳，路径，名称，校验码等。同时，通过查阅主机的注册表我们也可以得出具体路径以及设备。</p>
+<h1 id="作死之路"><a href="#作死之路" class="headerlink" title="作死之路"></a>作死之路</h1><p>如果你想要更多的Dump来分析，请左转Microsoft Community，我在我的附件里（前文可下载）附上了9份Dump文件，本次分析的文件结果也已导出为html格式，于附件中。<br>。<br>。<br>。<br>。<br>。<br>。<br>如果你想变得更强大，欢迎阅读书籍《深入解析Windows操作系统》，绝对是一本好书，就是有“点”厚？！<br><img src="https://s2.ax1x.com/2019/12/21/QxSjnf.jpg" alt="《深入解析Windows操作系统》第六版下册"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>如何输出Hello World！</title>
+    <url>/2019/12/19/%E5%A6%82%E4%BD%95%E8%BE%93%E5%87%BAHello-World%EF%BC%81/</url>
+    <content><![CDATA[<h1 id="One-issue！"><a href="#One-issue！" class="headerlink" title="One issue！"></a>One issue！</h1><p><strong><em>据说在学习一门语言的时候输出Hello World！会带来好运。</em></strong></p><p>哪怎么输出Hello World呢？难道就是像下面这样：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	printf(&quot;Hello World!&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+<p>是的，我们就是要输出上述源代码。</p>
+<h1 id="输出源码"><a href="#输出源码" class="headerlink" title="输出源码"></a>输出源码</h1><p>如果我们直接运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	printf(&quot;#include&lt;stdio.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	printf(&quot;Hello World!&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不出意外地报错，由于各种语言存在保留字以及需要使用无法输入的字符，因此需要对部分地方进行转义。<img src="https://s2.ax1x.com/2019/10/03/u0dVJS.jpg" alt="u0dVJS.jpg"><br>修改后的源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;#include &lt;stdio.h&gt;\nint main()\n&#123;\nprintf(\&quot;Hello world\\n\&quot;);\nreturn 0;\n&#125;&quot;);</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此处，我们对换行符通过\n进行了转义,还对”以及\进行了转义。</p>
+<h1 id="AWSL"><a href="#AWSL" class="headerlink" title="AWSL"></a>AWSL</h1><p><img src="https://s2.ax1x.com/2019/10/03/u0ySt1.jpg" alt="u0ySt1.jpg"><br>阿伟死了！这道题与上述问题相似，不过又有一个坑。<br><img src="https://s2.ax1x.com/2019/10/03/u0yxKS.jpg" alt="u0yxKS.jpg"><br>我最开始的源码是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;#include &lt;bits/stdc++.h&gt;\nusing namespace std;\n\nint main()\n&#123;\n\t//输出 Hello World !\n\tcout&lt;&lt;\&quot;Hello World !\&quot;&lt;&lt;endl;\n\n\treturn 0;\n&#125;&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我使用了\n和\t来对上述源码进行转义，提交之后报格式错误。由于有了前几题的心酸历程，我去仔细看了下格式，发现缩进只有四个空格。而我使用Mingw-W64编译出来的代码中制表符占据了八个空格的位置，不同编译器以及编辑器的差异造成了上述问题。</p>
+<p>修改后的源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;#include &lt;bits/stdc++.h&gt;\nusing namespace std;\n\nint main()\n&#123;\n    //输出 Hello World !\n    cout&lt;&lt;\&quot;Hello World !\&quot;&lt;&lt;endl;\n\n    return 0;\n&#125;&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在使用Tab还是Space的问题上的讨论似乎成为了与Vim/Emacs哪个更好相似的问题。</p>
+<h1 id="转义表"><a href="#转义表" class="headerlink" title="转义表"></a>转义表</h1><p>以下即为C语言常用转义字符表格：</p>
+<table>
+<thead>
+<tr>
+<th>转义字符</th>
+<th>意义</th>
+<th>ASCII码值（十进制）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\a</td>
+<td>响铃(BEL)</td>
+<td>007</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>退格(BS) ，将当前位置移到前一列</td>
+<td>008</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>换页(FF)，将当前位置移到下页开头</td>
+<td>012</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>换行(LF) ，将当前位置移到下一行开头</td>
+<td>010</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>回车(CR) ，将当前位置移到本行开头</td>
+<td>013</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>水平制表(HT)</td>
+<td>009</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>垂直制表(VT)</td>
+<td>011</td>
+</tr>
+<tr>
+<td>&#39;</td>
+<td>单引号</td>
+<td>039</td>
+</tr>
+<tr>
+<td>&quot;</td>
+<td>双引号</td>
+<td>034</td>
+</tr>
+<tr>
+<td>\\</td>
+<td>反斜杠</td>
+<td>092</td>
+</tr>
+</tbody></table>
+<p>当然C语言也提供一种数字转义方法，如下：</p>
+<table>
+<thead>
+<tr>
+<th>八进制转义</th>
+<th>十六进制转义</th>
+<th>名称/意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\7</td>
+<td>\x07</td>
+<td>响铃</td>
+</tr>
+<tr>
+<td>\10</td>
+<td>\x08</td>
+<td>退格</td>
+</tr>
+<tr>
+<td>\12</td>
+<td>\x0A</td>
+<td>换行</td>
+</tr>
+<tr>
+<td>\14</td>
+<td>\x0C</td>
+<td>换页</td>
+</tr>
+<tr>
+<td>\40</td>
+<td>\x20</td>
+<td>空格</td>
+</tr>
+<tr>
+<td>\60</td>
+<td>\x30</td>
+<td>0</td>
+</tr>
+<tr>
+<td>\101</td>
+<td>\x41</td>
+<td>A</td>
+</tr>
+<tr>
+<td>\141</td>
+<td>x61</td>
+<td>a</td>
+</tr>
+</tbody></table>
+]]></content>
+  </entry>
+  <entry>
+    <title>win10下安装Python</title>
+    <url>/2019/12/19/%E5%AE%89%E8%A3%85python/</url>
+    <content><![CDATA[<hr>
+<p><strong><em>我来砸场了！Windows在1903更新中实现了Python开箱即用的体验，你只需要在cmd中输入python3，系统便会引导你去Store下载Python依赖包。<img src="https://s2.ax1x.com/2019/12/19/QqGiQS.jpg" alt="QqGiQS.jpg"></em></strong></p>
+<h3 id="1-自己的碎碎念"><a href="#1-自己的碎碎念" class="headerlink" title="1.自己的碎碎念"></a>1.自己的碎碎念</h3><h5 id="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"><a href="#python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法" class="headerlink" title="python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法"></a>python现在作为很火的语言也越来越受大家欢迎，对有经验的程序猿还好，但对新手程序猿来说（尤其是选择恐惧症）来说，安装python恐怕是一件难事，今天就分享给大家我安装python的方法</h5><h3 id="2-环境需求"><a href="#2-环境需求" class="headerlink" title="2.环境需求"></a>2.环境需求</h3><p>win10</p>
 <p>python版本：python3.7</p>
 <a id="more"></a>
 <h3 id="3-下载步骤"><a href="#3-下载步骤" class="headerlink" title="3.下载步骤"></a>3.下载步骤</h3><p>当然这里还有一个推荐方法就是直接利用微软自带的应用商店安装一键安装，也很方便。不过我个人还是比较喜欢这种手动下载的方法<br>1.首先要到python官网下载python，需要下载对应的版本（我觉得都9102年了应该很少有32位的电脑了吧）不过以防万一，大家还是去搜一下怎么去查自己系统多少位吧，我这里就不再赘述了</p>
@@ -38,13 +341,131 @@
       </tags>
   </entry>
   <entry>
-    <title>test</title>
-    <url>/2019/12/15/test/</url>
-    <content><![CDATA[<p>dararadafaga8913141<br><img src="/images/pasted-0.png" alt="upload successful"></p>
+    <title>Linux on Windows</title>
+    <url>/2019/12/19/Linux-on-Windows/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>毋庸置疑的是，Windows是家用平台的巨头，Linux是服务器端的主流系统，而在实际生产中时常遇到需要使用二者的情况，而本篇文章正是讨论如何将二者安装于同一硬件基础上。其中包括既传统的双系统，虚拟机系统，又涉及Windows 10的新特性，WSL系统。</p><h1 id="双系统"><a href="#双系统" class="headerlink" title="双系统"></a>双系统</h1><p>基于硬件的双系统，此处概念的Linux完全独立于windows。优点是二者独立，互不干扰，且系统完整，不会出现诡异的问题，系统资源也能得到完整利用。</p><a id="more"></a>
+
+<p>安装双系统只需要准备烧录好镜像的U盘（引导程序及镜像），并在BIOS里以U盘引导启动并按照指引完成安装即可。</p>
+<p>当然，此种方案的缺点也十分明显，由于两个系统相互独立，因此要想进行切换，就必须进行硬件层次上的重启，不仅耗时而且资料会得到损失。</p>
+<h1 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h1><p>虚拟机的运行需要硬件的支持，因为某些CPU并不支持虚拟化。常见的Windows虚拟机包括但不仅限于virtualbox，VMware。。。此类虚拟机优势即是两者相对独立，并且可以随时进行切换，系统选择灵活，资源调控便捷。当然，优点多多，缺点也有，那就是资源占用问题，由于虚拟出了一个操作系统，因此，资源占用十分严重，而且常用虚拟软件的授权费挺贵哈。</p>
+<p>安装流程也全称是GUI界面，不过需要注意资源的分配，虚拟机和主机的配置要恰到好处，避免虚拟机或主机发生卡顿，当然，既然是虚拟技术，就必然有性能损耗。</p>
+<h1 id="巨硬WSL"><a href="#巨硬WSL" class="headerlink" title="巨硬WSL"></a>巨硬WSL</h1><p>巨硬这个可以说是非常硬了，WSL是“Windows Subsystem for Linux”的简称，从名称可以看出来WSL被归类为Windows的子系统，是一个为在Windows 10上能够原生运行Linux二进制可执行文件（ELF格式）的兼容层，最早在Windows 10的1607中出现并延续下来。当然，这个子系统，非常干净，除去内核的文本Ubuntu 16.04LTS只有195MB大小。当然，这样的Linux是不自带编译器的。</p>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p><img src="http://pccqnqw75.bkt.clouddn.com/18-8-7/9757038.jpg" alt></p>
+<p>简的来说，便是LX会话器担任Windows与Linux交互的媒介，并通络内核模式与运行在用户模式下的Pico进行交互，Pico进程则负责模拟并运行相应的二进制文件，大部分情况下对Linux的操作会被映射为对Windows内核的调用。<br><a href="https://www.infoq.com/news/2016/04/linux-windows" target="_blank" rel="noopener">参考</a>。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>1，Windows版本高于1607并在设置下的更新与安全中打开开发者人员模式。<img src="https://ws1.sinaimg.cn/large/0078xKluly1fu2fgs2sykj32yo1lse81.jpg" alt></p>
+<p>2，接着在PowerShell下键入<br><code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</code>以打开Windows子系统功能。</p>
+<p>同样，也可以在控制面板下手动打开“适用于Windows的Linux子系统”。</p>
+<p><img src="https://ws1.sinaimg.cn/large/0078xKluly1fu2ft9wyefj32yo1ltn4a.jpg" alt></p>
+<p>3，重启之后在Microsoft Store下选择想要安装的Linux发行版，等待安装流程结束，设置新用户名及密码。</p>
+<h2 id="后期配置"><a href="#后期配置" class="headerlink" title="后期配置"></a>后期配置</h2><p>系统安装之后，因为Ubuntu的默认root账户密码是每次开机随机生成的，可以使用<br><code>sudo passwd root</code><br>来修改root账户密码。</p>
+<p>此外，由于众所周知的原因，Ubuntu的apt包管理服务器设在国外，因此需要修改为国内镜像源。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 备份原文件</span><br><span class="line">cp /etc/apt/sources.list /etc/apt/sources.list_backup</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 修改源配置文件</span><br><span class="line">vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<p>修改内容为（当然可以选用其它软件源）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 默认注释了源码仓库，如有需要可自行取消注释</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line"># deb-src https://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line"># deb-src https://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line"># deb-src https://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line"># deb-src https://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line"># 预发布软件源，不建议启用</span><br><span class="line"># deb https://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse</span><br><span class="line"># deb-src https://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+
+<p>之后使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+
+<p>更新包索引来生效。</p>
+<p>当然，由于与Windows共用一套硬件，而Windows下的服务占用了22端口，因此需要更换Linux的SSH登陆端口。</p>
+<p>修改配置文件之前使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cp /etc/ssh/sshd_config /etc/ssh/sshd_config_backup</span><br></pre></td></tr></table></figure>
+
+<p>来备份原配置文件。此处通过修改/etc/shh/sshd_config来实现对SSH的配置。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>进入编辑界面，接着修改port 为2333（或者其他不与Windows产生冲突的端口），将ListenAddress前的注释去掉以修改SSH监听地址。<img src="https://ws1.sinaimg.cn/large/0078xKluly1fu2ntq9bexj319c0hn76b.jpg" alt>接下来按照自己的需求修改对应值，例如可将UsePrivilegeSeparation值修改为no，PasswordAuthentication值修改为yes，PermitRootLogin修改为yes。具体依靠个人情况配置，这里贴一篇<a href="http://blog.51cto.com/xujpxm/1717862" target="_blank" rel="noopener">博文</a>。</p>
+<p>安装配置之后，重启SSH服务。接着以IP为127.0.0.1或者主机localhost，端口号2333进行SSH连接。例如</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh root@localhost -p 2333</span><br></pre></td></tr></table></figure>
+
+<p>连接到本地SSH服务，倘若需要在主机以外访问SSH，则需配置防火墙。</p>
+<p>安装基本组件后即可依据个人环境要求配置Linux，倘若报错，可能是因为这个精简的Linux缺少了依赖库，下载安装即可。</p>
+<p>*</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#倘若遇到Cannot load host key则可以考虑重新生成公私匙。</span><br><span class="line">rm /etc/ssh/ssh*key</span><br><span class="line">dpkg-reconfigure openssh-serve</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://pccqnqw75.bkt.clouddn.com/18-8-8/19552218.jpg" alt></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>此种运行Linux的方式，占用系统资源少，调用方便，但由于是Windows子系统，因此存在一定的兼容问题，但是一般生产生活完全够用。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>WSL提供了两种可被Linux访问的文件系统：VolFs和DriveFs。前者在各方面都非常类似于常规的Linux文件系统，包括权限支持、symbolic链接、大小写敏感，以及Windows文件系统中不允许使用的字符。后者提供了与Windows相互访问的方式，使得用户能够在Linux中看到所有Windows卷。</p>
+<p>因此，Linux与Windows的资源是允许相互访问的，Linux下的/mnt挂载的有Windows的盘符，当然也有全部文件。</p>
+<p><img src="https://ws1.sinaimg.cn/large/0078xKluly1fu2ooaw4lqj31uy0yu78q.jpg" alt><br>Windows下的Linux文件则存放在C:\Users[用户名]\AppData\Local\Packages[对应包名],例如我可以通过C:\Users\wrzto\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc来访问Linux资源。</p>
+<p>当然，值得注意的是，但二者的资源处于相对竞争状态时，Windows优先获取资源。</p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a href="http://mirrors.ustc.edu.cn/help/" target="_blank" rel="noopener">Linux修改软件源帮助</a></p>
+]]></content>
+      <tags>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从iCloud迁移照片到Google Photos</title>
+    <url>/2019/12/19/%E4%BB%8EiCloud%E8%BF%81%E7%A7%BB%E7%85%A7%E7%89%87%E5%88%B0Google-Photos/</url>
+    <content><![CDATA[<h1 id="缘由-amp-要求"><a href="#缘由-amp-要求" class="headerlink" title="缘由&amp;要求"></a>缘由&amp;要求</h1><p>Google大法好，Photos无限容量备份照片！</p><p>当然，需要一台位于境外的VPS，从iCloud上拉资源，再上传到Google Drive。</p><h1 id="从iCloud上下载"><a href="#从iCloud上下载" class="headerlink" title="从iCloud上下载"></a>从iCloud上下载</h1><p>由于Apple没有开放iCloud的API，于是关于iCloud下载的第三方程序少之又少。于是我找到了这个<a href="https://www.ctolib.com/ndbroadbent-icloud_photos_downloader.html" target="_blank" rel="noopener">icloudpd</a>。</p><a id="more"></a>
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#以Ubuntu/Debian系统为例</span><br><span class="line">#下载并安装pip，若为安装unzip，则需使用apt-get install unzip。</span><br><span class="line"> root@Raincorn:/icloud# wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate</span><br><span class="line">--2019-01-30 20:58:55--  https://bootstrap.pypa.io/get-pip.py</span><br><span class="line">Resolving bootstrap.pypa.io (bootstrap.pypa.io)... 151.101.0.175, 151.101.64.175, 151.101.128.175, ...</span><br><span class="line">Connecting to bootstrap.pypa.io (bootstrap.pypa.io)|151.101.0.175|:443... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 1700321 (1.6M) [text/x-python]</span><br><span class="line">Saving to: ‘get-pip.py’</span><br><span class="line"></span><br><span class="line">get-pip.py            100%[===========================&gt;]   1.62M  --.-KB/s   in 0.02s  </span><br><span class="line"></span><br><span class="line">2019-01-30 20:58:55 (79.4 MB/s) - ‘get-pip.py’ saved [1700321/1700321]</span><br><span class="line"></span><br><span class="line">root@Raincorn:/icloud# python get-pip.py</span><br><span class="line">DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won&apos;t be maintained after that date. A future version of pip will drop support for Python 2.7.</span><br><span class="line">Collecting pip</span><br><span class="line">  Downloading</span><br><span class="line">Successfully installed pip-19.0.1 setuptools-40.7.1 wheel-0.32.3</span><br><span class="line">#由于已经由pip收录，可以使用pip install icloudpd来安装icloudpd。</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>icloud photos</code>(注意，photos为你要保存照片的目录，可自定义为其他。)<br>接着会要求输入iCloud账号密码，验证完成后就会开始下载，我用了51分20秒把2324张照片下载了下来。但是为什么速度不理想，原因很大程度上是因为苹果的iCloud服务器由云上贵州接管，服务器在国内，晚上又是高峰时段。</p>
+<h1 id="上传到Google-Drive"><a href="#上传到Google-Drive" class="headerlink" title="上传到Google Drive"></a>上传到Google Drive</h1><p>Google作为行业巨头，全力推行开源事业，有关Drive的有关程序网上比比皆是，我这里介绍我正在使用的一个名为<a href="https://rclone.org" target="_blank" rel="noopener">rclone</a>的管理程序。</p>
+<h2 id="rclone的安装"><a href="#rclone的安装" class="headerlink" title="rclone的安装"></a>rclone的安装</h2><h3 id="下载rclone"><a href="#下载rclone" class="headerlink" title="下载rclone"></a>下载rclone</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#按照官方Docs操作就好。</span><br><span class="line">#首先下载并解压rclone</span><br><span class="line">root@Raincorn:~# wget https://downloads.rclone.org/rclone-current-linux-amd64.zip</span><br><span class="line"></span><br><span class="line">root@Raincorn:~# unzip rclone-current-linux-amd64.zip</span><br><span class="line"></span><br><span class="line">root@Raincorn:~# cd rclone-*linux-amd64</span><br></pre></td></tr></table></figure>
+
+<h3 id="复制赋权"><a href="#复制赋权" class="headerlink" title="复制赋权"></a>复制赋权</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cp rclone /usr/bin/</span><br><span class="line"></span><br><span class="line">chown root:root /usr/bin/rclone</span><br><span class="line"></span><br><span class="line">chmod 755 /usr/bin/rclone</span><br><span class="line">#至于为什么要有这一步，可以参考之前那篇关于[环境变量]（https://raincorn.top/2018/08/29/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/）的文章，间的来说，就是为了在用rclone时能够找到对应的程序。</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装帮助页面"><a href="#安装帮助页面" class="headerlink" title="安装帮助页面"></a>安装帮助页面</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir -p /usr/local/share/man/man1</span><br><span class="line"></span><br><span class="line">cp rclone.1 /usr/local/share/man/man1/</span><br><span class="line"></span><br><span class="line">mandb</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>键入rclone config即可进入配置页面。</p>
+<p>这里是配置实例，基本上有些英语基础就没问题。也可以参考<a href="https://rclone.org/drive/" target="_blank" rel="noopener">https://rclone.org/drive/</a>    给出的实例，或者<a href="https://www.chenweiliang.com/cwl-694.html" target="_blank" rel="noopener">https://www.chenweiliang.com/cwl-694.html</a>    的例子。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root@Raincorn:/rclone# rclone config</span><br><span class="line">2019/01/30 21:25:58 NOTICE: Config file &quot;/root/.config/rclone/rclone.conf&quot; not found - using defaults</span><br><span class="line">No remotes found - make a new one</span><br><span class="line">n) New remote</span><br><span class="line">s) Set configuration password</span><br><span class="line">q) Quit config</span><br><span class="line">n/s/q&gt; n（创建新的Drive类型）</span><br><span class="line">name&gt; Google（自定义配置的名称）</span><br><span class="line">Type of storage to configure.</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">Choose a number from below, or type in your own value</span><br><span class="line"> 1 / A stackable unification remote, which can appear to merge the contents of several remotes</span><br><span class="line">   \ &quot;union&quot;</span><br><span class="line"> 2 / Alias for a existing remote</span><br><span class="line">   \ &quot;alias&quot;</span><br><span class="line"> 3 / Amazon Drive</span><br><span class="line">   \ &quot;amazon cloud drive&quot;</span><br><span class="line"> 4 / Amazon S3 Compliant Storage Providers (AWS, Ceph, Dreamhost, IBM COS, Minio)</span><br><span class="line">   \ &quot;s3&quot;</span><br><span class="line"> 5 / Backblaze B2</span><br><span class="line">   \ &quot;b2&quot;</span><br><span class="line"> 6 / Box</span><br><span class="line">   \ &quot;box&quot;</span><br><span class="line"> 7 / Cache a remote</span><br><span class="line">   \ &quot;cache&quot;</span><br><span class="line"> 8 / Dropbox</span><br><span class="line">   \ &quot;dropbox&quot;</span><br><span class="line"> 9 / Encrypt/Decrypt a remote</span><br><span class="line">   \ &quot;crypt&quot;</span><br><span class="line">10 / FTP Connection</span><br><span class="line">   \ &quot;ftp&quot;</span><br><span class="line">11 / Google Cloud Storage (this is not Google Drive)</span><br><span class="line">   \ &quot;google cloud storage&quot;</span><br><span class="line">12 / Google Drive</span><br><span class="line">   \ &quot;drive&quot;</span><br><span class="line">13 / Hubic</span><br><span class="line">   \ &quot;hubic&quot;</span><br><span class="line">14 / JottaCloud</span><br><span class="line">   \ &quot;jottacloud&quot;</span><br><span class="line"></span><br><span class="line">Storage&gt; 12（选择类型，会随着版本变动而有所变化。）</span><br><span class="line">** See help for drive backend at: https://rclone.org/drive/ **</span><br><span class="line"></span><br><span class="line">Google Application Client Id</span><br><span class="line">Leave blank normally.</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">client_id&gt; </span><br><span class="line">Google Application Client Secret</span><br><span class="line">Leave blank normally.</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">client_secret&gt; </span><br><span class="line">Scope that rclone should use when requesting access from drive.</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">Choose a number from below, or type in your own value</span><br><span class="line"> 1 / Full access all files, excluding Application Data Folder.</span><br><span class="line">   \ &quot;drive&quot;</span><br><span class="line"> 2 / Read-only access to file metadata and file contents.</span><br><span class="line">   \ &quot;drive.readonly&quot;</span><br><span class="line">   / Access to files created by rclone only.</span><br><span class="line"> 3 | These are visible in the drive website.</span><br><span class="line">   | File authorization is revoked when the user deauthorizes the app.</span><br><span class="line">   \ &quot;drive.file&quot;</span><br><span class="line">   / Allows read and write access to the Application Data folder.</span><br><span class="line"> 4 | This is not visible in the drive website.</span><br><span class="line">   \ &quot;drive.appfolder&quot;</span><br><span class="line">   / Allows read-only access to file metadata but</span><br><span class="line"> 5 | does not allow any access to read or download file content.</span><br><span class="line">   \ &quot;drive.metadata.readonly&quot;</span><br><span class="line">scope&gt; 1（即允许rclone获得你全部的Drive访问权限。）</span><br><span class="line">ID of the root folder</span><br><span class="line">Leave blank normally.</span><br><span class="line">Fill in to access &quot;Computers&quot; folders. (see docs).</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">root_folder_id&gt; </span><br><span class="line">Service Account Credentials JSON file path </span><br><span class="line">Leave blank normally.</span><br><span class="line">Needed only if you want use SA instead of interactive login.</span><br><span class="line">Enter a string value. Press Enter for the default (&quot;&quot;).</span><br><span class="line">service_account_file&gt; </span><br><span class="line">Edit advanced config? (y/n)</span><br><span class="line">y) Yes</span><br><span class="line">n) No</span><br><span class="line">y/n&gt; n（不进行高级配置。）</span><br><span class="line">Remote config</span><br><span class="line">Use auto config?</span><br><span class="line"> * Say Y if not sure</span><br><span class="line"> * Say N if you are working on a remote or headless machine or Y didn&apos;t work</span><br><span class="line">y) Yes</span><br><span class="line">n) No</span><br><span class="line">y/n&gt; n</span><br><span class="line">If your browser doesn&apos;t open automatically go to the following link: https://accounts.google.com/(你需要登陆的链接。)</span><br><span class="line">Enter verification code&gt; 4/4gBaYe2_（你在网页中获得erification code）</span><br><span class="line">Configure this as a team drive?</span><br><span class="line">y) Yes</span><br><span class="line">n) No</span><br><span class="line">y/n&gt; n</span><br><span class="line">--------------------</span><br><span class="line">[Google]</span><br><span class="line">type = drive</span><br><span class="line">scope = drive</span><br><span class="line">token = &#123;&quot;access_token&quot;:&quot;ya29.GluhBkLo5l7zLGZFmeHEbBSWFxJD8HaiAqpDLmD7BPPFUGcpXrgnnd8pWoahZJvgyv9Qk5yc7TxRLRmxKt31N8mmjP4bbvr2sSb_E8ZbpRNetFtglc2SrjMRFW6z&quot;,&quot;token_type&quot;:&quot;Bearer&quot;,&quot;refresh_token&quot;:&quot;1/jmLzUeXGBUqMVHV_k4x8F6UhPXkbMW-U-zJpnGnnv6I&quot;,&quot;expiry&quot;:&quot;2019-01-30T22:28:52.644486809+08:00&quot;&#125;</span><br><span class="line">--------------------</span><br><span class="line">y) Yes this is OK</span><br><span class="line">e) Edit this remote</span><br><span class="line">d) Delete this remote</span><br><span class="line">y/e/d&gt; y</span><br><span class="line">Current remotes:</span><br><span class="line"></span><br><span class="line">Name                 Type</span><br><span class="line">====                 ====</span><br><span class="line">Google               drive</span><br><span class="line"></span><br><span class="line">e) Edit existing remote</span><br><span class="line">n) New remote</span><br><span class="line">d) Delete remote</span><br><span class="line">r) Rename remote</span><br><span class="line">c) Copy remote</span><br><span class="line">s) Set configuration password</span><br><span class="line">q) Quit config</span><br><span class="line">e/n/d/r/c/s/q&gt; q</span><br></pre></td></tr></table></figure>
+
+<h2 id="开始上传Google-Drive"><a href="#开始上传Google-Drive" class="headerlink" title="开始上传Google Drive"></a>开始上传Google Drive</h2><p>（本地文件夹以origin,Drive文件夹以backup为例）<br>在web端新建一个名为backup的文件夹，新建完成后使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root@Raincorn:/rclone# rclone lsd Google:</span><br><span class="line">          -1 2019-01-30 21:32:54        -1 backup</span><br><span class="line">#这里的“Google”即为你所创建的配置名称，backup即为你刚刚新建的那个用来备份的文件夹。     </span><br><span class="line">root@Raincorn:/rclone# rclone copy /root/origin Google:backup</span><br><span class="line">#/root/origin为源文件夹，Google：backup为配置名称+远程文件夹。</span><br></pre></td></tr></table></figure>
+
+<p>挂到Screen中，第二天即可迁移完成。</p>
 ]]></content>
   </entry>
   <entry>
-    <title>git初窥</title>
+    <title>Windows安装文件初探</title>
+    <url>/2019/12/19/Windows%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6%E5%88%9D%E6%8E%A2/</url>
+    <content><![CDATA[<p>首先声明，我只是感兴趣于iso内的安装文件，并无他意，这篇文章也仅仅代表我个人的观点与立场。一个有意思的地方是，安装文件里的文本相当一部分编码采用的是扩展集UTF-16而非UTF-8或GBK。</p><h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>我的系统是政府精简版1709,使用rufus烧录，大体上精简了一部分次要功能。<br><img src="https://s2.ax1x.com/2019/07/10/ZgubU1.png" alt="ZgubU1.png"></p><p>我的U盘位于/run/media/raincorn/WIN10_CMGE/，该目录下有5个文件夹以及4个文件。</p><a id="more"></a>
+
+
+<h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><p><strong>注意，下文若未单独指明，文本文件内容编码则为UTF-8。</strong></p>
+<h2 id="autorun-inf"><a href="#autorun-inf" class="headerlink" title="autorun.inf"></a>autorun.inf</h2><p>文件内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[AutoRun.Amd64]</span><br><span class="line">open=setup.exe</span><br><span class="line">icon=setup.exe,0</span><br><span class="line"></span><br><span class="line">[AutoRun]</span><br><span class="line">open=sources\SetupError.exe x64</span><br><span class="line">icon=sources\SetupError.exe,0</span><br></pre></td></tr></table></figure>
+
+<p>inf文件，即为windows操作系统下用来描述设备或文件等信息的文件。此处的autorun.info，顾名思义，是针对X86 电脑的自动运行标识符。文件内容反馈出的含义为运行setup.exe，并可用于指定盘符图标。</p>
+<h2 id="bootmgr"><a href="#bootmgr" class="headerlink" title="bootmgr"></a>bootmgr</h2><p>传统BIOS模式下的引导文件。</p>
+<p>传统BIOS+MBR启动流程为： </p>
+<ul>
+<li>PC上电，主板芯片组加电自检（POST）。</li>
+<li>自检通过则优先从设置的默认设备启动。</li>
+<li>读取位于硬盘第一扇区的MBR记录，并搜寻活动分区。</li>
+<li>在根目录下读取bootmgr（启动管理器），此时计算机控制权交由bootmgr。</li>
+<li>bootmgr搜索boot目录下的BCD（启动配置数据），若存在多个启动选项则会交由用户选择，反之直接启动。</li>
+<li>bootmgr继续读取并运行Windows\System32\winload.exe。</li>
+<li>winload.exe则完成内核读取与其余启动过程。</li>
+</ul>
+<p>简洁版便是：BIOS-POST-MBR-Bootmgr-BCD-Winload.exe-内核</p>
+<h2 id="bootmgr-efi"><a href="#bootmgr-efi" class="headerlink" title="bootmgr.efi"></a>bootmgr.efi</h2><p>UEFI启动的引导文件。</p>
+<p>经典UEFI+GPT启动流程为：</p>
+<ul>
+<li>PC加电，UEFI 读取位于 ESP 分区 EFI/Microsoft/Boot/目录下的 bootmgfw.efi 。</li>
+<li>运行bootmgr.efi并将计算机控制权交于 bootmgfw 。</li>
+<li>bootmgfw搜索并读取EFI/Microsoft/Boot/BCD，若有多个启动选项则交由用户选择，反之启动默认系统。</li>
+<li>默认启动 Windows之后，bootmgrfw 搜索并读取 Windows 分区 Windows\System32 目录下的 winload.efi 程序。</li>
+<li>winload.efi完成后续内核加载与启动流程。</li>
+</ul>
+<p>二者区别：<img src="https://s2.ax1x.com/2019/07/12/ZWk9Ff.jpg" alt="ZgubU1.png"></p>
+<h2 id="setup-exe"><a href="#setup-exe" class="headerlink" title="setup.exe"></a>setup.exe</h2><p>用于正常windows环境或者预安装环境下启动安装程序的应用文件。</p>
+<h1 id="文件夹内容"><a href="#文件夹内容" class="headerlink" title="文件夹内容"></a>文件夹内容</h1><h2 id="boot"><a href="#boot" class="headerlink" title="boot"></a>boot</h2><p>BIOS启动流程所需的文件。</p>
+<h2 id="EFI"><a href="#EFI" class="headerlink" title="EFI"></a>EFI</h2><p>UEFI启动流程所需的文件。</p>
+<h2 id="sources"><a href="#sources" class="headerlink" title="sources"></a>sources</h2><p>Windowa安装文件所在位置，一般而言包含install.wim和预安装环境。</p>
+<h2 id="support"><a href="#support" class="headerlink" title="support"></a>support</h2><p>包含帮助信息以及系统工具。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Git初窥</title>
     <url>/2019/11/19/git%E5%88%9D%E7%AA%A5/</url>
     <content><![CDATA[<h1 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h1><p>因为学校留作业要交Github上，但又很厌烦在页面上点来点去的方法，所以写下命令行git提交文件的方法供大家使用，我个人认为如果会用的话是能提升工作效率的。</p><h1 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h1><p>我假设你是在Windows系统上</p><p>在Windows上使用Git，可以从Git官网直接<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载安装程序</a>，然后按默认选项安装即可。</p><p>安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！</p><a id="more"></a>
 

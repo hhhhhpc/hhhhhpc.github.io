@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="前言毋庸置疑的是，Windows是家用平台的巨头，Linux是服务器端的主流系统，而在实际生产中时常遇到需要使用二者的情况，而本篇文章正是讨论如何将二者安装于同一硬件基础上。其中包括既传统的双系统，虚拟机系统，又涉及Windows 10的新特性，WSL系统。双系统基于硬件的双系统，此处概念的Linux完全独立于windows。优点是二者独立，互不干扰，且系统完整，不会出现诡异的问题，系统资源也能得">
+<meta name="keywords" content="Windows">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux on Windows">
+<meta property="og:url" content="http://yoursite.com/2019/12/19/Linux-on-Windows/index.html">
+<meta property="og:site_name" content="硬件联盟博客">
+<meta property="og:description" content="前言毋庸置疑的是，Windows是家用平台的巨头，Linux是服务器端的主流系统，而在实际生产中时常遇到需要使用二者的情况，而本篇文章正是讨论如何将二者安装于同一硬件基础上。其中包括既传统的双系统，虚拟机系统，又涉及Windows 10的新特性，WSL系统。双系统基于硬件的双系统，此处概念的Linux完全独立于windows。优点是二者独立，互不干扰，且系统完整，不会出现诡异的问题，系统资源也能得">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pccqnqw75.bkt.clouddn.com/18-8-7/9757038.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0078xKluly1fu2fgs2sykj32yo1lse81.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0078xKluly1fu2ft9wyefj32yo1ltn4a.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0078xKluly1fu2ntq9bexj319c0hn76b.jpg">
+<meta property="og:image" content="http://pccqnqw75.bkt.clouddn.com/18-8-8/19552218.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0078xKluly1fu2ooaw4lqj31uy0yu78q.jpg">
+<meta property="og:updated_time" content="2019-12-19T07:34:14.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux on Windows">
+<meta name="twitter:description" content="前言毋庸置疑的是，Windows是家用平台的巨头，Linux是服务器端的主流系统，而在实际生产中时常遇到需要使用二者的情况，而本篇文章正是讨论如何将二者安装于同一硬件基础上。其中包括既传统的双系统，虚拟机系统，又涉及Windows 10的新特性，WSL系统。双系统基于硬件的双系统，此处概念的Linux完全独立于windows。优点是二者独立，互不干扰，且系统完整，不会出现诡异的问题，系统资源也能得">
+<meta name="twitter:image" content="http://pccqnqw75.bkt.clouddn.com/18-8-7/9757038.jpg">
+  <link rel="canonical" href="http://yoursite.com/2019/12/19/Linux-on-Windows/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Linux on Windows | 硬件联盟博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">硬件联盟博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">5</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">18</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/19/Linux-on-Windows/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="硬件技术联盟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硬件联盟博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Linux on Windows
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-12-19 15:33:00 / Modified: 15:34:14" itemprop="dateCreated datePublished" datetime="2019-12-19T15:33:00+08:00">2019-12-19</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/12/19/Linux-on-Windows/" class="post-meta-item leancloud_visitors" data-flag-title="Linux on Windows" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/12/19/Linux-on-Windows/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/12/19/Linux-on-Windows/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>毋庸置疑的是，Windows是家用平台的巨头，Linux是服务器端的主流系统，而在实际生产中时常遇到需要使用二者的情况，而本篇文章正是讨论如何将二者安装于同一硬件基础上。其中包括既传统的双系统，虚拟机系统，又涉及Windows 10的新特性，WSL系统。</p><h1 id="双系统"><a href="#双系统" class="headerlink" title="双系统"></a>双系统</h1><p>基于硬件的双系统，此处概念的Linux完全独立于windows。优点是二者独立，互不干扰，且系统完整，不会出现诡异的问题，系统资源也能得到完整利用。</p><a id="more"></a>
+
+<p>安装双系统只需要准备烧录好镜像的U盘（引导程序及镜像），并在BIOS里以U盘引导启动并按照指引完成安装即可。</p>
+<p>当然，此种方案的缺点也十分明显，由于两个系统相互独立，因此要想进行切换，就必须进行硬件层次上的重启，不仅耗时而且资料会得到损失。</p>
+<h1 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h1><p>虚拟机的运行需要硬件的支持，因为某些CPU并不支持虚拟化。常见的Windows虚拟机包括但不仅限于virtualbox，VMware。。。此类虚拟机优势即是两者相对独立，并且可以随时进行切换，系统选择灵活，资源调控便捷。当然，优点多多，缺点也有，那就是资源占用问题，由于虚拟出了一个操作系统，因此，资源占用十分严重，而且常用虚拟软件的授权费挺贵哈。</p>
+<p>安装流程也全称是GUI界面，不过需要注意资源的分配，虚拟机和主机的配置要恰到好处，避免虚拟机或主机发生卡顿，当然，既然是虚拟技术，就必然有性能损耗。</p>
+<h1 id="巨硬WSL"><a href="#巨硬WSL" class="headerlink" title="巨硬WSL"></a>巨硬WSL</h1><p>巨硬这个可以说是非常硬了，WSL是“Windows Subsystem for Linux”的简称，从名称可以看出来WSL被归类为Windows的子系统，是一个为在Windows 10上能够原生运行Linux二进制可执行文件（ELF格式）的兼容层，最早在Windows 10的1607中出现并延续下来。当然，这个子系统，非常干净，除去内核的文本Ubuntu 16.04LTS只有195MB大小。当然，这样的Linux是不自带编译器的。</p>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p><img src="http://pccqnqw75.bkt.clouddn.com/18-8-7/9757038.jpg" alt></p>
+<p>简的来说，便是LX会话器担任Windows与Linux交互的媒介，并通络内核模式与运行在用户模式下的Pico进行交互，Pico进程则负责模拟并运行相应的二进制文件，大部分情况下对Linux的操作会被映射为对Windows内核的调用。<br><a href="https://www.infoq.com/news/2016/04/linux-windows" target="_blank" rel="noopener">参考</a>。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>1，Windows版本高于1607并在设置下的更新与安全中打开开发者人员模式。<img src="https://ws1.sinaimg.cn/large/0078xKluly1fu2fgs2sykj32yo1lse81.jpg" alt></p>
+<p>2，接着在PowerShell下键入<br><code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</code>以打开Windows子系统功能。</p>
+<p>同样，也可以在控制面板下手动打开“适用于Windows的Linux子系统”。</p>
+<p><img src="https://ws1.sinaimg.cn/large/0078xKluly1fu2ft9wyefj32yo1ltn4a.jpg" alt></p>
+<p>3，重启之后在Microsoft Store下选择想要安装的Linux发行版，等待安装流程结束，设置新用户名及密码。</p>
+<h2 id="后期配置"><a href="#后期配置" class="headerlink" title="后期配置"></a>后期配置</h2><p>系统安装之后，因为Ubuntu的默认root账户密码是每次开机随机生成的，可以使用<br><code>sudo passwd root</code><br>来修改root账户密码。</p>
+<p>此外，由于众所周知的原因，Ubuntu的apt包管理服务器设在国外，因此需要修改为国内镜像源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 备份原文件</span><br><span class="line">cp /etc/apt/sources.list /etc/apt/sources.list_backup</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 修改源配置文件</span><br><span class="line">vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<p>修改内容为（当然可以选用其它软件源）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 默认注释了源码仓库，如有需要可自行取消注释</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line"># deb-src https://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line"># deb-src https://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line"># deb-src https://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line"># deb-src https://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line"># 预发布软件源，不建议启用</span><br><span class="line"># deb https://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse</span><br><span class="line"># deb-src https://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+
+<p>之后使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+
+<p>更新包索引来生效。</p>
+<p>当然，由于与Windows共用一套硬件，而Windows下的服务占用了22端口，因此需要更换Linux的SSH登陆端口。</p>
+<p>修改配置文件之前使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/ssh/sshd_config /etc/ssh/sshd_config_backup</span><br></pre></td></tr></table></figure>
+
+<p>来备份原配置文件。此处通过修改/etc/shh/sshd_config来实现对SSH的配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>进入编辑界面，接着修改port 为2333（或者其他不与Windows产生冲突的端口），将ListenAddress前的注释去掉以修改SSH监听地址。<img src="https://ws1.sinaimg.cn/large/0078xKluly1fu2ntq9bexj319c0hn76b.jpg" alt>接下来按照自己的需求修改对应值，例如可将UsePrivilegeSeparation值修改为no，PasswordAuthentication值修改为yes，PermitRootLogin修改为yes。具体依靠个人情况配置，这里贴一篇<a href="http://blog.51cto.com/xujpxm/1717862" target="_blank" rel="noopener">博文</a>。</p>
+<p>安装配置之后，重启SSH服务。接着以IP为127.0.0.1或者主机localhost，端口号2333进行SSH连接。例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@localhost -p 2333</span><br></pre></td></tr></table></figure>
+
+<p>连接到本地SSH服务，倘若需要在主机以外访问SSH，则需配置防火墙。</p>
+<p>安装基本组件后即可依据个人环境要求配置Linux，倘若报错，可能是因为这个精简的Linux缺少了依赖库，下载安装即可。</p>
+<p>*</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#倘若遇到Cannot load host key则可以考虑重新生成公私匙。</span><br><span class="line">rm /etc/ssh/ssh*key</span><br><span class="line">dpkg-reconfigure openssh-serve</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://pccqnqw75.bkt.clouddn.com/18-8-8/19552218.jpg" alt></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>此种运行Linux的方式，占用系统资源少，调用方便，但由于是Windows子系统，因此存在一定的兼容问题，但是一般生产生活完全够用。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>WSL提供了两种可被Linux访问的文件系统：VolFs和DriveFs。前者在各方面都非常类似于常规的Linux文件系统，包括权限支持、symbolic链接、大小写敏感，以及Windows文件系统中不允许使用的字符。后者提供了与Windows相互访问的方式，使得用户能够在Linux中看到所有Windows卷。</p>
+<p>因此，Linux与Windows的资源是允许相互访问的，Linux下的/mnt挂载的有Windows的盘符，当然也有全部文件。</p>
+<p><img src="https://ws1.sinaimg.cn/large/0078xKluly1fu2ooaw4lqj31uy0yu78q.jpg" alt><br>Windows下的Linux文件则存放在C:\Users[用户名]\AppData\Local\Packages[对应包名],例如我可以通过C:\Users\wrzto\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc来访问Linux资源。</p>
+<p>当然，值得注意的是，但二者的资源处于相对竞争状态时，Windows优先获取资源。</p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a href="http://mirrors.ustc.edu.cn/help/" target="_blank" rel="noopener">Linux修改软件源帮助</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/12/19/从iCloud迁移照片到Google-Photos/" rel="next" title="从iCloud迁移照片到Google Photos">
+                  <i class="fa fa-chevron-left"></i> 从iCloud迁移照片到Google Photos
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/12/19/安装python/" rel="prev" title="win10下安装Python">
+                  win10下安装Python <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双系统"><span class="nav-number">2.</span> <span class="nav-text">双系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机"><span class="nav-number">3.</span> <span class="nav-text">虚拟机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#巨硬WSL"><span class="nav-number">4.</span> <span class="nav-text">巨硬WSL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现原理"><span class="nav-number">4.1.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">4.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后期配置"><span class="nav-number">4.3.</span> <span class="nav-text">后期配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">4.4.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源"><span class="nav-number">4.5.</span> <span class="nav-text">资源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#资料"><span class="nav-number">5.</span> <span class="nav-text">资料</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">硬件技术联盟</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">硬件技术联盟</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=XMcD9pNjK3V40D6jUj0nlV1u-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'XMcD9pNjK3V40D6jUj0nlV1u-gzGzoHsz',
+            'X-LC-Key': 'bC0poa1v6JejAlDxJcSHemqP',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '7o4zkUkX5ibWMdl91RNu2ddv-gzGzoHsz',
+    appKey: 'DCvwhBf94NfhNUBrTBopgPCP',
+    placeholder: '来啊，快活啊',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
