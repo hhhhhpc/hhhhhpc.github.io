@@ -55,14 +55,19 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="硬件联盟博客">
-<meta property="og:url" content="http://yoursite.com/tags/环境配置/index.html">
+  <meta name="description" content="解决ubuntu关机卡界面90s注意了，这个不是系统的问题，是配置的问题。网上有很多其他的方案，下载watchdog啊，或者一行命令什么的，其实只需要改一下配置文件就可以了。sudo vim /etc/systemd/system.conf可以使用vim也可以使用ubuntu自带的gedit，用vim的话需要先apt安装一下。">
+<meta name="keywords" content="环境配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决Ubuntu关机卡界面90s">
+<meta property="og:url" content="http://yoursite.com/2020/01/14/解决Ubuntu关机卡界面90s/index.html">
 <meta property="og:site_name" content="硬件联盟博客">
+<meta property="og:description" content="解决ubuntu关机卡界面90s注意了，这个不是系统的问题，是配置的问题。网上有很多其他的方案，下载watchdog啊，或者一行命令什么的，其实只需要改一下配置文件就可以了。sudo vim /etc/systemd/system.conf可以使用vim也可以使用ubuntu自带的gedit，用vim的话需要先apt安装一下。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-14T11:46:37.416Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="硬件联盟博客">
-  <link rel="canonical" href="http://yoursite.com/tags/环境配置/">
+<meta name="twitter:title" content="解决Ubuntu关机卡界面90s">
+<meta name="twitter:description" content="解决ubuntu关机卡界面90s注意了，这个不是系统的问题，是配置的问题。网上有很多其他的方案，下载watchdog啊，或者一行命令什么的，其实只需要改一下配置文件就可以了。sudo vim /etc/systemd/system.conf可以使用vim也可以使用ubuntu自带的gedit，用vim的话需要先apt安装一下。">
+  <link rel="canonical" href="http://yoursite.com/2020/01/14/解决Ubuntu关机卡界面90s/">
 
 
 <script id="page-configurations">
@@ -70,13 +75,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Tag: 环境配置 | 硬件联盟博客</title>
+  <title>解决Ubuntu关机卡界面90s | 硬件联盟博客</title>
   
 
 
@@ -251,142 +256,144 @@
         <div class="content-wrap">
             
 
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-  
-
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block tag">
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">环境配置<small>Tag</small>
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/14/解决Ubuntu关机卡界面90s/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="硬件技术联盟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硬件联盟博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">解决Ubuntu关机卡界面90s
+
+          
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-01-14 19:45:33 / Modified: 19:46:37" itemprop="dateCreated datePublished" datetime="2020-01-14T19:45:33+08:00">2020-01-14</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2020/01/14/解决Ubuntu关机卡界面90s/" class="post-meta-item leancloud_visitors" data-flag-title="解决Ubuntu关机卡界面90s" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/01/14/解决Ubuntu关机卡界面90s/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/01/14/解决Ubuntu关机卡界面90s/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+        <h1 id="解决ubuntu关机卡界面90s"><a href="#解决ubuntu关机卡界面90s" class="headerlink" title="解决ubuntu关机卡界面90s"></a>解决ubuntu关机卡界面90s</h1><p>注意了，这个不是系统的问题，是配置的问题。网上有很多其他的方案，下载watchdog啊，或者一行命令什么的，其实只需要改一下配置文件就可以了。</p><p>sudo vim /etc/systemd/system.conf</p><p>可以使用vim也可以使用ubuntu自带的gedit，用vim的话需要先apt安装一下。</p><a id="more"></a>
 
-  
-  
 
-  
+<p># This file is part of systemd.<br>#<br># systemd is free software; you can redistribute it and/or modify it<br># under the terms of the GNU Lesser General Public License as published by<br># the Free Software Foundation; either version 2.1 of the License, or<br># (at your option) any later version.<br>#<br># Entries in this file show the compile time defaults.<br># You can change settings by editing this file.<br># Defaults can be restored by simply deleting this file.<br>#<br># See systemd-system.conf(5) for details.</p>
+<p>[Manager]<br>#LogLevel=info<br>#LogTarget=journal-or-kmsg<br>#LogColor=yes<br>#LogLocation=no<br>#DumpCore=yes<br>#ShowStatus=yes<br>#CrashChangeVT=no<br>#CrashShell=no<br>#CrashReboot=no<br>#CtrlAltDelBurstAction=reboot-force<br>#CPUAffinity=1 2<br>#JoinControllers=cpu,cpuacct net_cls,net_prio<br>#RuntimeWatchdogSec=0<br>#ShutdownWatchdogSec=10min<br>#CapabilityBoundingSet=<br>#SystemCallArchitectures=<br>#TimerSlackNSec=<br>#DefaultTimerAccuracySec=1min<br>#DefaultStandardOutput=journal<br>#DefaultStandardError=inherit<br><strong>#DefaultTimeoutStartSec=90s</strong><br><strong>#DefaultTimeoutStopSec=90s</strong><br>#DefaultRestartSec=100ms<br>#DefaultStartLimitIntervalSec=10s<br>#DefaultStartLimitBurst=5<br>#DefaultEnvironment=<br>#DefaultCPUAccounting=no<br>#DefaultIOAccounting=no<br>#DefaultIPAccounting=no<br>#DefaultBlockIOAccounting=no<br>#DefaultMemoryAccounting=no<br>#DefaultTasksAccounting=yes<br>#DefaultTasksMax=<br>#DefaultLimitCPU=<br>#DefaultLimitFSIZE=<br>#DefaultLimitDATA=<br>#DefaultLimitSTACK=<br>#DefaultLimitCORE=<br>#DefaultLimitRSS=<br>#DefaultLimitNOFILE=<br>#DefaultLimitAS=<br>#DefaultLimitNPROC=<br>#DefaultLimitMEMLOCK=<br>#DefaultLimitLOCKS=<br>#DefaultLimitSIGPENDING=<br>#DefaultLimitMSGQUEUE=<br>#DefaultLimitNICE=<br>#DefaultLimitRTPRIO=<br>#DefaultLimitRTTIME=<br>#IPAddressAllow=<br>#IPAddressDeny=</p>
+<p>配置文件大概就长这样，找到加粗的俩行，把#注释去掉并且修改时间为1，就可以解决了</p>
+
+    </div>
+
     
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
-    </div>
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/01/14/解决Ubuntu关机卡界面90s/" itemprop="url">
-            <span itemprop="name">解决Ubuntu关机卡界面90s</span>
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-01-14T19:45:33+08:00"
-              content="2020-01-14">
-          01-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
     
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
+    
         
-          <a class="post-title-link" href="/2019/12/19/安装python/" itemprop="url">
-            <span itemprop="name">win10下安装Python</span>
-          </a>
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/环境配置/" rel="tag"># 环境配置</a>
+            
+          </div>
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-19T15:34:00+08:00"
-              content="2019-12-19">
-          12-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
         
-          <a class="post-title-link" href="/2019/09/15/解决美帝良心想装上Ubuntu没网的问题/" itemprop="url">
-            <span itemprop="name">解决美帝良心想装上Ubuntu没网的问题</span>
-          </a>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/01/01/CPU寄存器总结/" rel="next" title="CPU寄存器总结">
+                  <i class="fa fa-chevron-left"></i> CPU寄存器总结
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
         
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-09-15T22:24:14+08:00"
-              content="2019-09-15">
-          09-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    </div>
+      </footer>
+    
   </div>
   
   
   
+  </article>
 
-  
-
+  </div>
 
 
           </div>
           
+    
+    <div class="comments" id="comments"></div>
+  
 
         </div>
           
@@ -401,6 +408,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -413,6 +425,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#解决ubuntu关机卡界面90s"><span class="nav-number">1.</span> <span class="nav-text">解决ubuntu关机卡界面90s</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 

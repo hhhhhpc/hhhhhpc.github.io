@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2020/01/14/%E8%A7%A3%E5%86%B3ubuntu%E5%85%B3%E6%9C%BA%E5%8D%A1%E7%95%8C%E9%9D%A290s/</url>
+    <title>解决Ubuntu关机卡界面90s</title>
+    <url>/2020/01/14/%E8%A7%A3%E5%86%B3Ubuntu%E5%85%B3%E6%9C%BA%E5%8D%A1%E7%95%8C%E9%9D%A290s/</url>
     <content><![CDATA[<h1 id="解决ubuntu关机卡界面90s"><a href="#解决ubuntu关机卡界面90s" class="headerlink" title="解决ubuntu关机卡界面90s"></a>解决ubuntu关机卡界面90s</h1><p>注意了，这个不是系统的问题，是配置的问题。网上有很多其他的方案，下载watchdog啊，或者一行命令什么的，其实只需要改一下配置文件就可以了。</p><p>sudo vim /etc/systemd/system.conf</p><p>可以使用vim也可以使用ubuntu自带的gedit，用vim的话需要先apt安装一下。</p><a id="more"></a>
 
 
@@ -10,6 +10,9 @@
 <p>[Manager]<br>#LogLevel=info<br>#LogTarget=journal-or-kmsg<br>#LogColor=yes<br>#LogLocation=no<br>#DumpCore=yes<br>#ShowStatus=yes<br>#CrashChangeVT=no<br>#CrashShell=no<br>#CrashReboot=no<br>#CtrlAltDelBurstAction=reboot-force<br>#CPUAffinity=1 2<br>#JoinControllers=cpu,cpuacct net_cls,net_prio<br>#RuntimeWatchdogSec=0<br>#ShutdownWatchdogSec=10min<br>#CapabilityBoundingSet=<br>#SystemCallArchitectures=<br>#TimerSlackNSec=<br>#DefaultTimerAccuracySec=1min<br>#DefaultStandardOutput=journal<br>#DefaultStandardError=inherit<br><strong>#DefaultTimeoutStartSec=90s</strong><br><strong>#DefaultTimeoutStopSec=90s</strong><br>#DefaultRestartSec=100ms<br>#DefaultStartLimitIntervalSec=10s<br>#DefaultStartLimitBurst=5<br>#DefaultEnvironment=<br>#DefaultCPUAccounting=no<br>#DefaultIOAccounting=no<br>#DefaultIPAccounting=no<br>#DefaultBlockIOAccounting=no<br>#DefaultMemoryAccounting=no<br>#DefaultTasksAccounting=yes<br>#DefaultTasksMax=<br>#DefaultLimitCPU=<br>#DefaultLimitFSIZE=<br>#DefaultLimitDATA=<br>#DefaultLimitSTACK=<br>#DefaultLimitCORE=<br>#DefaultLimitRSS=<br>#DefaultLimitNOFILE=<br>#DefaultLimitAS=<br>#DefaultLimitNPROC=<br>#DefaultLimitMEMLOCK=<br>#DefaultLimitLOCKS=<br>#DefaultLimitSIGPENDING=<br>#DefaultLimitMSGQUEUE=<br>#DefaultLimitNICE=<br>#DefaultLimitRTPRIO=<br>#DefaultLimitRTTIME=<br>#IPAddressAllow=<br>#IPAddressDeny=</p>
 <p>配置文件大概就长这样，找到加粗的俩行，把#注释去掉并且修改时间为1，就可以解决了</p>
 ]]></content>
+      <tags>
+        <tag>环境配置</tag>
+      </tags>
   </entry>
   <entry>
     <title>CPU寄存器总结</title>
